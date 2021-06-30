@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587077701602",
+    "project_id": "takaful-9e68d",
+    "storage_bucket": "takaful-9e68d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587077701602:android:2887f46034a1185b07b3bb",
+        "android_client_info": {
+          "package_name": "com.graduatio.project.takaful"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587077701602-jfgc7slvrt6ga8b952pn0lp53h5gkc0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIXnwDc8BaDuYA_AwvWmep83C6azsfqo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587077701602-jfgc7slvrt6ga8b952pn0lp53h5gkc0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.graduatio.project.takaful">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Takaful">
+        <activity android:name=".Actvities.DonationDetails"></activity>
+        <activity android:name=".Actvities.EditPayMethod" />
+        <activity android:name=".Actvities.EditProfile" />
+        <activity android:name=".Actvities.HomeActivity" />
+        <activity android:name=".Actvities.ForgetPassowrd" />
+        <activity android:name=".Actvities.SignUp" />
+        <activity android:name=".Actvities.Login" />
+        <activity android:name=".Actvities.LastAppBegging" />
+        <activity android:name=".Actvities.SecondAppBegging" />
+        <activity android:name=".Actvities.AppBegging" />
+        <activity android:name=".Actvities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

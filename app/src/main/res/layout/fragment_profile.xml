@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Fragments.ProfileFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="419dp"
+        android:layout_height="651dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Payment method"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/useremail"
+                app:layout_constraintTop_toBottomOf="@+id/useremail" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="48dp"
+                android:text="Email address"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/userimage"
+                app:layout_constraintTop_toBottomOf="@+id/userimage" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="40dp"
+                android:text="Profile "
+                android:textColor="#000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/userimage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Chiro Morganisa"
+                app:layout_constraintStart_toEndOf="@+id/userimage"
+                app:layout_constraintTop_toTopOf="@+id/userimage" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="RU+"
+                app:layout_constraintStart_toStartOf="@+id/username"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <TextView
+                android:id="@+id/usernphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:text="+768-907-6969"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/edit_text_background"
+                app:layout_constraintBottom_toBottomOf="@+id/usernphone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/username" />
+
+            <ImageView
+                android:id="@+id/editprofile"
+                android:layout_width="24dp"
+                android:layout_height="37dp"
+                android:src="@drawable/ic_shape"
+                app:layout_constraintBottom_toBottomOf="@+id/view8"
+                app:layout_constraintEnd_toEndOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="@+id/view8"
+                app:layout_constraintTop_toTopOf="@+id/view8" />
+
+            <TextView
+                android:id="@+id/useremail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="chiromorgan@gmail.com"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_background"
+                app:layout_constraintEnd_toEndOf="@+id/useremail"
+                app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+            <ImageView
+                android:id="@+id/editpay_method"
+                android:layout_width="23dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_shape"
+                app:layout_constraintBottom_toBottomOf="@+id/view9"
+                app:layout_constraintEnd_toEndOf="@+id/view9"
+                app:layout_constraintStart_toStartOf="@+id/view9"
+                app:layout_constraintTop_toTopOf="@+id/view9" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Help and support"
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Ayman@ymail.com"
+                android:textColor="#000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            <android.widget.Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp"
+                android:background="@drawable/button_shape"
+                android:drawableStart="@drawable/ic_logout"
+                android:drawableLeft="@drawable/ic_logout"
+                android:paddingStart="15dp"
+                android:paddingLeft="15dp"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/view9"
+                app:layout_constraintStart_toStartOf="@+id/textView27" />
+
+            <TextView
+                android:id="@+id/pey_method"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toStartOf="@+id/view9"
+                app:layout_constraintHorizontal_bias="0.092"
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
