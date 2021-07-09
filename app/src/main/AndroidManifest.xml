@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.graduatio.project.takaful">
-
+        <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
+
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Takaful">
-        <activity android:name=".Actvities.DonationDetails"></activity>
+        <activity android:name=".Actvities.Payment_Method"></activity>
+        <activity android:name=".Actvities.DonationDetails" />
         <activity android:name=".Actvities.EditPayMethod" />
         <activity android:name=".Actvities.EditProfile" />
         <activity android:name=".Actvities.HomeActivity" />

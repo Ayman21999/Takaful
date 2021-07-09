@@ -7,30 +7,24 @@
     android:background="@color/background"
     tools:context=".Actvities.EditProfile">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:cardCornerRadius="20dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+        app:layout_constraintTop_toTopOf="parent" />
             <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/back_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="36dp"
                 android:layout_marginLeft="36dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="44dp"
+                android:src="@drawable/ic_arrow_left"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_arrow_back"
-                tools:ignore="VectorDrawableCompat" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -39,11 +33,12 @@
                 android:layout_marginStart="44dp"
                 android:layout_marginLeft="44dp"
                 android:text="Edit Profile"
+                android:textColor="#000"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toTopOf="@+id/imageView10"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/back_btn"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="@+id/back_btn"
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/imageView13"
@@ -71,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="First Name"
-                app:layout_constraintStart_toStartOf="@+id/imageView10"
+                android:textColor="#000"
+                app:layout_constraintStart_toStartOf="@+id/back_btn"
                 app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
             <EditText
@@ -81,17 +77,20 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
+                android:textColor="@color/background"
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <EditText
                 android:id="@+id/lastname"
-                android:layout_width="129dp"
-                android:layout_height="59dp"
+                android:layout_width="145dp"
+                android:layout_height="56dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
+                android:textColor="@color/background"
+
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="@+id/textView28"
                 app:layout_constraintTop_toTopOf="@+id/firstname" />
@@ -104,6 +103,8 @@
                 android:layout_marginLeft="120dp"
                 android:layout_marginTop="24dp"
                 android:text="Last Name"
+                android:textColor="#000"
+
                 app:layout_constraintStart_toEndOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
@@ -115,6 +116,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Email "
+                android:textColor="#000"
+
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -128,6 +131,8 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
+                android:textColor="@color/background"
+
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="@+id/textView29"
                 app:layout_constraintHorizontal_bias="0.485"
@@ -140,6 +145,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Phone Number "
+                android:textColor="#000"
+
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/emailedit"
                 app:layout_constraintStart_toStartOf="@+id/emailedit"
@@ -153,6 +160,7 @@
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:inputType="phone"
+                android:textColor="@color/background"
                 app:layout_constraintEnd_toEndOf="@+id/textView30"
                 app:layout_constraintStart_toStartOf="@+id/textView30"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
@@ -165,13 +173,12 @@
                 android:background="@drawable/button_shape"
                 android:text="Save Changes "
                 android:textAllCaps="false"
+
                 android:textColor="#fff"
                 app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
                 app:layout_constraintHorizontal_bias="0.486"
                 app:layout_constraintStart_toStartOf="@+id/editTextPhone"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

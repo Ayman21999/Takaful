@@ -15,44 +15,44 @@ import com.graduatio.project.takaful.Fragments.ProfileFragment;
 import com.graduatio.project.takaful.Fragments.SearchFragment;
 import com.graduatio.project.takaful.R;
 
-public class HomeActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity {
 
-    private BottomNavigationView nav_btom;
+    private BottomNavigationView bottomNavigationViewl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        bottomNavigationViewl = findViewById(R.id.bottomnav);
+        bottomNavigationViewl.setOnNavigationItemSelectedListener(bottomNavMethoed);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new CategoryFragment()).commit();
+
 
 
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethoed = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null ;
+            switch (item.getItemId()){
+                case R.id.home:
+                    fragment= new CategoryFragment();
+                    break;
+                case R.id.search :
+                    fragment = new SearchFragment();
+                    break;
+                case R.id.donationData :
+                    fragment = new DonationInforamtiomFragment();
+                    break;
+                case R.id.profile:
+                    fragment = new ProfileFragment();
+                    break;
 
-    public void SetUPElement() {
-        nav_btom = findViewById(R.id.bottomnav);
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
 
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        if (item.getItemId() == R.id.home) {
-            replaceFragment(new CategoryFragment());
-
-        } else if (item.getItemId() == R.id.profile) {
-            replaceFragment(new ProfileFragment());
-
-        } else if (item.getItemId() == R.id.search) {
-            replaceFragment(new SearchFragment());
-        } else if (item.getItemId() == R.id.donationData) {
-            replaceFragment(new DonationInforamtiomFragment());
+            return true;
         }
-        return true;
-    }
+    };
 
-    public void replaceFragment(Fragment fragment) {
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.homeFrameLayout, fragment).commit();
-
-    }
 }

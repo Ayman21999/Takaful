@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,16 +45,13 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String emailtxt = email.getText().toString();
                 String passtxt = pass.getText().toString();
-                if (emailtxt.equals("") && emailtxt.isEmpty()) {
-                    Toast.makeText(Login.this, "Email is required", Toast.LENGTH_SHORT).show();
-                } else if (passtxt.isEmpty() && passtxt.trim().equals("")) {
-                    Toast.makeText(Login.this, "Password is required", Toast.LENGTH_SHORT).show();
-
+                if (emailtxt.isEmpty()) {
+                    Toast.makeText(Login.this, "Email is Required", Toast.LENGTH_SHORT).show();
+                } else if (passtxt.isEmpty()) {
+                    Toast.makeText(Login.this, "Password is Required", Toast.LENGTH_SHORT).show();
                 } else {
                     LogIn(emailtxt, passtxt);
-
                 }
-
             }
         });
     }
@@ -73,21 +72,24 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Loading ...! ");
         Task<AuthResult> task = auth.signInWithEmailAndPassword(email, pass);
 
-        task.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Intent intent = new Intent(Login.this, HomeActivity.class);
-                startActivity(intent);
-                progressDialog.dismiss();
+            public void onSuccess(AuthResult authResult) {
+                Intent i = new Intent(Login.this , HomeActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(Login.this, "Error :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("ttt", "Error " + e.getLocalizedMessage());
                 progressDialog.dismiss();
 
             }
         });
+
     }
 
 

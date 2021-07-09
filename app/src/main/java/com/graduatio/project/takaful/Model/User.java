@@ -19,10 +19,10 @@ public class User {
     String role ;
     @PropertyName("payMethod")
     String payMethod;
-
     @PropertyName("isHasActivity")
     boolean isHasActivity ;
-
+    @PropertyName("phone")
+    String phone;
     public boolean isHasActivity() {
         return isHasActivity;
     }
@@ -93,5 +93,13 @@ public class User {
 
     public void setPayMethod(String payMethod) {
         this.payMethod = payMethod;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

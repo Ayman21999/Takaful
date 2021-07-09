@@ -14,7 +14,6 @@
         android:layout_marginStart="140dp"
         android:layout_marginLeft="140dp"
         android:text="Tak"
-
         android:textColor="#fff"
         android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +89,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
@@ -99,10 +98,10 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:textColorHint="#DEDEDE"
                 android:textColor="@color/background"
+                android:textColorHint="#DEDEDE"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -115,14 +114,14 @@
                 android:ems="10"
                 android:hint="Password "
                 android:inputType="textPassword"
-                android:textColor="@color/background"
 
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/background"
                 android:textColorHint="#DEDEDE"
-                app:layout_constraintEnd_toEndOf="@+id/username"
-                app:layout_constraintStart_toStartOf="@+id/username"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
+                app:layout_constraintEnd_toEndOf="@+id/phone"
+                app:layout_constraintStart_toStartOf="@+id/phone"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
 
             <EditText
                 android:id="@+id/confirm"
@@ -147,10 +146,11 @@
                 android:id="@+id/signe_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/button_shape"
                 android:text="Create Account"
-                android:textAllCaps="false"
 
+                android:textAllCaps="false"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/confirm"
@@ -175,6 +175,20 @@
                 app:layout_constraintStart_toStartOf="@+id/email"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:hint="Phone"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="@+id/username"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/username"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -192,10 +206,10 @@
         android:background="@drawable/white_background_creatnewaccount"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.945"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -238,7 +252,7 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.86" />
+        app:layout_constraintGuide_percent="0.87" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
