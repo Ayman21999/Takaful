@@ -27,13 +27,11 @@ import com.graduatio.project.takaful.R;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class SignUp extends AppCompatActivity  {
+public class SignUp extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore firebaseFirestore;
-    EditText email;
-    EditText password;
-    EditText confirmpassword;
-    EditText username;
+    EditText email, password, confirmpassword, phone, username;
+
     CollectionReference reference;
     Button singe;
     ProgressDialog progressDialog;
@@ -53,21 +51,25 @@ public class SignUp extends AppCompatActivity  {
                 String emailtext = email.getText().toString();
                 String passwordtext = password.getText().toString();
                 String confirmtext = confirmpassword.getText().toString();
+                String phone_txt = phone.getText().toString();
                 if (nametext.isEmpty() && nametext.equals(" ")) {
                     Toast.makeText(SignUp.this, "Please fill the Your name", Toast.LENGTH_SHORT).show();
                 } else if (emailtext.isEmpty() && emailtext.equals(" ")) {
                     Toast.makeText(SignUp.this, "Please fill the Your E-mail", Toast.LENGTH_SHORT).show();
 
-                }else  if (passwordtext.isEmpty() && nametext.equals(" ")){
+                } else if (passwordtext.isEmpty() && nametext.equals(" ")) {
                     Toast.makeText(SignUp.this, "Please fill the Your  Password", Toast.LENGTH_SHORT).show();
 
-                }else if (!confirmtext.equals(passwordtext)){
+                } else if (!confirmtext.equals(passwordtext)) {
                     Toast.makeText(SignUp.this, "Password must be matched", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Register(nametext,emailtext,passwordtext);
+                } else if (phone_txt.isEmpty() && phone_txt.equals(" ")){
+                    Toast.makeText(SignUp.this, "Please fill the Your  Phone Number ", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Register(nametext, emailtext, passwordtext,phone_txt);
                     Toast.makeText(SignUp.this, "SingeUP Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent =new Intent(SignUp.this , Login.class);
+                    Intent intent = new Intent(SignUp.this, Login.class);
                     startActivity(intent);
                 }
 
@@ -87,12 +89,12 @@ public class SignUp extends AppCompatActivity  {
         progressDialog = new ProgressDialog(this);
         logText = findViewById(R.id.sgin_in_text);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        phone = findViewById(R.id.phone);
         reference = firebaseFirestore.collection("Users");
     }
 
 
-
-    public void Register(String name, String email, String password) {
+    public void Register(String name, String email, String password ,String phone) {
         progressDialog.setMessage("Loading...!!");
         Task<AuthResult> task = auth.createUserWithEmailAndPassword(email, password);
         task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -101,16 +103,19 @@ public class SignUp extends AppCompatActivity  {
                 if (authResult == null || authResult.getUser() == null) {
                     return;
                 }
-                HashMap<String , Object>map = new HashMap<>();
-                map.put("name",name);
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("name", name);
                 map.put("userId", FirebaseAuth.getInstance().getUid());
-                map.put("email",email);
-                map.put("password",password);
-                map.put("isHasCharity",false);
-                map.put("userImage","");
-                map.put("role","");
+                map.put("email", email);
+                map.put("firstName", "");
+                map.put("lastName", "");
+                map.put("phone", phone);
+                map.put("password", password);
+                map.put("isHasCharity", false);
+                map.put("userImage", "");
+                map.put("role", "");
                 map.put("payMethod", "");
-                map.put("isHasActivity",false);
+                map.put("isHasActivity", false);
 
 
                 reference.document(FirebaseAuth.getInstance().getUid()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -122,7 +127,7 @@ public class SignUp extends AppCompatActivity  {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUp.this, "Fire store Error : "+ e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this, "Fire store Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
                         progressDialog.dismiss();
 

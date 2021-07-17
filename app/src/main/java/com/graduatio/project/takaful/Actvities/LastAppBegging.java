@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.graduatio.project.takaful.R;
 
 public class LastAppBegging extends AppCompatActivity {
-    TextView    singe_txt;
-    TextView login_txt;
+    Button singe_txt;
+    Button login_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,8 @@ public class LastAppBegging extends AppCompatActivity {
     }
 
  void setUpElements(){
-        singe_txt = findViewById(R.id.sign_txt);
-        login_txt = findViewById(R.id.log_txt);
+        singe_txt = findViewById(R.id.signup);
+        login_txt = findViewById(R.id.login);
 
  }
 }

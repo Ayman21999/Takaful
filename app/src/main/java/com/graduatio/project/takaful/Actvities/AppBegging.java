@@ -19,7 +19,7 @@ public class AppBegging extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_begging);
         skip  = findViewById(R.id.skip);
-        next  = findViewById(R.id.next);
+        next  = findViewById(R.id.signup);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override

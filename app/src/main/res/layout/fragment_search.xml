@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/card_background"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView2"
+        app:layout_constraintBottom_toBottomOf="@+id/list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,24 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/edit_text_background"
-        android:ems="10"
-        android:hint="Donate for..."
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/view6"
-        app:layout_constraintEnd_toStartOf="@+id/view7"
-        app:layout_constraintStart_toStartOf="@+id/view6"
-        app:layout_constraintTop_toTopOf="@+id/view6"
-        app:layout_constraintVertical_bias="0.466" />
-
     <View
         android:id="@+id/view7"
         android:layout_width="50dp"
@@ -75,7 +57,7 @@
         app:layout_constraintTop_toTopOf="@+id/view6" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/search_btn"
         android:layout_width="34dp"
         android:layout_height="37dp"
         android:layout_marginTop="8dp"
@@ -89,7 +71,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
@@ -100,4 +82,31 @@
         app:layout_constraintTop_toBottomOf="@+id/view6"
         app:layout_constraintVertical_bias="0.0" />
 
+    <SearchView
+
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="@+id/view6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view6"
+        app:layout_constraintTop_toTopOf="@+id/view6" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/noResultsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

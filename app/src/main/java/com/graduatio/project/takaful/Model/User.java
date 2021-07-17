@@ -3,40 +3,36 @@ package com.graduatio.project.takaful.Model;
 import com.google.firebase.firestore.PropertyName;
 
 public class User {
-    @PropertyName("name")
-    String name ;
+
     @PropertyName("userId")
-    String userId  ;
+    String userId;
     @PropertyName("email")
-    String email ;
+    String email;
     @PropertyName("password")
     String password;
     @PropertyName("isHasCharity")
-    boolean isHasCharity ;
+    boolean isHasCharity;
     @PropertyName("userImage")
     String userImage;
     @PropertyName("role")
-    String role ;
+    String role;
     @PropertyName("payMethod")
     String payMethod;
     @PropertyName("isHasActivity")
-    boolean isHasActivity ;
+    boolean isHasActivity;
     @PropertyName("phone")
     String phone;
+    @PropertyName("firstName")
+    String firstName;
+    @PropertyName("lastName")
+    String lastName;
+
     public boolean isHasActivity() {
         return isHasActivity;
     }
 
     public void setHasActivity(boolean hasActivity) {
         isHasActivity = hasActivity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUserId() {
@@ -101,5 +97,21 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

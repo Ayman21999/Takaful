@@ -39,7 +39,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,10 +50,11 @@
         android:id="@+id/imageView12"
         android:layout_width="109dp"
         android:layout_height="108dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_user"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        app:srcCompat="@drawable/add_image" />
+         />
 
     <TextView
         android:id="@+id/textView32"
@@ -62,17 +63,17 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center_horizontal"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="Help our buddy get better education"
-
+        android:textAlignment="viewStart"
         android:textColor="#000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/textView33"
@@ -80,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="By: White Hat Organization"
-        android:textColor="#000"
+        android:textColor="#A8A8A8"
         app:layout_constraintEnd_toEndOf="@+id/textView32"
         app:layout_constraintStart_toStartOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
@@ -89,13 +90,14 @@
         android:id="@+id/button5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Donate as anonymous"
-        android:textColor="#fff"
-        android:textAllCaps="false"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:background="@drawable/button_shape"
-        app:layout_constraintEnd_toEndOf="@+id/textView32"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="Donate as anonymous"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
@@ -114,10 +116,11 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="356dp"
-        android:layout_height="212dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="@+id/button5"
         app:layout_constraintStart_toStartOf="@+id/textView35"
         app:layout_constraintTop_toBottomOf="@+id/textView35">
@@ -126,58 +129,80 @@
             android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
             android:elevation="4dp"
-            android:layout_marginTop="5dp"
+            android:drawableEnd="@drawable/ic_visa"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:text="Credit Card"
-            android:textColor="#D8d8d8" />
+            android:textColor="#D8d8d8"
+            android:paddingEnd="10dp"
+
+            android:drawableRight="@drawable/ic_visa" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
             android:elevation="4dp"
-            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_googlewallet"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Google Wallet "
+            android:textColor="#D8d8d8"
+            android:paddingEnd="10dp"
 
-            android:text="Bank Transfer"
-            android:textColor="#D8d8d8" />
+            android:drawableRight="@drawable/ic_googlewallet" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
             android:elevation="4dp"
-            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_paypal"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:text="PayPal "
-            android:textColor="#D8d8d8" />
+            android:textColor="#D8d8d8"
+            android:paddingEnd="10dp"
+            android:drawableRight="@drawable/ic_paypal" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
         android:text="Total"
-        android:textSize="16sp"
         android:textColor="#000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.163" />
 
     <TextView
         android:id="@+id/totalnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="$710.00"
-        android:textSize="16sp"
         android:textColor="#000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.275" />
 
     <android.widget.Button
         android:id="@+id/donate_btn"
@@ -197,4 +222,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1462dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.71" />
 </androidx.constraintlayout.widget.ConstraintLayout>

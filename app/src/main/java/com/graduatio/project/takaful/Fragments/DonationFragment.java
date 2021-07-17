@@ -30,4 +30,9 @@ public class DonationFragment extends Fragment {
         return view;
 
     }
+    public void replaceFragment(Fragment fragment) {
+
+        getChildFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+    }
 }

@@ -118,8 +118,7 @@
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
                 android:textColor="@color/background"
-                android:textColorHint="#DEDEDE"
-                app:layout_constraintEnd_toEndOf="@+id/phone"
+                android:textColorHint="#DEDEDE"                app:layout_constraintEnd_toEndOf="@+id/phone"
                 app:layout_constraintStart_toStartOf="@+id/phone"
                 app:layout_constraintTop_toBottomOf="@+id/phone" />
 
@@ -165,6 +164,7 @@
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Username"
+                android:textColor="@color/background"
 
                 android:inputType="textPersonName"
                 android:paddingStart="10dp"
@@ -183,6 +183,11 @@
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Phone"
+                android:textColor="@color/background"
+
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:textColorHint="#DEDEDE"
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="@+id/username"
                 app:layout_constraintHorizontal_bias="0.1"

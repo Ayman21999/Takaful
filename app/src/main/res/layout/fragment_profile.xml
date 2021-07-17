@@ -23,7 +23,7 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:text="Payment method"
         android:textColor="#A8a8a8"
         android:textSize="20sp"
@@ -106,8 +106,8 @@
 
     <View
         android:id="@+id/view8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/edit_text_background"
@@ -117,9 +117,9 @@
 
     <ImageView
         android:id="@+id/editprofile"
-        android:layout_width="24dp"
-        android:layout_height="37dp"
-        android:src="@drawable/ic_shape"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_arrpw"
         app:layout_constraintBottom_toBottomOf="@+id/view8"
         app:layout_constraintEnd_toEndOf="@+id/view8"
         app:layout_constraintStart_toStartOf="@+id/view8"
@@ -129,7 +129,7 @@
         android:id="@+id/useremail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="chiromorgan@gmail.com"
@@ -142,8 +142,8 @@
 
     <View
         android:id="@+id/view9"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="@+id/useremail"
@@ -151,9 +151,9 @@
 
     <ImageView
         android:id="@+id/editpay_method"
-        android:layout_width="23dp"
-        android:layout_height="38dp"
-        android:src="@drawable/ic_shape"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_shapesss"
         app:layout_constraintBottom_toBottomOf="@+id/view9"
         app:layout_constraintEnd_toEndOf="@+id/view9"
         app:layout_constraintStart_toStartOf="@+id/view9"
@@ -162,7 +162,7 @@
     <android.widget.Button
         android:id="@+id/logout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginBottom="72dp"
         android:background="@drawable/button_shape"
         android:drawableLeft="@drawable/ic_logout"
@@ -190,5 +190,49 @@
         app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="@+id/textView25"
         app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView73"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Help and support"
+        android:textColor="#A8a8a8"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/pay_method"
+        app:layout_constraintTop_toBottomOf="@+id/pay_method" />
+
+    <TextView
+        android:id="@+id/textView74"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Admin@gmail.com"
+        android:textColor="#000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView73"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView73"
+        app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+    <View
+        android:id="@+id/view40"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+
+        app:layout_constraintEnd_toEndOf="@+id/view9"
+        app:layout_constraintTop_toTopOf="@+id/textView73" />
+
+    <ImageView
+        android:id="@+id/admin_massaging"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_arrpw"
+        app:layout_constraintBottom_toBottomOf="@+id/view40"
+        app:layout_constraintEnd_toEndOf="@+id/view40"
+        app:layout_constraintStart_toStartOf="@+id/view40"
+        app:layout_constraintTop_toTopOf="@+id/view40" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

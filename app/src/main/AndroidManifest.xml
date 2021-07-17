@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.graduatio.project.takaful">
-        <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +26,13 @@
         <activity android:name=".Actvities.DonationDetails" />
         <activity android:name=".Actvities.EditPayMethod" />
         <activity android:name=".Actvities.EditProfile" />
-        <activity android:name=".Actvities.HomeActivity" />
+        <activity android:name=".Actvities.HomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Actvities.ForgetPassowrd" />
         <activity android:name=".Actvities.SignUp" />
         <activity android:name=".Actvities.Login" />
@@ -23,11 +40,7 @@
         <activity android:name=".Actvities.SecondAppBegging" />
         <activity android:name=".Actvities.AppBegging" />
         <activity android:name=".Actvities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

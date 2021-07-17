@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Actvities.EditProfile;
+import com.graduatio.project.takaful.Actvities.Login;
 import com.graduatio.project.takaful.Model.User;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
@@ -38,7 +40,7 @@ public class ProfileFragment extends Fragment {
         editprofilr = view.findViewById(R.id.editprofile);
         addPayMethod = view.findViewById(R.id.editpay_method);
         name = view.findViewById(R.id.username);
-        email = view.findViewById(R.id.email);
+        email = view.findViewById(R.id.useremail);
         phonenumber = view.findViewById(R.id.usernphone);
         paymethod = view.findViewById(R.id.pay_method);
         loguot = view.findViewById(R.id.logout);
@@ -56,11 +58,16 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
             if (task.isSuccessful()){
-                name.setText(user[0].getName());
+                name.setText(user[0].getFirstName());
                 email.setText(user[0].getEmail());
                 phonenumber.setText(user[0].getPhone());
                 paymethod.setText(user[0].getPayMethod());
-                Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
+                if (user[0].getUserImage().isEmpty()){
+                    Toast.makeText(getContext(), "Empty Image", Toast.LENGTH_SHORT).show();
+                }else {
+                    Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
+
+                }
             }
             }
         });
@@ -68,20 +75,26 @@ public class ProfileFragment extends Fragment {
         editprofilr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext() , EditProfile.class);
-                getContext().startActivity(intent);
+            Intent intent = new Intent(getContext() ,EditProfile.class);
+            startActivity(intent);
             }
         });
 
         loguot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                logOut();
             }
         });
+
         return view;
     }
 
+    private void logOut() {
+        FirebaseAuth.getInstance().signOut();
+        Intent i=new Intent(getContext(), Login.class);
+        startActivity(i);
 
+    }
 
     }

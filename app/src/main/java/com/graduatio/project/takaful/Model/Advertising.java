@@ -5,16 +5,16 @@ import com.google.firebase.firestore.PropertyName;
 public class Advertising {
     @PropertyName("add_ID")
     String add_ID;
-    @PropertyName("catagorey")
-    String catagorey;
+    @PropertyName("address")
+    String address;
     @PropertyName("description")
     String description;
     @PropertyName("image")
     String image;
     @PropertyName("title")
-    String title ;
+    String title;
     @PropertyName("userId")
-    String userId ;
+    String userId;
     @PropertyName("target")
     int target;
     @PropertyName("remaining")
@@ -22,8 +22,28 @@ public class Advertising {
     @PropertyName("beginDate")
     long beginDate;
     @PropertyName("endDate")
-    long endDate ;
+    long endDate;
+    @PropertyName("Type")
+    String Type;
+    @PropertyName("userJob")
+    String userJob;
+    @PropertyName("name_of_Charity")
+    String name_of_Charity;
+    @PropertyName("media_account")
+    String media_account;
+    @PropertyName("whoarebenefit")
+    String whoarebenefit;
+    @PropertyName("userphone")
+    String userphone;
+    @PropertyName("isRejected")
+    boolean isRejected;
+    public String getName_of_Charity() {
+        return name_of_Charity;
+    }
 
+    public void setName_of_Charity(String name_of_Charity) {
+        this.name_of_Charity = name_of_Charity;
+    }
 
     public String getAdd_ID() {
         return add_ID;
@@ -33,13 +53,6 @@ public class Advertising {
         this.add_ID = add_ID;
     }
 
-    public String getCatagorey() {
-        return catagorey;
-    }
-
-    public void setCatagorey(String catagorey) {
-        this.catagorey = catagorey;
-    }
 
     public String getDescription() {
         return description;
@@ -103,5 +116,61 @@ public class Advertising {
 
     public void setEndDate(long endDate) {
         this.endDate = endDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public String getUserJob() {
+        return userJob;
+    }
+
+    public void setUserJob(String userJob) {
+        this.userJob = userJob;
+    }
+
+    public String getMedia_account() {
+        return media_account;
+    }
+
+    public void setMedia_account(String media_account) {
+        this.media_account = media_account;
+    }
+
+    public String getWhoarebenefit() {
+        return whoarebenefit;
+    }
+
+    public void setWhoarebenefit(String whoarebenefit) {
+        this.whoarebenefit = whoarebenefit;
+    }
+
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    public boolean isRejected() {
+        return isRejected;
+    }
+
+    public void setRejected(boolean rejected) {
+        isRejected = rejected;
     }
 }

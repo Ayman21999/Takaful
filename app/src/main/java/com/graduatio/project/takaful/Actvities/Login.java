@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.graduatio.project.takaful.DataBase.SessionManager;
 import com.graduatio.project.takaful.R;
 
 public class Login extends AppCompatActivity {
@@ -43,17 +45,32 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailtxt = email.getText().toString();
-                String passtxt = pass.getText().toString();
-                if (emailtxt.isEmpty()) {
-                    Toast.makeText(Login.this, "Email is Required", Toast.LENGTH_SHORT).show();
-                } else if (passtxt.isEmpty()) {
-                    Toast.makeText(Login.this, "Password is Required", Toast.LENGTH_SHORT).show();
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+
+                    Log.i("a user is logged in: ", user.getEmail());
                 } else {
-                    LogIn(emailtxt, passtxt);
+                    Log.i("Username", "there is no user");
+
+                    String emailtxt = email.getText().toString();
+                    String passtxt = pass.getText().toString();
+                    if (emailtxt.isEmpty()) {
+                        Toast.makeText(Login.this, "Email is Required", Toast.LENGTH_SHORT).show();
+                    } else if (passtxt.isEmpty()) {
+                        Toast.makeText(Login.this, "Password is Required", Toast.LENGTH_SHORT).show();
+                    } else {
+                        LogIn(emailtxt, passtxt);
+                        SessionManager manager = new SessionManager(Login.this);
+                        manager.CreateSession(emailtxt, passtxt);
+                    }
                 }
             }
+
         });
+
+
     }
 
     public void SetUpElement() {
@@ -75,7 +92,7 @@ public class Login extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Intent i = new Intent(Login.this , HomeActivity.class);
+                Intent i = new Intent(Login.this, HomeActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 finish();
