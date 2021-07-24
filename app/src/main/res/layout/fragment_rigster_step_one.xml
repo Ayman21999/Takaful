@@ -12,7 +12,8 @@
         android:id="@+id/view24"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
+
         android:background="@drawable/card_background"
         app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,16 +25,18 @@
     <android.widget.Button
         android:id="@+id/next"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_active_"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/background"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -55,7 +58,7 @@
         android:id="@+id/textView49"
         android:layout_width="321dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="Complete your personal information to proceed this charity program"
         android:textColor="#707070"
         android:textSize="16sp"
@@ -68,9 +71,7 @@
         android:id="@+id/view25"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/secleted_step"
         app:layout_constraintStart_toStartOf="@+id/textView49"
         app:layout_constraintTop_toBottomOf="@+id/textView49" />
@@ -108,12 +109,14 @@
         android:id="@+id/v"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/edit_text_background"
         app:layout_constraintBottom_toBottomOf="@+id/view25"
+        app:layout_constraintEnd_toStartOf="@+id/view27"
         app:layout_constraintTop_toTopOf="@+id/view25"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="180dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView51"
@@ -141,14 +144,12 @@
         android:id="@+id/view27"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:background="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="@+id/v"
         app:layout_constraintEnd_toStartOf="@+id/view28"
-        app:layout_constraintStart_toEndOf="@+id/v"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/v"
         app:layout_constraintVertical_bias="0.488" />
 
@@ -183,7 +184,7 @@
         android:id="@+id/textView53"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Your Profession"
@@ -197,15 +198,16 @@
     <EditText
         android:id="@+id/job"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView53"
         app:layout_constraintTop_toBottomOf="@+id/textView53" />
@@ -224,13 +226,14 @@
     <EditText
         android:id="@+id/name_of_ins"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
+        android:textColor="@color/background"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/job"
         app:layout_constraintStart_toStartOf="@+id/textView54"
         app:layout_constraintTop_toBottomOf="@+id/textView54" />
@@ -249,13 +252,14 @@
     <EditText
         android:id="@+id/media_account"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-
         android:background="@drawable/edit_text_background"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="@+id/name_of_ins"
         app:layout_constraintStart_toStartOf="@+id/textView55"
         app:layout_constraintTop_toBottomOf="@+id/textView55" />
@@ -274,15 +278,25 @@
     <EditText
         android:id="@+id/address"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="@+id/media_account"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView56"
         app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="230dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

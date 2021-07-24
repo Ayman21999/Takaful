@@ -29,4 +29,9 @@
         <item name="android:textSize">10sp</item>
 
     </style>
+
+    <style name="FullScreenDialogTheme" parent="Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Theme.AppCompat.Dialog</item>
+    </style>
 </resources>

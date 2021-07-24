@@ -84,12 +84,15 @@
         android:id="@+id/v"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/button_shape"
         app:layout_constraintBottom_toBottomOf="@+id/view25"
+        app:layout_constraintEnd_toStartOf="@+id/view27"
         app:layout_constraintTop_toTopOf="@+id/view25"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="180dp" />
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/imageView25"
         android:layout_width="wrap_content"
@@ -101,19 +104,16 @@
         app:layout_constraintTop_toTopOf="@+id/v" />
 
 
-
     <View
         android:id="@+id/view27"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:background="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="@+id/v"
         app:layout_constraintEnd_toStartOf="@+id/view28"
-        app:layout_constraintStart_toEndOf="@+id/v"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="@+id/v"
         app:layout_constraintVertical_bias="0.488" />
 
@@ -276,5 +276,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view29"
         app:layout_constraintVertical_bias="0.157" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="238dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

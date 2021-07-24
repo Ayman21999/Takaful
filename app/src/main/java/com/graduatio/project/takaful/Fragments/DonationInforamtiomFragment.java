@@ -20,7 +20,6 @@ import java.util.List;
 
 public class DonationInforamtiomFragment extends Fragment {
 
-    FragmentActivity myContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

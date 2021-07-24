@@ -22,21 +22,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Actvities.EditProfile;
 import com.graduatio.project.takaful.Actvities.Login;
+import com.graduatio.project.takaful.Actvities.EditPaymentMethod;
 import com.graduatio.project.takaful.Model.User;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView userimage,editprofilr,addPayMethod ;
-    TextView name , phonenumber,email,paymethod;
+    ImageView userimage, editprofilr, addPayMethod, edit_paymothed;
+    TextView name, phonenumber, email, paymethod;
     Button loguot;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View  view = inflater.inflate(R.layout.fragment_profile, container, false);
-        userimage  =view.findViewById(R.id.userimage);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        userimage = view.findViewById(R.id.userimage);
         editprofilr = view.findViewById(R.id.editprofile);
         addPayMethod = view.findViewById(R.id.editpay_method);
         name = view.findViewById(R.id.username);
@@ -44,6 +44,7 @@ public class ProfileFragment extends Fragment {
         phonenumber = view.findViewById(R.id.usernphone);
         paymethod = view.findViewById(R.id.pay_method);
         loguot = view.findViewById(R.id.logout);
+        edit_paymothed = view.findViewById(R.id.editpay_method);
 
         User[] user = new User[1];
         FirebaseFirestore.getInstance().collection("Users")
@@ -51,32 +52,39 @@ public class ProfileFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    user[0] =documentSnapshot.toObject(User.class);
+                        user[0] = documentSnapshot.toObject(User.class);
 
                     }
                 }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-            if (task.isSuccessful()){
-                name.setText(user[0].getFirstName());
-                email.setText(user[0].getEmail());
-                phonenumber.setText(user[0].getPhone());
-                paymethod.setText(user[0].getPayMethod());
-                if (user[0].getUserImage().isEmpty()){
-                    Toast.makeText(getContext(), "Empty Image", Toast.LENGTH_SHORT).show();
-                }else {
-                    Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
+                if (task.isSuccessful()) {
+                    name.setText(user[0].getFirstName());
+                    email.setText(user[0].getEmail());
+                    phonenumber.setText(user[0].getPhone());
+                    paymethod.setText(user[0].getPayMethod());
+                    if (user[0].getUserImage().isEmpty()) {
+                        Toast.makeText(getContext(), "Empty Image", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
 
+                    }
                 }
-            }
             }
         });
 
+        edit_paymothed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EditPaymentMethod.class);
+                startActivity(intent);
+            }
+        });
         editprofilr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getContext() ,EditProfile.class);
-            startActivity(intent);
+                Intent intent = new Intent(getContext(), EditProfile.class);
+                startActivity(intent);
             }
         });
 
@@ -92,9 +100,9 @@ public class ProfileFragment extends Fragment {
 
     private void logOut() {
         FirebaseAuth.getInstance().signOut();
-        Intent i=new Intent(getContext(), Login.class);
+        Intent i = new Intent(getContext(), Login.class);
         startActivity(i);
 
     }
 
-    }
+}

@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,7 +16,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,7 +48,7 @@ import java.util.Date;
 public class EditProfile extends AppCompatActivity {
 
     EditText fname, lname, email, phone;
-    ImageView userimage, edit_image_iv,back;
+    ImageView userimage, edit_image_iv, back;
     Button save;
     FirebaseFirestore firebaseFirestore;
     CollectionReference reference;
@@ -82,6 +85,7 @@ public class EditProfile extends AppCompatActivity {
                     lname_txt[0] = documentSnapshot.getString("lastName");
                     email_txt[0] = documentSnapshot.getString("email");
                     phone_txt[0] = documentSnapshot.getString("phone");
+                    imageUrl[0] = documentSnapshot.getString("userImage");
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -138,30 +142,23 @@ public class EditProfile extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         fAuth = FirebaseAuth.getInstance();
         userid = fAuth.getCurrentUser().getUid();
-        back  = findViewById(R.id.back_btn);
+        back = findViewById(R.id.back_btn);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            /// GALLERY
-            uploading = true;
-            mProgressDialog.setMessage("Loading Image");
-            mProgressDialog.show();
-            filePath = Uri.parse("file://" + cameraImageFilePath);
+          /// GALLERY
+            if (requestCode == 2   && resultCode == RESULT_OK) {
+                imageUri = data.getData();
+//                UploadImage();
+            }
 
-
-            Picasso.get().load(imageUrl).fit().into(userimage);
-        }
     }
 
     public void SelectImage(Context context) {
         if (ActivityCompat.checkSelfPermission(EditProfile.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-            Intent pikPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(pikPhoto, 2);
-
+            OpenImage();
         } else {
             ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
 
@@ -186,18 +183,16 @@ public class EditProfile extends AppCompatActivity {
 
                         if (imageUrl != null && !imageUrl.isEmpty()) {
 
-                            userRef.update("imageUrl", imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            userRef.update("userImage", imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     progressDialog.dismiss();
-                                    save.setClickable(true);
                                     Intent intent = new Intent(EditProfile.this, ProfileFragment.class);
                                     finish();
                                 }
                             });
                         } else {
                             progressDialog.dismiss();
-                            save.setClickable(true);
                             Intent intent = new Intent(EditProfile.this, ProfileFragment.class);
                             finish();
                         }
@@ -207,7 +202,7 @@ public class EditProfile extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(EditProfile.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
-                save.setClickable(true);
+                Log.d("qqq", e.getLocalizedMessage());
             }
         });
     }
@@ -227,7 +222,6 @@ public class EditProfile extends AppCompatActivity {
             progressDialog.setMessage("Updating ....");
             progressDialog.setCancelable(false);
             progressDialog.show();
-            save.setClickable(false);
 
             if (imageUri != null) {
 
@@ -245,6 +239,8 @@ public class EditProfile extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
                                         imageUrl = uri.toString();
                                         updateData(txt_fname, txt_lname, txt_email, txt_phone, progressDialog);
+                                        Picasso.get().load(imageUrl).fit().into(userimage);
+                                        progressDialog.dismiss();
                                     }
                                 });
                             }
@@ -252,9 +248,56 @@ public class EditProfile extends AppCompatActivity {
 
             } else {
                 updateData(txt_fname, txt_lname, txt_email, txt_phone, progressDialog);
+                progressDialog.dismiss();
 
             }
 
+        }
+    }
+
+    public void OpenImage() {
+        Intent intent = new Intent();
+        intent.setType("image/");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 2);
+
+    }
+
+    public String getFileExtention(Uri uri){
+        ContentResolver resolver =getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
+    }
+    public void UploadImage() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Updating ....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        if (imageUri != null){
+            final StorageReference reference = FirebaseStorage.getInstance().getReference().child("img")
+                    .child(System.currentTimeMillis()+"."+getFileExtention(imageUri));
+
+            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        imageUrl = imageUri.toString();
+                        Toast.makeText(EditProfile.this, "image Uploading...", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("qqq", e.getLocalizedMessage());
+                        progressDialog.dismiss();
+
+                    }
+                });
+                }
+            });
         }
     }
 }

@@ -1,13 +1,17 @@
 package com.graduatio.project.takaful.Fragments;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,12 +33,19 @@ import com.graduatio.project.takaful.R;
 
 import java.util.Calendar;
 
-public class RigsterStepTwoFragment extends Fragment {
+public class RigsterStepTwoFragment extends DialogFragment {
 
     EditText title, whoarebenefit, target, deadline;
     Button perv, next;
     long start_date, end_date;
     FirebaseFirestore firebaseFirestore;
+    String id;
+    ProgressDialog progressDialog;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +58,7 @@ public class RigsterStepTwoFragment extends Fragment {
         deadline = view.findViewById(R.id.deadline);
         perv = view.findViewById(R.id.previous);
         next = view.findViewById(R.id.next);
+        progressDialog = new ProgressDialog(getContext());
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +76,13 @@ public class RigsterStepTwoFragment extends Fragment {
                     Toast.makeText(getContext(), "Pleas set your target", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    UpdateUploadedData();
+                    UpdateUploadedData(title_txt , whoarebenefit_txt , target_txt);
                     Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
+                    Bundle bundle =new Bundle();
+                    bundle.putString("id",id);
+                    DialogFragment fragment = LastStepFragment.lastStepFragment();
+                    fragment.getChildFragmentManager().beginTransaction().commit();
+                    fragment.setArguments(bundle);
 
                 }
 
@@ -106,32 +124,36 @@ public class RigsterStepTwoFragment extends Fragment {
 //        bsd.show();
 //    }
 
-    public void UpdateUploadedData() {
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-            firebaseFirestore.collection("Advertising").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        String title_txt = task.getResult().getString("title");
-                        String whobenefit_txt = task.getResult().getString("whoarebenefit");
-                        double targe_txt = Double.parseDouble(task.getResult().getString("target"));
-                        title.setText(title_txt);
-                        whoarebenefit.setText(whobenefit_txt);
-                        target.setText(targe_txt + "");
-                    } else {
-                        Toast.makeText(getActivity(), "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
+    public void UpdateUploadedData(String title , String forWhoDonate , double target) {
+        Bundle bundle = this.getArguments();
+        id =   bundle.getString("id");
+        progressDialog.show();
+        progressDialog.setMessage("Updating...");
+            firebaseFirestore.collection("Advertising").document(id)
+                    .update("title",title , "whoarebenefit",forWhoDonate,"target",target)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("Tag",e.getLocalizedMessage());
+                    Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
+            });
+    }
+    public static RigsterStepTwoFragment RTwoFragment(){
+        return new RigsterStepTwoFragment();
     }
 
 }
+    //String title_txt = task.getResult().getString("title");
+//                        String whobenefit_txt = task.getResult().getString("whoarebenefit");
+//                        double targe_txt = Double.parseDouble(task.getResult().getString("target"));
+//                        title.setText(title_txt);
+//                        whoarebenefit.setText(whobenefit_txt);
+//                        target.setText(targe_txt + "");

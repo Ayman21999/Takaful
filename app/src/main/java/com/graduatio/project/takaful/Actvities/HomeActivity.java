@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.graduatio.project.takaful.DataBase.SessionManager;
+import com.graduatio.project.takaful.Fragments.DonationFragment;
 import com.graduatio.project.takaful.Fragments.DonationInforamtiomFragment;
 import com.graduatio.project.takaful.Fragments.CategoryFragment;
 import com.graduatio.project.takaful.Fragments.ProfileFragment;
@@ -46,6 +48,9 @@ public class HomeActivity extends AppCompatActivity  {
                     break;
                 case R.id.donationData :
                     fragment = new DonationInforamtiomFragment();
+                    DonationInforamtiomFragment donationFragment = new DonationInforamtiomFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().add(R.id.main_layout,donationFragment).commit();
                     break;
                 case R.id.profile:
                     fragment = new ProfileFragment();
@@ -64,9 +69,6 @@ public class HomeActivity extends AppCompatActivity  {
 
     }
     public void onBackPressed() {
-
-
-
             Log.d("ttt","last frag: "+getSupportFragmentManager().getFragments()
                     .get(getSupportFragmentManager().getFragments().size()-1));
             if (bottomNavigationViewl.getSelectedItemId() != R.id.category) {

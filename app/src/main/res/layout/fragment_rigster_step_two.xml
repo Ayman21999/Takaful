@@ -9,47 +9,48 @@
 
     <View
         android:id="@+id/view29"
-        android:layout_width="match_parent"
-        android:layout_height="621dp"
+        android:layout_width="0dp"
+        android:layout_height="641dp"
         android:background="@drawable/card_background"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView48"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
-        android:gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
         android:text="Start a Charity"
-        android:textAlignment="center"
         android:textColor="#707070"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/view29"
+        app:layout_constraintTop_toTopOf="@id/view29" />
 
     <TextView
         android:id="@+id/textView49"
-        android:layout_width="321dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="Complete your personal information to proceed this charity program"
         android:textColor="#707070"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView48"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView48"
         app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
     <View
         android:id="@+id/view25"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_shape"
         app:layout_constraintStart_toStartOf="@+id/textView49"
         app:layout_constraintTop_toBottomOf="@+id/textView49" />
@@ -58,10 +59,10 @@
         android:id="@+id/view26"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="@+id/v"
         app:layout_constraintEnd_toStartOf="@+id/v"
@@ -73,12 +74,14 @@
         android:id="@+id/v"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/secleted_step"
         app:layout_constraintBottom_toBottomOf="@+id/view25"
+        app:layout_constraintEnd_toStartOf="@+id/view27"
         app:layout_constraintTop_toTopOf="@+id/view25"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="180dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView51"
@@ -106,26 +109,27 @@
         android:id="@+id/view27"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="@+id/v"
         app:layout_constraintEnd_toStartOf="@+id/view28"
-        app:layout_constraintStart_toEndOf="@+id/v"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toTopOf="@+id/v"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintVertical_bias="0.511" />
 
     <View
         android:id="@+id/view28"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:background="@drawable/edit_text_background"
         app:layout_constraintBottom_toBottomOf="@+id/v"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView49"
         app:layout_constraintTop_toTopOf="@+id/v"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -138,11 +142,12 @@
         app:layout_constraintEnd_toEndOf="@+id/view25"
         app:layout_constraintStart_toStartOf="@+id/view25"
         app:layout_constraintTop_toTopOf="@+id/view25" />
+
     <TextView
         android:id="@+id/textView53"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Title for This Program"
@@ -156,20 +161,19 @@
     <EditText
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/background"
-        android:paddingStart="10dp"
-        android:paddingLeft="10dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView53"
-        app:layout_constraintTop_toBottomOf="@+id/textView53"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
     <TextView
         android:id="@+id/textView54"
@@ -185,15 +189,15 @@
     <EditText
         android:id="@+id/name_of_ins"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
 
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@color/background"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/textView54"
         app:layout_constraintTop_toBottomOf="@+id/textView54" />
@@ -212,19 +216,19 @@
     <EditText
         android:id="@+id/target"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/dolar"
         android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/dolar"
+        android:drawableLeft="@drawable/dolar"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@color/background"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="@+id/name_of_ins"
         app:layout_constraintStart_toStartOf="@+id/textView55"
-        app:layout_constraintTop_toBottomOf="@+id/textView55"
-        android:drawableLeft="@drawable/dolar" />
+        app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
     <TextView
         android:id="@+id/textView56"
@@ -240,22 +244,21 @@
     <EditText
         android:id="@+id/deadline"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
 
         android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/ic_group_10"
+        android:drawableLeft="@drawable/ic_group_10"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@color/background"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
-        android:drawableStart="@drawable/ic_group_10"
 
+        android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="@+id/target"
         app:layout_constraintStart_toStartOf="@+id/textView56"
-        app:layout_constraintTop_toBottomOf="@+id/textView56"
-        android:drawableLeft="@drawable/ic_group_10"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
     <TextView
         android:id="@+id/textView57"
@@ -280,40 +283,50 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
-        android:background="#093E3A"
+        android:layout_marginEnd="40dp"
 
+        android:layout_marginBottom="16dp"
+        android:background="#093E3A"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view29"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.widget.Button
             android:id="@+id/previous"
-            android:layout_height="70dp"
             android:layout_width="match_parent"
-            android:text="Previous"
-            android:background="@drawable/button_creat_add_shape"
+            android:layout_height="70dp"
             android:layout_weight="0.5"
+            android:background="@drawable/button_creat_add_shape"
+            android:text="Previous"
             android:textAllCaps="false"
-            />
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
         <android.widget.Button
             android:id="@+id/next"
-            android:layout_height="70dp"
             android:layout_width="match_parent"
-            android:text="Next"
-            android:background="@drawable/button_active_"
-
-            android:textAllCaps="false"
+            android:layout_height="70dp"
             android:layout_weight="0.5"
+            android:background="@drawable/button_active_"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="#0E4944"
+            android:textSize="16sp"
 
             />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.49878347"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

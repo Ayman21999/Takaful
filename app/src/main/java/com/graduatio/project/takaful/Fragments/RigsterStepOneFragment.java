@@ -1,10 +1,15 @@
 package com.graduatio.project.takaful.Fragments;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +28,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Actvities.EditProfile;
 import com.graduatio.project.takaful.R;
 
-public class RigsterStepOneFragment extends Fragment {
+public class RigsterStepOneFragment extends DialogFragment {
 
     EditText job, nameOFCharity, mediaAccount, address;
     Button next;
-
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    String userid;
+    String id;
+    ProgressDialog progressDialog;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +53,8 @@ public class RigsterStepOneFragment extends Fragment {
         address = view.findViewById(R.id.address);
         next = view.findViewById(R.id.next);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        userid = firebaseAuth.getCurrentUser().getUid();
+        progressDialog = new ProgressDialog(getContext());
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +75,12 @@ public class RigsterStepOneFragment extends Fragment {
                     Toast.makeText(getContext(), "Pleas Fill Your Address", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    UpdateUploadedData();
+                    UpdateUploadedData(job_txt,name_of_Inv_txt,media_txt,address_txt);
+                    DialogFragment dialogFragment = RigsterStepTwoFragment.RTwoFragment();
+                    dialogFragment.show(getChildFragmentManager(), ":");
+                    Bundle bundle =new Bundle();
+                    bundle.putString("id",id);
+                    dialogFragment.setArguments(bundle);
                 }
 
             }
@@ -72,34 +88,31 @@ public class RigsterStepOneFragment extends Fragment {
         return view;
     }
 
-    public void UpdateUploadedData() {
-        firebaseFirestore.collection("Advertising").document(userid)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    public void UpdateUploadedData(String job ,String nameOfCharity,String mediaAccount,String address) {
+        Bundle bundle = this.getArguments();
+         id = bundle.getString("id");
+        progressDialog.show();
+        progressDialog.setMessage("Updating...");
+        firebaseFirestore.collection("Advertising").document(id)
+                .update("job",job, "name_of_Charity", nameOfCharity ,
+                        "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        String job_txt = task.getResult().getString("userJob");
-                        String name_of_Inv_txt = task.getResult().getString("name_of_Charity");
-                        String media_txt = task.getResult().getString("userJob");
-                        String address_txt = task.getResult().getString("address");
-
-                        job.setText(job_txt);
-                        nameOFCharity.setText(name_of_Inv_txt);
-                        mediaAccount.setText(media_txt);
-                        address.setText(address_txt);
-
-                    } else {
-                        Toast.makeText(getActivity(), "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Tag",e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
 
             }
         });
+    }
+
+    public static RigsterStepOneFragment Rfragment() {
+        return new RigsterStepOneFragment();
     }
 }

@@ -10,227 +10,249 @@
     <View
         android:id="@+id/view22"
         android:layout_width="0dp"
-        android:layout_height="657dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
         android:text="Start a Charity"
         android:textColor="#000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/view22" />
 
     <TextView
         android:id="@+id/textView42"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Choose the type of your charity program"
         android:textColor="#000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView41"
         app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
-    <View
-        android:id="@+id/view19"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/selectshape"
-        app:layout_constraintStart_toStartOf="@+id/textView42"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
-
-    <View
-        android:id="@+id/view20"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/selectshape"
-        app:layout_constraintEnd_toEndOf="@+id/view21"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="@+id/view23"
-        app:layout_constraintTop_toBottomOf="@+id/textView46" />
-
-    <View
-        android:id="@+id/view21"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:background="@drawable/selectshape"
-        app:layout_constraintStart_toEndOf="@+id/view23"
-        app:layout_constraintTop_toTopOf="@+id/view23" />
-
-    <View
-        android:id="@+id/textView22"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
-        android:background="@drawable/selectshape"
-        app:layout_constraintStart_toEndOf="@+id/view19"
-        app:layout_constraintTop_toTopOf="@+id/view19" />
-
-
-    <View
-        android:id="@+id/view23"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/selectshape"
-        app:layout_constraintStart_toStartOf="@+id/view19"
-        app:layout_constraintTop_toBottomOf="@+id/textView43" />
-
-    <View
-        android:id="@+id/bbb"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/ic_oval"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/view22"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+        app:layout_constraintEnd_toEndOf="@+id/view22"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/view22"
+        app:layout_constraintTop_toBottomOf="@+id/textView42"
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageView
-        android:id="@+id/edu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_mortarboard"
-        app:layout_constraintBottom_toBottomOf="@+id/view19"
-        app:layout_constraintEnd_toEndOf="@+id/view19"
-        app:layout_constraintStart_toStartOf="@+id/view19"
-        app:layout_constraintTop_toTopOf="@+id/view19" />
+        <View
+            android:id="@+id/view21"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selectshape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/med"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_stethoscope"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView22" />
+        <View
+            android:id="@+id/textView22"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginLeft="72dp"
+            android:background="@drawable/selectshape"
+            app:layout_constraintStart_toEndOf="@+id/view21"
+            app:layout_constraintTop_toTopOf="@+id/view21" />
 
-    <ImageView
-        android:id="@+id/next"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_baseline_arrow_forward"
-        app:layout_constraintBottom_toBottomOf="@+id/bbb"
-        app:layout_constraintEnd_toEndOf="@+id/bbb"
-        app:layout_constraintStart_toStartOf="@+id/bbb"
-        app:layout_constraintTop_toTopOf="@+id/bbb" />
+        <View
+            android:id="@+id/view19"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/selectshape"
+            app:layout_constraintEnd_toEndOf="@+id/view21"
+            app:layout_constraintStart_toStartOf="@+id/view21"
+            app:layout_constraintTop_toBottomOf="@+id/education" />
 
-    <ImageView
-        android:id="@+id/food"
-        android:layout_width="49dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_fastfood"
-        app:layout_constraintBottom_toBottomOf="@+id/view23"
-        app:layout_constraintEnd_toEndOf="@+id/view23"
-        app:layout_constraintStart_toStartOf="@+id/view23"
-        app:layout_constraintTop_toTopOf="@+id/view23" />
+        <ImageView
+            android:id="@+id/food"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_fastfood"
+            app:layout_constraintBottom_toBottomOf="@+id/view19"
+            app:layout_constraintEnd_toEndOf="@+id/view19"
+            app:layout_constraintStart_toStartOf="@+id/view19"
+            app:layout_constraintTop_toTopOf="@+id/view19" />
 
-    <ImageView
-        android:id="@+id/idea"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_projectmanagement"
-        app:layout_constraintBottom_toBottomOf="@+id/view21"
-        app:layout_constraintEnd_toEndOf="@+id/view21"
-        app:layout_constraintStart_toStartOf="@+id/view21"
-        app:layout_constraintTop_toTopOf="@+id/view21" />
+        <TextView
+            android:id="@+id/health"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Health"
+            android:textAlignment="center"
+            android:textColor="#B6B6B6"
+            app:layout_constraintEnd_toEndOf="@+id/textView22"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
-    <ImageView
-        android:id="@+id/home_ty"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_homerenovation"
-        app:layout_constraintBottom_toBottomOf="@+id/view20"
-        app:layout_constraintEnd_toEndOf="@+id/view20"
-        app:layout_constraintStart_toStartOf="@+id/view20"
-        app:layout_constraintTop_toTopOf="@+id/view20" />
+        <View
+            android:id="@+id/view23"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/selectshape"
+            app:layout_constraintBottom_toBottomOf="@+id/view19"
+            app:layout_constraintEnd_toEndOf="@+id/textView22"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/view19" />
 
-    <TextView
-        android:id="@+id/textView43"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Education "
-        android:textColor="#B6B6B6"
-        app:layout_constraintEnd_toEndOf="@+id/view19"
-        app:layout_constraintHorizontal_bias="0.547"
-        app:layout_constraintStart_toStartOf="@+id/view19"
-        app:layout_constraintTop_toBottomOf="@+id/view19" />
+        <ImageView
+            android:id="@+id/edu"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_mortarboard"
+            app:layout_constraintBottom_toBottomOf="@+id/view21"
+            app:layout_constraintEnd_toEndOf="@+id/view21"
+            app:layout_constraintStart_toStartOf="@+id/view21"
+            app:layout_constraintTop_toTopOf="@+id/view21" />
 
-    <TextView
-        android:id="@+id/textView44"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Health"
-        android:textColor="#B6B6B6"
+        <ImageView
+            android:id="@+id/idea"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_projectmanagement"
+            app:layout_constraintBottom_toBottomOf="@+id/view23"
+            app:layout_constraintEnd_toEndOf="@+id/view23"
+            app:layout_constraintStart_toStartOf="@+id/view23"
+            app:layout_constraintTop_toTopOf="@+id/view23" />
 
-        app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        <View
+            android:id="@+id/view20"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/selectshape"
+            app:layout_constraintEnd_toEndOf="@+id/view23"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="@+id/view19"
+            app:layout_constraintTop_toBottomOf="@+id/small" />
 
-    <TextView
-        android:id="@+id/textView45"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Food"
-        android:textColor="#B6B6B6"
+        <TextView
+            android:id="@+id/small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Small Projects"
+            android:textAlignment="center"
+            android:textColor="#B6B6B6"
+            app:layout_constraintEnd_toEndOf="@+id/view23"
+            app:layout_constraintStart_toStartOf="@+id/view23"
+            app:layout_constraintTop_toBottomOf="@+id/view23" />
 
-        app:layout_constraintEnd_toEndOf="@+id/view23"
-        app:layout_constraintStart_toStartOf="@+id/view23"
-        app:layout_constraintTop_toBottomOf="@+id/view23" />
+        <View
+            android:id="@+id/bbb"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/ic_oval"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view20" />
 
-    <TextView
-        android:id="@+id/textView46"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Small Projects"
-        android:textColor="#B6B6B6"
+        <ImageView
+            android:id="@+id/home_ty"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_homerenovation"
+            app:layout_constraintBottom_toBottomOf="@+id/view20"
+            app:layout_constraintEnd_toEndOf="@+id/view20"
+            app:layout_constraintStart_toStartOf="@+id/view20"
+            app:layout_constraintTop_toTopOf="@+id/view20" />
 
-        app:layout_constraintEnd_toEndOf="@+id/view21"
-        app:layout_constraintStart_toStartOf="@+id/view21"
-        app:layout_constraintTop_toBottomOf="@+id/view21" />
+        <ImageView
+            android:id="@+id/med"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_stethoscope"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintEnd_toEndOf="@+id/textView22"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/textView22" />
 
-    <TextView
-        android:id="@+id/textView47"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Home Renovation"
-        android:textColor="#B6B6B6"
+        <TextView
+            android:id="@+id/education"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Education "
+            android:textAlignment="center"
+            android:textColor="#B6B6B6"
+            app:layout_constraintEnd_toEndOf="@+id/view21"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/view21"
+            app:layout_constraintTop_toBottomOf="@+id/view21" />
 
-        app:layout_constraintEnd_toEndOf="@+id/view20"
-        app:layout_constraintStart_toStartOf="@+id/view20"
-        app:layout_constraintTop_toBottomOf="@+id/view20" />
+        <TextView
+            android:id="@+id/txtfood"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center_horizontal"
+            android:text="Food"
+            android:textAlignment="center"
+            android:textColor="#B6B6B6"
+            app:layout_constraintEnd_toEndOf="@+id/view19"
+            app:layout_constraintStart_toStartOf="@+id/view19"
+            app:layout_constraintTop_toBottomOf="@+id/view19" />
+
+        <TextView
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Home Renovation"
+            android:textAlignment="center"
+            android:textColor="#B6B6B6"
+            app:layout_constraintEnd_toEndOf="@+id/view20"
+            app:layout_constraintStart_toStartOf="@+id/view20"
+            app:layout_constraintTop_toBottomOf="@+id/view20" />
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_baseline_arrow_forward"
+            app:layout_constraintBottom_toBottomOf="@+id/bbb"
+            app:layout_constraintEnd_toEndOf="@+id/bbb"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/bbb"
+            app:layout_constraintTop_toTopOf="@+id/bbb"
+            app:layout_constraintVertical_bias="0.8" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

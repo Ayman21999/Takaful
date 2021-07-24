@@ -37,6 +37,8 @@ public class Advertising {
     String userphone;
     @PropertyName("isRejected")
     boolean isRejected;
+    @PropertyName("dayleft")
+    int dayleft;
     public String getName_of_Charity() {
         return name_of_Charity;
     }
@@ -172,5 +174,13 @@ public class Advertising {
 
     public void setRejected(boolean rejected) {
         isRejected = rejected;
+    }
+
+    public int getDayleft() {
+        return dayleft;
+    }
+
+    public void setDayleft(int dayleft) {
+        this.dayleft = dayleft;
     }
 }

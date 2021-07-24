@@ -8,13 +8,14 @@
     tools:context=".Fragments.DonationFragment">
 
 
+
     <View
         android:id="@+id/view18"
         android:layout_width="170dp"
         android:layout_height="191dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="196dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/edit_text_background"

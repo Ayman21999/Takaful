@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -26,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,7 +40,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
-public class LastStepFragment extends Fragment {
+public class LastStepFragment extends DialogFragment {
 
     ImageView add_image;
     Button publish;
@@ -49,10 +52,16 @@ public class LastStepFragment extends Fragment {
     boolean isUploading;
     String cameraImageFilePath;
     private final static int CAMERA_REQUEST_CODE = 1;
-
+    String id ;
     private Uri filePath;
     ProgressDialog mProgressDialog;
     StorageReference sreference;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL,R.style.FullScreenDialogTheme);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,7 +101,9 @@ public class LastStepFragment extends Fragment {
                     Toast.makeText(getContext(), "Pleas Add description", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    UpdateUploadedData();
+                    UpdateUploadedData(desc_txt , image_url , phone);
+                    showSuccessfulMessageBottomSheet();
+
                 }
             }
         });
@@ -134,32 +145,46 @@ public class LastStepFragment extends Fragment {
         }
     }
 
-    public void UpdateUploadedData() {
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-
-        firebaseFirestore.collection("Advertising").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().exists()) {
-                        String txt_phone = task.getResult().getString("userphone");
-                        String txt_desc = task.getResult().getString("description");
-                        image_url = task.getResult().getString("image");
-                        phonenumber.setText(txt_phone);
-                        desc.setText(txt_desc);
-
-                    } else {
-                        Toast.makeText(getActivity(), "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+    public void UpdateUploadedData(String img ,String desc , String phone) {
+        Bundle bundle = this.getArguments();
+        id = bundle.getString("id");
+        mProgressDialog.show();
+        mProgressDialog.setMessage("Updating...");
+        firebaseFirestore.collection("Advertising")
+                .document(id).update("description",desc ,"image",img , "userphone",phone)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        mProgressDialog.dismiss();
                     }
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                Log.d("Tag",e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                mProgressDialog.dismiss();
             }
         });
+    }
+    void showSuccessfulMessageBottomSheet() {
+
+
+        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet,
+                null);
+        parentView.setBackgroundColor(Color.TRANSPARENT);
+
+        parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
+            Fragment fragment = new CategoryFragment();
+            fragment.getChildFragmentManager().beginTransaction().commit();
+            bsd.dismiss();
+
+        });
+
+    }
+
+    public static LastStepFragment lastStepFragment(){
+        return new LastStepFragment();
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".Actvities.Payment_Method">
+    tools:context=".Actvities.Donate_Payment_Method">
 
 
     <View
@@ -89,7 +89,7 @@
     <android.widget.Button
         android:id="@+id/button5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"

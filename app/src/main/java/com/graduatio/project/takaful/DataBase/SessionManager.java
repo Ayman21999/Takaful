@@ -10,7 +10,7 @@ public class SessionManager {
     SharedPreferences usersession;
     SharedPreferences.Editor editor;
     Context context;
-
+    public static final  String USER_SESSION= "userlogin";
     public static final String IS_LOGIN = "IsLoggedIn";
     public static final String KEY_ID = "id";
     public static final String KEY_USERNAME = "username";
@@ -19,7 +19,7 @@ public class SessionManager {
 
     public SessionManager(Context context) {
         this.context = context;
-        usersession = context.getSharedPreferences("userlogin", Context.MODE_PRIVATE);
+        usersession = context.getSharedPreferences(USER_SESSION, Context.MODE_PRIVATE);
         editor = usersession.edit();
     }
 
@@ -57,5 +57,13 @@ public class SessionManager {
     public void LogOut() {
         editor.clear();
         editor.commit();
+    }
+
+    public void  creareRemmberSession(String email ,String pass){
+        editor.putBoolean(IS_LOGIN , true);
+        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_PASSWORD, pass );
+        editor.commit();
+
     }
 }

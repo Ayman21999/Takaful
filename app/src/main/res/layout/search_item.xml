@@ -1,8 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
 
+    <ImageView
+        android:id="@+id/ad_img"
+        android:layout_width="144dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_image" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Realize Syirian children drea.."
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ad_img"
+        app:layout_constraintTop_toTopOf="@+id/ad_img" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="By: Black Heart Institution"
+        android:textColor="#A8A8A8"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/dayleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="10 Days left"
+        android:textColor="#000"
+
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <TextView
+        android:id="@+id/remenig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="$450.00 left"
+        android:textColor="#000"
+
+        app:layout_constraintBottom_toBottomOf="@+id/dayleft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dayleft"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/complete"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        app:layout_constraintEnd_toStartOf="@+id/percnet"
+        app:layout_constraintStart_toStartOf="@+id/dayleft"
+        app:layout_constraintTop_toBottomOf="@+id/remenig" />
+
+    <View
+        android:id="@+id/view44"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/edit_text_background"
+        android:backgroundTint="@color/background"
+        app:layout_constraintBottom_toBottomOf="@+id/complete"
+        app:layout_constraintEnd_toEndOf="@+id/complete"
+        app:layout_constraintStart_toStartOf="@+id/complete"
+        app:layout_constraintTop_toTopOf="@+id/complete" />
+
+    <TextView
+        android:id="@+id/percnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="75%"
+        android:textColor="#A8A8A8"
+        app:layout_constraintBottom_toBottomOf="@+id/complete"
+        app:layout_constraintEnd_toEndOf="@+id/remenig"
+        app:layout_constraintStart_toEndOf="@+id/complete"
+        app:layout_constraintTop_toTopOf="@+id/complete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,6 +62,10 @@
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view15"
         app:layout_constraintStart_toStartOf="@+id/view15"
@@ -81,9 +85,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-
                 tools:layout_editor_absoluteX="107dp"
-                tools:layout_editor_absoluteY="407dp" />
+                tools:layout_editor_absoluteY="407dp"
+                tools:listitem="@layout/charity_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>

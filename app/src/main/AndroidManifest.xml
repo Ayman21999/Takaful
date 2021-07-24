@@ -6,27 +6,24 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Takaful">
-        <activity android:name=".Actvities.Payment_Method"></activity>
+        android:theme="@style/Theme.Takaful"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Actvities.PayInfo"></activity>
+        <activity android:name=".Actvities.EditPaymentMethod" />
+        <activity android:name=".Actvities.AddPaymantMethodActivity" />
+        <activity android:name=".Actvities.Donate_Payment_Method" />
         <activity android:name=".Actvities.DonationDetails" />
         <activity android:name=".Actvities.EditPayMethod" />
         <activity android:name=".Actvities.EditProfile" />
-        <activity android:name=".Actvities.HomeActivity" >
+        <activity android:name=".Actvities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,9 +36,7 @@
         <activity android:name=".Actvities.LastAppBegging" />
         <activity android:name=".Actvities.SecondAppBegging" />
         <activity android:name=".Actvities.AppBegging" />
-        <activity android:name=".Actvities.MainActivity">
-
-        </activity>
+        <activity android:name=".Actvities.MainActivity" />
     </application>
 
 </manifest>
