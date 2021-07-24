@@ -2,6 +2,7 @@ package com.graduatio.project.takaful.Fragments;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -35,24 +36,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.graduatio.project.takaful.Actvities.EditProfile;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
+import static android.app.Activity.RESULT_OK;
+
 public class LastStepFragment extends DialogFragment {
 
-    ImageView add_image;
+    ImageView add_image,ads_image;
     Button publish;
-    EditText phonenumber;
-    EditText desc;
+    EditText phonenumber ,desc;
     FirebaseFirestore firebaseFirestore;
-    String image_url;
+    String image_url,id,cameraImageFilePath;
     FirebaseStorage storage;
     boolean isUploading;
-    String cameraImageFilePath;
-    private final static int CAMERA_REQUEST_CODE = 1;
-    String id ;
     private Uri filePath;
     ProgressDialog mProgressDialog;
     StorageReference sreference;
@@ -61,6 +61,9 @@ public class LastStepFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,R.style.FullScreenDialogTheme);
+        Bundle bundle = this.getArguments() ;
+       id =  bundle.getString("id");
+
     }
 
     @Override
@@ -71,19 +74,14 @@ public class LastStepFragment extends DialogFragment {
         phonenumber = view.findViewById(R.id.phone_num);
         desc = view.findViewById(R.id.desc_txt);
         publish = view.findViewById(R.id.publish_btn);
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        ads_image = view.findViewById(R.id.image_ads);
+        mProgressDialog = new ProgressDialog(getContext());
 
         add_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-                    Intent pikPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pikPhoto, 2);
-
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
-
-                }
+               SelectImage(getContext());
             }
         });
 
@@ -101,7 +99,7 @@ public class LastStepFragment extends DialogFragment {
                     Toast.makeText(getContext(), "Pleas Add description", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    UpdateUploadedData(desc_txt , image_url , phone);
+                    UpdateUploadedData(image_url ,desc_txt ,  phone);
                     showSuccessfulMessageBottomSheet();
 
                 }
@@ -113,13 +111,13 @@ public class LastStepFragment extends DialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE) {
+        if (requestCode == 2   && resultCode == RESULT_OK) {
             /// GALLERY
             isUploading = true;
+            filePath = data.getData();
             mProgressDialog.setMessage("Uploading ....");
             mProgressDialog.show();
-            filePath = Uri.parse("file://" + cameraImageFilePath);
-            sreference = FirebaseStorage.getInstance().getReference().child("img/" + UUID.randomUUID().toString());
+            sreference = FirebaseStorage.getInstance().getReference().child("Ads_img/" + UUID.randomUUID().toString());
             sreference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -129,7 +127,7 @@ public class LastStepFragment extends DialogFragment {
                         @Override
                         public void onSuccess(Uri uri) {
                             image_url = uri.toString();
-                            Picasso.get().load(image_url).fit().into(add_image);
+                            Picasso.get().load(image_url).fit().into(ads_image);
                             Log.d("ttt", image_url);
                             Toast.makeText(getContext(), image_url, Toast.LENGTH_SHORT).show();
                         }
@@ -140,14 +138,13 @@ public class LastStepFragment extends DialogFragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("aa","Errrrrrrrrrrrrrrrrrrrrrrror"+ e.getMessage());
                 }
             });
         }
     }
 
     public void UpdateUploadedData(String img ,String desc , String phone) {
-        Bundle bundle = this.getArguments();
-        id = bundle.getString("id");
         mProgressDialog.show();
         mProgressDialog.setMessage("Updating...");
         firebaseFirestore.collection("Advertising")
@@ -181,6 +178,22 @@ public class LastStepFragment extends DialogFragment {
             bsd.dismiss();
 
         });
+
+    }
+    public void SelectImage(Context context) {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            OpenImage();
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+
+        }
+
+    }
+    public void OpenImage() {
+        Intent intent = new Intent();
+        intent.setType("image/");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 2);
 
     }
 

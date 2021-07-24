@@ -151,6 +151,12 @@ public class EditProfile extends AppCompatActivity {
           /// GALLERY
             if (requestCode == 2   && resultCode == RESULT_OK) {
                 imageUri = data.getData();
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Updating ....");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                Picasso.get().load(imageUri).fit().into(userimage);
+                progressDialog.dismiss();
 //                UploadImage();
             }
 
@@ -263,41 +269,41 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
-    public String getFileExtention(Uri uri){
-        ContentResolver resolver =getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
-    }
-    public void UploadImage() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Updating ....");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        if (imageUri != null){
-            final StorageReference reference = FirebaseStorage.getInstance().getReference().child("img")
-                    .child(System.currentTimeMillis()+"."+getFileExtention(imageUri));
-
-            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        imageUrl = imageUri.toString();
-                        Toast.makeText(EditProfile.this, "image Uploading...", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("qqq", e.getLocalizedMessage());
-                        progressDialog.dismiss();
-
-                    }
-                });
-                }
-            });
-        }
-    }
+//    public String getFileExtention(Uri uri){
+//        ContentResolver resolver =getContentResolver();
+//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
+//    }
+//    public void UploadImage() {
+//        ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Updating ....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
+//        if (imageUri != null){
+//            final StorageReference reference = FirebaseStorage.getInstance().getReference().child("img")
+//                    .child(System.currentTimeMillis()+"."+getFileExtention(imageUri));
+//
+//            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        imageUrl = imageUri.toString();
+//                        Toast.makeText(EditProfile.this, "image Uploading...", Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d("qqq", e.getLocalizedMessage());
+//                        progressDialog.dismiss();
+//
+//                    }
+//                });
+//                }
+//            });
+//        }
+//    }
 }

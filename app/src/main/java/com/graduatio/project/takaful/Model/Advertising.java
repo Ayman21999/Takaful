@@ -20,7 +20,7 @@ public class Advertising {
     @PropertyName("remaining")
     int remaining;
     @PropertyName("beginDate")
-    long beginDate;
+    int beginDate;
     @PropertyName("endDate")
     long endDate;
     @PropertyName("Type")
@@ -108,7 +108,7 @@ public class Advertising {
         return beginDate;
     }
 
-    public void setBeginDate(long beginDate) {
+    public void setBeginDate(int beginDate) {
         this.beginDate = beginDate;
     }
 

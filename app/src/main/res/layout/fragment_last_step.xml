@@ -285,4 +285,13 @@
         app:layout_constraintGuide_begin="238dp"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/image_ads"
+        android:layout_width="112dp"
+        android:layout_height="110dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view30"
+        app:layout_constraintEnd_toEndOf="@+id/view31"
+        app:layout_constraintStart_toStartOf="@+id/view31"
+        app:layout_constraintTop_toTopOf="@+id/view31" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

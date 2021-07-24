@@ -76,11 +76,13 @@ public class RigsterStepOneFragment extends DialogFragment {
 
                 } else {
                     UpdateUploadedData(job_txt,name_of_Inv_txt,media_txt,address_txt);
+
                     DialogFragment dialogFragment = RigsterStepTwoFragment.RTwoFragment();
-                    dialogFragment.show(getChildFragmentManager(), ":");
                     Bundle bundle =new Bundle();
                     bundle.putString("id",id);
                     dialogFragment.setArguments(bundle);
+                    dialogFragment.show(getChildFragmentManager(), "dd");
+
                 }
 
             }
@@ -89,13 +91,13 @@ public class RigsterStepOneFragment extends DialogFragment {
     }
 
     public void UpdateUploadedData(String job ,String nameOfCharity,String mediaAccount,String address) {
-        Bundle bundle = this.getArguments();
-         id = bundle.getString("id");
-        progressDialog.show();
-        progressDialog.setMessage("Updating...");
-        firebaseFirestore.collection("Advertising").document(id)
-                .update("job",job, "name_of_Charity", nameOfCharity ,
-                        "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
+            Bundle bundle = this.getArguments();
+             id = bundle.getString("id");
+            progressDialog.show();
+            progressDialog.setMessage("Updating...");
+            firebaseFirestore.collection("Advertising").document(id)
+                    .update("job",job, "name_of_Charity", nameOfCharity ,
+                            "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
