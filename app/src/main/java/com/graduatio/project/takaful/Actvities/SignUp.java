@@ -113,7 +113,7 @@ public class SignUp extends AppCompatActivity {
                 map.put("password", password);
                 map.put("isHasCharity", false);
                 map.put("userImage", "");
-                map.put("role", "");
+                map.put("role", "user");
                 map.put("payMethod", "");
                 map.put("isHasActivity", false);
 

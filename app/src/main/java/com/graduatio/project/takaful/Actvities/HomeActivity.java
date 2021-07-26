@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_home);
         bottomNavigationViewl = findViewById(R.id.bottomnav);
         bottomNavigationViewl.setOnNavigationItemSelectedListener(bottomNavMethoed);
-        replaceFragment(new CategoryFragment());
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new CategoryFragment()).commit();
 
     }
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethoed = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity  {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null ;
             switch (item.getItemId()){
-                case R.id.home:
+                case R.id.category:
                     fragment= new CategoryFragment();
                     break;
                 case R.id.search :
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity  {
                     fragment = new DonationInforamtiomFragment();
                     DonationInforamtiomFragment donationFragment = new DonationInforamtiomFragment();
                     FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().add(R.id.main_layout,donationFragment).commit();
+                    manager.beginTransaction().replace(R.id.container,donationFragment).commit();
                     break;
                 case R.id.profile:
                     fragment = new ProfileFragment();

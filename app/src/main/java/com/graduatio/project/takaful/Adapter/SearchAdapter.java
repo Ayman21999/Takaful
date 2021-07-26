@@ -39,7 +39,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
         holder.title.setText(advertising.getTarget());
 //        holder.usernamePublished.setText(advertising.ge);
         holder.percent.setText(advertising.getTarget());
-        holder.dayleft.setText(advertising.getDayleft());
+        holder.dayleft.setText(advertising.getDaynumber());
         Picasso.get().load(advertising.getImage()).into(holder.ad_image);
     }
 

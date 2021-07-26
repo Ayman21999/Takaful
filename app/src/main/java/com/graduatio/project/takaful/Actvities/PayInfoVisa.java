@@ -21,7 +21,7 @@ import com.graduatio.project.takaful.R;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class PayInfo extends AppCompatActivity {
+public class PayInfoVisa extends AppCompatActivity {
 
     EditText cardnumber;
     EditText cvvCode;
@@ -44,19 +44,19 @@ public class PayInfo extends AppCompatActivity {
                 String date_txt = date.getText().toString();
 
                 if (card_txt.length() < 12) {
-                    Toast.makeText(PayInfo.this, "Please the card number  must be 12 number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, "Please the card number  must be 12 number", Toast.LENGTH_SHORT).show();
 
                 } else if (card_txt.isEmpty()) {
-                    Toast.makeText(PayInfo.this, "Please write your card number ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, "Please write your card number ", Toast.LENGTH_SHORT).show();
 
                 } else if (cvvCode_txt.length() < 4) {
-                    Toast.makeText(PayInfo.this, "Please the CVV Code must be 4 number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, "Please the CVV Code must be 4 number", Toast.LENGTH_SHORT).show();
 
                 } else if (cvvCode_txt.isEmpty()) {
-                    Toast.makeText(PayInfo.this, "Please write your CVV Code ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, "Please write your CVV Code ", Toast.LENGTH_SHORT).show();
 
                 } else if (date_txt.isEmpty()) {
-                    Toast.makeText(PayInfo.this, "Please set end date for your card ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, "Please set end date for your card ", Toast.LENGTH_SHORT).show();
 
                 } else {
                     AddMethod(card_txt, cvvCode_txt, date_txt);
@@ -87,14 +87,14 @@ public class PayInfo extends AppCompatActivity {
         collectionReference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(PayInfo.this, "Add Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(PayInfo.this ,EditPaymentMethod.class);
+                Toast.makeText(PayInfoVisa.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PayInfoVisa.this ,EditPaymentMethod.class);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PayInfo.this, "Error :" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PayInfoVisa.this, "Error :" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("tt", e.getLocalizedMessage());
             }
         });

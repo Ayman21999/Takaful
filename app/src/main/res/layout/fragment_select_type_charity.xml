@@ -49,6 +49,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/view22"
         app:layout_constraintEnd_toEndOf="@+id/view22"
         app:layout_constraintHorizontal_bias="1.0"
@@ -106,6 +107,8 @@
             android:text="Health"
             android:textAlignment="center"
             android:textColor="#B6B6B6"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView22"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView22"
@@ -160,6 +163,8 @@
             android:text="Small Projects"
             android:textAlignment="center"
             android:textColor="#B6B6B6"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/view23"
             app:layout_constraintStart_toStartOf="@+id/view23"
             app:layout_constraintTop_toBottomOf="@+id/view23" />
@@ -168,16 +173,14 @@
             android:id="@+id/bbb"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_oval"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view20" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/home_ty"
@@ -208,6 +211,8 @@
             android:text="Education "
             android:textAlignment="center"
             android:textColor="#B6B6B6"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/view21"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/view21"
@@ -224,6 +229,8 @@
             android:text="Food"
             android:textAlignment="center"
             android:textColor="#B6B6B6"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/view19"
             app:layout_constraintStart_toStartOf="@+id/view19"
             app:layout_constraintTop_toBottomOf="@+id/view19" />
@@ -237,6 +244,8 @@
             android:text="Home Renovation"
             android:textAlignment="center"
             android:textColor="#B6B6B6"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/view20"
             app:layout_constraintStart_toStartOf="@+id/view20"
             app:layout_constraintTop_toBottomOf="@+id/view20" />

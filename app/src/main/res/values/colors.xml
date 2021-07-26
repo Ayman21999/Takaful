@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="txt_color">#B6B6B6</color>
     <color name="background">#0E4944</color>
+    <color name="tabcolor">#979797</color>
 </resources>

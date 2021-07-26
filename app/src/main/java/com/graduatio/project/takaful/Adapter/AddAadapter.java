@@ -10,8 +10,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.graduatio.project.takaful.Actvities.DonationDetails;
 import com.graduatio.project.takaful.Fragments.DonationInforamtiomFragment;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.R;
@@ -43,18 +45,17 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
     @Override
     public void onBindViewHolder(@NonNull AddHolder holder, int position) {
         Advertising advertising = advertisings.get(position);
-        holder.title.setText(   advertising.getTitle());
+        holder.title.setText(advertising.getTitle());
         Picasso.get().load(advertising.getImage()).into(holder.imageView);
 //        holder.percent.setText(advertising.getRemaining() + "");
-        holder.target.setText(advertising.getTarget());
+        holder.target.setText("$ "+advertising.getTarget());
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context , DonationInforamtiomFragment.class);
-                intent.putExtra("id",advertising.getAdd_ID());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                Intent intent = new Intent(context , DonationDetails.class);
+                intent.putExtra("id", advertising.getAdd_ID());
+                context.startActivity(intent);
             }
         });
     }
@@ -70,7 +71,7 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
         TextView target;
         TextView percent;
         SeekBar seekBar;
-
+        ConstraintLayout constraintLayout;
         public AddHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.ad_name);
@@ -78,6 +79,7 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
             target = itemView.findViewById(R.id.targetnum);
             percent = itemView.findViewById(R.id.percent);
             seekBar = itemView.findViewById(R.id.seekBar);
+            constraintLayout = itemView.findViewById(R.id.item);
 
         }
     }

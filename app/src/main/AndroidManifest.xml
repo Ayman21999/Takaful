@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takaful"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Actvities.PayInfo"></activity>
+        <activity android:name=".Actvities.AddGoogleWActivity2"></activity>
+        <activity android:name=".Actvities.AdminNotificationActivity" />
+        <activity android:name=".Actvities.PayInfoVisa" />
         <activity android:name=".Actvities.EditPaymentMethod" />
         <activity android:name=".Actvities.AddPaymantMethodActivity" />
         <activity android:name=".Actvities.Donate_Payment_Method" />

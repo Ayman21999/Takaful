@@ -2,7 +2,6 @@ package com.graduatio.project.takaful.Actvities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.graduatio.project.takaful.Adapter.PayAdapter;
 import com.graduatio.project.takaful.Model.PayMethod;
 import com.graduatio.project.takaful.R;
 
@@ -64,7 +62,7 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
         hashMap.put("cardNumber", "");
         hashMap.put("cvvCode", "");
         hashMap.put("enddate", "");
-        hashMap.put("img", typeMethod);
+        hashMap.put("type", typeMethod);
 
         reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -85,7 +83,7 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 typeMethod = "visa";
-                Intent intent =new Intent(AddPaymantMethodActivity.this ,PayInfo.class);
+                Intent intent =new Intent(AddPaymantMethodActivity.this , PayInfoVisa.class);
                 startActivity(intent);
             }
         });
@@ -93,7 +91,7 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 typeMethod = "googleW";
-                Intent intent =new Intent(AddPaymantMethodActivity.this ,PayInfo.class);
+                Intent intent =new Intent(AddPaymantMethodActivity.this , AddGoogleWActivity2.class);
                 startActivity(intent);
             }
         });
@@ -101,7 +99,7 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 typeMethod = "pal";
-                Intent intent =new Intent(AddPaymantMethodActivity.this ,PayInfo.class);
+                Intent intent =new Intent(AddPaymantMethodActivity.this , PayInfoVisa.class);
                 startActivity(intent);
             }
         });

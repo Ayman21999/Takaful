@@ -146,4 +146,14 @@ trusted fundraising online apps"
 
             />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="146dp"
+        android:layout_height="263dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:srcCompat="@drawable/money" />
 </androidx.constraintlayout.widget.ConstraintLayout>

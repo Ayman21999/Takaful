@@ -1,44 +1,60 @@
 package com.graduatio.project.takaful.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.graduatio.project.takaful.Actvities.AddPaymantMethodActivity;
 import com.graduatio.project.takaful.Model.PayMethod;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PayAdapter extends RecyclerView.Adapter<PayAdapter.PayHolder> {
 
-    Context context ;
-    List<PayMethod>methods;
-    public PayAdapter(Context context,List<PayMethod>methods ){
-        this.context = context ;
-        this.methods = methods ;
+    Context context;
+    private final static int POLL_LIMIT = 4;
+    private ArrayList<String> methods;
+    private String method;
+    private ScrollToBottomListener scrollToBottomListener;
+
+    public interface ScrollToBottomListener {
+        void scrollToBottom();
+    }
+
+    public PayAdapter(ArrayList<String> methods, Context context,
+                      ScrollToBottomListener scrollToBottomListener) {
+        this.methods = methods;
+        this.context = context;
+        method= "Add Method";
 
     }
+
     @NonNull
     @Override
     public PayHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.pay_method_item,parent ,false);
-        return new PayAdapter.PayHolder(view);
+        return new PayHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.pay_method_item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull PayHolder holder, int position) {
-    PayMethod payMethod = methods.get(position);
-    holder.secritnum.setText(payMethod.getCvvCode());
-    holder.cardnumber.setText(payMethod.getCardNumber());
-    Picasso.get().load(payMethod.getImg()).into(holder.paytype);
-
+        holder.bind(position);
+    }
+    private void addPollItem(int position) {
+        methods.add(methods+" "+ (position + 1));
+        notifyItemInserted(methods.size());
+        scrollToBottomListener.scrollToBottom();
     }
 
     @Override
@@ -47,17 +63,29 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.PayHolder> {
     }
 
     public class PayHolder extends RecyclerView.ViewHolder {
-        ImageView paytype ;
-        TextView cardnumber ;
-        TextView secritnum;
-
+        private final   Button add;
         public PayHolder(@NonNull View itemView) {
             super(itemView);
-
-            paytype = itemView.findViewById(R.id.pay_img);
-            cardnumber = itemView.findViewById(R.id.cardnumber);
-            secritnum = itemView.findViewById(R.id.secritnumber);
+            add = itemView.findViewById(R.id.add);
 
         }
+        private void bind(int position){
+            add.setText(method);
+
+            if (position == getItemCount() - 1 && position != POLL_LIMIT) {
+                add.setVisibility(View.VISIBLE);
+                add.setOnClickListener(v -> {
+                    Intent intent =new Intent(context , AddPaymantMethodActivity.class);
+                    context.startActivity(intent);
+                    addPollItem(position + 1);
+                });
+            } else {
+                add.setVisibility(View.INVISIBLE);
+                add.setOnClickListener(null);
+            }
+
+        }
+
     }
+
 }

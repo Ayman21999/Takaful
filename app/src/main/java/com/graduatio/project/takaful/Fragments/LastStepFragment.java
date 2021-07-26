@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -37,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.graduatio.project.takaful.Actvities.EditProfile;
+import com.graduatio.project.takaful.Actvities.HomeActivity;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
@@ -100,7 +102,7 @@ public class LastStepFragment extends DialogFragment {
 
                 } else {
                     UpdateUploadedData(image_url ,desc_txt ,  phone);
-                    showSuccessfulMessageBottomSheet();
+                    showPostOptionsBottomSheet();
 
                 }
             }
@@ -171,7 +173,6 @@ public class LastStepFragment extends DialogFragment {
         final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet,
                 null);
         parentView.setBackgroundColor(Color.TRANSPARENT);
-
         parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
             Fragment fragment = new CategoryFragment();
             fragment.getChildFragmentManager().beginTransaction().commit();
@@ -196,8 +197,39 @@ public class LastStepFragment extends DialogFragment {
         startActivityForResult(intent, 2);
 
     }
+    private void showBottomSheetDialog() {
 
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+        bottomSheetDialog.setContentView(R.layout.success_bottomsheet);
+
+        ConstraintLayout delete = bottomSheetDialog.findViewById(R.id.home_btn);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    DialogFragment dialogFragment = CategoryFragment.cFragment();
+                    dialogFragment.show(getChildFragmentManager(),"aa");
+
+            }
+        });
+        bottomSheetDialog.show();
+    }
     public static LastStepFragment lastStepFragment(){
         return new LastStepFragment();
     }
+    private void showPostOptionsBottomSheet() {
+
+        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet, null);
+        parentView.setBackgroundColor(Color.TRANSPARENT);
+
+        parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
+           Intent intent  = new Intent(getContext() , HomeActivity.class);
+           getActivity().startActivity(intent);
+            bsd.dismiss();
+
+        });
+        bsd.setContentView(parentView);
+        bsd.show();
+    }
+
 }

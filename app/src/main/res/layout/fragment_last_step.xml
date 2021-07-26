@@ -10,8 +10,10 @@
     <View
         android:id="@+id/view29"
         android:layout_width="0dp"
-        android:layout_height="644dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/card_background"
+        app:layout_constraintBottom_toTopOf="@+id/publish_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,19 +265,17 @@
         android:id="@+id/publish_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Publish Now"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:textAllCaps="false"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_active_"
+        android:text="Publish Now"
+        android:textAllCaps="false"
         android:textColor="#0E4944"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view29"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -287,11 +287,11 @@
 
     <ImageView
         android:id="@+id/image_ads"
-        android:layout_width="112dp"
-        android:layout_height="110dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/view30"
-        app:layout_constraintEnd_toEndOf="@+id/view31"
-        app:layout_constraintStart_toStartOf="@+id/view31"
-        app:layout_constraintTop_toTopOf="@+id/view31" />
+        app:layout_constraintEnd_toEndOf="@+id/view30"
+        app:layout_constraintStart_toStartOf="@+id/view30"
+        app:layout_constraintTop_toTopOf="@+id/view30" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

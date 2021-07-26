@@ -71,7 +71,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
                 String title_txt = title.getText().toString();
                 String whoarebenefit_txt = whoarebenefit.getText().toString();
                 int target_txt = Integer.parseInt(target.getText().toString());
-                long deaddate = Long.parseLong(deadline.getText().toString());
+                int deaddate = Integer.parseInt((deadline.getText().toString()));
                 if (title_txt.isEmpty()) {
                     Toast.makeText(getContext(), "Pleas Fill Title", Toast.LENGTH_SHORT).show();
 
@@ -130,12 +130,17 @@ public class RigsterStepTwoFragment extends DialogFragment {
 //        bsd.show();
 //    }
 
-    public void UpdateUploadedData(String title, String forWhoDonate, int  target , long beginDate) {
+    public void UpdateUploadedData(String title, String forWhoDonate, int  target , int beginDate) {
 
         progressDialog.show();
         progressDialog.setMessage("Updating...");
         firebaseFirestore.collection("Advertising").document(id)
-                .update("title", title, "whoarebenefit", forWhoDonate, "target", target ,"beginDate",beginDate)
+                .update("title", title,
+                        "whoarebenefit",
+                        forWhoDonate,
+                        "target", target ,
+                        "Daynumber",beginDate
+                        , "remaining" ,target)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#fff"
+    android:id="@+id/item"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -66,17 +67,14 @@
         android:id="@+id/targetnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="32dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="9999"
         android:textColor="#000"
-
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/percent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/percent"
@@ -95,17 +93,6 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBar"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginLeft="148dp"
-        android:text="$"
 
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/targetnum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

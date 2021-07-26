@@ -19,10 +19,8 @@ public class Advertising {
     int target;
     @PropertyName("remaining")
     int remaining;
-    @PropertyName("beginDate")
-    int beginDate;
-    @PropertyName("endDate")
-    long endDate;
+    @PropertyName("Daynumber")
+    int Daynumber;
     @PropertyName("Type")
     String Type;
     @PropertyName("userJob")
@@ -37,8 +35,6 @@ public class Advertising {
     String userphone;
     @PropertyName("isRejected")
     boolean isRejected;
-    @PropertyName("dayleft")
-    int dayleft;
     public String getName_of_Charity() {
         return name_of_Charity;
     }
@@ -104,20 +100,12 @@ public class Advertising {
         this.remaining = remaining;
     }
 
-    public long getBeginDate() {
-        return beginDate;
+    public int getDaynumber() {
+        return Daynumber;
     }
 
-    public void setBeginDate(int beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public long getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
+    public void setDaynumber(int daynumber) {
+        Daynumber = daynumber;
     }
 
     public String getAddress() {
@@ -176,11 +164,4 @@ public class Advertising {
         isRejected = rejected;
     }
 
-    public int getDayleft() {
-        return dayleft;
-    }
-
-    public void setDayleft(int dayleft) {
-        this.dayleft = dayleft;
-    }
 }
