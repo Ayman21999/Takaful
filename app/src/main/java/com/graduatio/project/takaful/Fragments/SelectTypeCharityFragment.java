@@ -29,15 +29,15 @@ public class SelectTypeCharityFragment extends DialogFragment {
 
     FirebaseFirestore firebaseFirestore;
     CollectionReference reference;
+    CollectionReference userRef;
     ImageView food, home, smallproject, next, education, health;
     String typeOfAdd = "";
-    long beginDate;
-    long endDate;
     String TAG = "ttt";
     ProgressDialog progressDialog;
     TextView home_txt,food_txt,small_txt,edue_txt,health_txt;
     String id;
-
+    String userAdsid;
+    String adsid;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +61,10 @@ public class SelectTypeCharityFragment extends DialogFragment {
         health_txt = view.findViewById(R.id.health);
         home_txt =view.findViewById(R.id.home);
         small_txt = view.findViewById(R.id.small);
-
+        userAdsid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            userRef = FirebaseFirestore.getInstance().collection("Users").document(userAdsid).collection("UserAds");
         progressDialog = new ProgressDialog(getContext());
-
+//        userRef = FirebaseFirestore.getInstance().collection("UserAds");
 
         food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,10 +132,12 @@ public class SelectTypeCharityFragment extends DialogFragment {
                 } else {
 
                     CreateAdd(typeOfAdd);
+                    CreateUserAds(typeOfAdd);
                     DialogFragment fragment = RigsterStepOneFragment.Rfragment();
                     fragment.show(getChildFragmentManager(), "aa");
                     Bundle bundle = new Bundle();
                     bundle.putString("id", id);
+                    bundle.putString("adsid",adsid);
                     fragment.setArguments(bundle);
 
                 }
@@ -155,12 +158,45 @@ public class SelectTypeCharityFragment extends DialogFragment {
         hashMap.put("target", 0);
         hashMap.put("address", "");
         hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        hashMap.put("beginDate", beginDate);
-        hashMap.put("endDate", endDate);
+        hashMap.put("Daynumber", 0);
         hashMap.put("isRejected", true);
         progressDialog.setMessage("Loading ...");
         progressDialog.show();
         reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Error : " + e.getLocalizedMessage());
+                progressDialog.dismiss();
+
+            }
+        });
+
+    }
+
+    public void CreateUserAds(String typeOfAdd) {
+        adsid = UUID.randomUUID().toString();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("Type", typeOfAdd);
+        hashMap.put("title", "");
+        hashMap.put("add_ID", adsid);
+        hashMap.put("description", "");
+        hashMap.put("image", "");
+        hashMap.put("remaining", 0);
+        hashMap.put("target", 0);
+        hashMap.put("address", "");
+        hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("Daynumber", 0);
+        hashMap.put("isRejected", true);
+        progressDialog.setMessage("Loading ...");
+        progressDialog.show();
+        userRef.document(adsid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();

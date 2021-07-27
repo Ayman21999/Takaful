@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Model.Advertising;
+import com.graduatio.project.takaful.Model.Donations;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
@@ -45,6 +46,9 @@ public class DonationDetails extends AppCompatActivity {
     FirebaseFirestore dFirebaseFirestore;
     CollectionReference dreference;
     EditText number;
+    String total;
+    String userid;
+    CollectionReference userRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,8 @@ public class DonationDetails extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         reference = firebaseFirestore.collection("Advertising");
         dFirebaseFirestore = FirebaseFirestore.getInstance();
-        dreference = dFirebaseFirestore.collection("Domation");
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        dreference = dFirebaseFirestore.collection("Users").document(userid).collection("Donation");
         ad_image = findViewById(R.id.add_image);
         targetnumber = findViewById(R.id.target_number);
         desc = findViewById(R.id.description);
@@ -68,7 +73,7 @@ public class DonationDetails extends AppCompatActivity {
         rimeing = findViewById(R.id.remining_number);
         donate = findViewById(R.id.donate_bttn);
         title = findViewById(R.id.titleadd);
-
+         userRef = FirebaseFirestore.getInstance().collection("Users");
     }
 
 
@@ -103,10 +108,10 @@ public class DonationDetails extends AppCompatActivity {
                     getUserInfo();
                     title.setText(advertising.getTitle());
                     desc.setText(advertising.getDescription());
-                    targetnumber.setText(""+advertising.getTarget());
+                    targetnumber.setText("" + advertising.getTarget());
                     Picasso.get().load(advertising.getImage()).into(ad_image);
-                    rimeing.setText(""+advertising.getRemaining());
-                    daynum.setText("Day left"+advertising.getDaynumber());
+                    rimeing.setText("" + advertising.getRemaining());
+                    daynum.setText("Day left" + advertising.getDaynumber());
 
                 }
 
@@ -124,7 +129,8 @@ public class DonationDetails extends AppCompatActivity {
             }
         });
     }
-    public void Donate(){
+
+    public void Donate() {
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,52 +138,75 @@ public class DonationDetails extends AppCompatActivity {
             }
         });
     }
-    public void donationOP(int total){
+
+    public void donationOP(String total) {
         String payid = UUID.randomUUID().toString();
-        HashMap hashMap  =new HashMap();
-        hashMap.put("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
-        hashMap.put("paymethod","");
-        hashMap.put("total",total);
-        hashMap.put("payid",payid);
-        hashMap.put("donateforAds",advertising.getName_of_Charity());
+        HashMap hashMap = new HashMap();
+        hashMap.put("userID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("paymethod", "");
+        hashMap.put("total", total);
+        hashMap.put("payid", payid);
+        hashMap.put("Adsid", advertising.getAdd_ID());
+
+        hashMap.put("donateforAds", advertising.getName_of_Charity());
 
         dreference.document(payid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Intent intent = new Intent(DonationDetails.this , Donate_Payment_Method.class );
-                intent.putExtra("id",advertising.getAdd_ID());
+                Intent intent = new Intent(DonationDetails.this, Donate_Payment_Method.class);
+                intent.putExtra("id", advertising.getAdd_ID());
+                intent.putExtra("adsid", advertising.getAdd_ID());
+                intent.putExtra("userid", advertising.getUserId());
+                intent.putExtra("total", total);
+                intent.putExtra("payid", payid);
+
                 startActivity(intent);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("ttt",e.getLocalizedMessage());
+                Log.d("ttt", e.getLocalizedMessage());
             }
         });
     }
+
     private void AddDonationNumber() {
         final BottomSheetDialog bsd = new BottomSheetDialog(DonationDetails.this, R.style.SheetDialog);
         final View parentView = getLayoutInflater().inflate(R.layout.bottom_sheet_number, null);
         parentView.setBackgroundColor(Color.TRANSPARENT);
         EditText number = parentView.findViewById(R.id.number);
 
-        int total = Integer.parseInt(number.getText().toString());
+
         parentView.findViewById(R.id.donate_btn).setOnClickListener(view -> {
-          if (total == 0 ){
+            total = number.getText() + "";
+            if (total.isEmpty() && total.equals("")) {
 
-               Toast.makeText(this, "Pleas insert number", Toast.LENGTH_SHORT).show();
-           }else {
-               donationOP(total);
+                Toast.makeText(this, "Pleas insert number", Toast.LENGTH_SHORT).show();
+            } else {
+                donationOP(total);
+                userRef.document(userid).update("isHasActivity", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(DonationDetails.this, "Thanks For your donation ", Toast.LENGTH_SHORT).show();
 
-               bsd.dismiss();
-           }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("sss","Errror :" + e.getLocalizedMessage());
+
+                    }
+                });
+                bsd.dismiss();
+            }
 
 
         });
-        parentView.findViewById(R.id.close).setOnClickListener(view ->{
+        parentView.findViewById(R.id.close).setOnClickListener(view -> {
             bsd.dismiss();
-        } );
+        });
         bsd.setContentView(parentView);
         bsd.show();
     }

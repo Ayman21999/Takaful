@@ -35,6 +35,7 @@ public class Advertising {
     String userphone;
     @PropertyName("isRejected")
     boolean isRejected;
+
     public String getName_of_Charity() {
         return name_of_Charity;
     }
@@ -163,5 +164,7 @@ public class Advertising {
     public void setRejected(boolean rejected) {
         isRejected = rejected;
     }
+
+
 
 }

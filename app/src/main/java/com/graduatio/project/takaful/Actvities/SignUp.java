@@ -63,11 +63,11 @@ public class SignUp extends AppCompatActivity {
                 } else if (!confirmtext.equals(passwordtext)) {
                     Toast.makeText(SignUp.this, "Password must be matched", Toast.LENGTH_SHORT).show();
 
-                } else if (phone_txt.isEmpty() && phone_txt.equals(" ")){
+                } else if (phone_txt.isEmpty() && phone_txt.equals(" ")) {
                     Toast.makeText(SignUp.this, "Please fill the Your  Phone Number ", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Register(nametext, emailtext, passwordtext,phone_txt);
+                    Register(nametext, emailtext, passwordtext, phone_txt);
                     Toast.makeText(SignUp.this, "SingeUP Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUp.this, Login.class);
                     startActivity(intent);
@@ -92,9 +92,7 @@ public class SignUp extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         reference = firebaseFirestore.collection("Users");
     }
-
-
-    public void Register(String name, String email, String password ,String phone) {
+    public void Register(String name, String email, String password, String phone) {
         progressDialog.setMessage("Loading...!!");
         Task<AuthResult> task = auth.createUserWithEmailAndPassword(email, password);
         task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -116,8 +114,6 @@ public class SignUp extends AppCompatActivity {
                 map.put("role", "user");
                 map.put("payMethod", "");
                 map.put("isHasActivity", false);
-
-
                 reference.document(FirebaseAuth.getInstance().getUid()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -128,9 +124,7 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(SignUp.this, "Fire store Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
                         progressDialog.dismiss();
-
                     }
                 });
             }

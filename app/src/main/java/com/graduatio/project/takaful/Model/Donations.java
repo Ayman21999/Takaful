@@ -9,10 +9,11 @@ public class Donations {
     @PropertyName("donateforAds")
     String donateforAds;
     @PropertyName("total")
-    int total;
+    String total;
     @PropertyName("paymethod")
     String paymethod;
-
+    @PropertyName("Adsid")
+    String Adsid;
     public String getUserID() {
         return userID;
     }
@@ -29,11 +30,11 @@ public class Donations {
         this.donateforAds = donateforAds;
     }
 
-    public int getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -43,5 +44,13 @@ public class Donations {
 
     public void setPaymethod(String paymethod) {
         this.paymethod = paymethod;
+    }
+
+    public String getAdsid() {
+        return Adsid;
+    }
+
+    public void setAdsid(String adsid) {
+        Adsid = adsid;
     }
 }

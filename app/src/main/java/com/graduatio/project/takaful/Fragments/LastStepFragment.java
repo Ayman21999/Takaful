@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,6 +59,9 @@ public class LastStepFragment extends DialogFragment {
     private Uri filePath;
     ProgressDialog mProgressDialog;
     StorageReference sreference;
+    String adsid;
+    String userid;
+    CollectionReference userRef;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,8 @@ public class LastStepFragment extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL,R.style.FullScreenDialogTheme);
         Bundle bundle = this.getArguments() ;
        id =  bundle.getString("id");
+       adsid =  bundle.getString("adsid");
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     }
 
@@ -77,6 +83,8 @@ public class LastStepFragment extends DialogFragment {
         desc = view.findViewById(R.id.desc_txt);
         publish = view.findViewById(R.id.publish_btn);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        userRef = FirebaseFirestore.getInstance().collection("Users").document(userid).collection("UserAds");
+
         ads_image = view.findViewById(R.id.image_ads);
         mProgressDialog = new ProgressDialog(getContext());
 
@@ -102,6 +110,7 @@ public class LastStepFragment extends DialogFragment {
 
                 } else {
                     UpdateUploadedData(image_url ,desc_txt ,  phone);
+                    UpdateUploadedDataforuser(image_url ,desc_txt ,  phone);
                     showPostOptionsBottomSheet();
 
                 }
@@ -166,24 +175,29 @@ public class LastStepFragment extends DialogFragment {
             }
         });
     }
-    void showSuccessfulMessageBottomSheet() {
-
-
-        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
-        final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet,
-                null);
-        parentView.setBackgroundColor(Color.TRANSPARENT);
-        parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
-            Fragment fragment = new CategoryFragment();
-            fragment.getChildFragmentManager().beginTransaction().commit();
-            bsd.dismiss();
-
+    public void UpdateUploadedDataforuser(String img ,String desc , String phone) {
+        mProgressDialog.show();
+        mProgressDialog.setMessage("Updating...");
+        userRef.document(adsid).update("description",desc ,"image",img , "userphone",phone)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        mProgressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Tag",e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                mProgressDialog.dismiss();
+            }
         });
-
     }
+
     public void SelectImage(Context context) {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            OpenImage();
+                OpenImage();
         } else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
 
@@ -197,39 +211,23 @@ public class LastStepFragment extends DialogFragment {
         startActivityForResult(intent, 2);
 
     }
-    private void showBottomSheetDialog() {
-
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
-        bottomSheetDialog.setContentView(R.layout.success_bottomsheet);
-
-        ConstraintLayout delete = bottomSheetDialog.findViewById(R.id.home_btn);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    DialogFragment dialogFragment = CategoryFragment.cFragment();
-                    dialogFragment.show(getChildFragmentManager(),"aa");
-
-            }
-        });
-        bottomSheetDialog.show();
-    }
     public static LastStepFragment lastStepFragment(){
         return new LastStepFragment();
     }
-    private void showPostOptionsBottomSheet() {
+        private void showPostOptionsBottomSheet() {
 
-        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
-        final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet, null);
-        parentView.setBackgroundColor(Color.TRANSPARENT);
+            final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
+            final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet, null);
+            parentView.setBackgroundColor(Color.TRANSPARENT);
 
-        parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
-           Intent intent  = new Intent(getContext() , HomeActivity.class);
-           getActivity().startActivity(intent);
-            bsd.dismiss();
+            parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
+               Intent intent  = new Intent(getContext() , HomeActivity.class);
+               getActivity().startActivity(intent);
+                bsd.dismiss();
 
-        });
-        bsd.setContentView(parentView);
-        bsd.show();
-    }
+            });
+            bsd.setContentView(parentView);
+            bsd.show();
+        }
 
 }

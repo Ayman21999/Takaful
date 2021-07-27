@@ -218,27 +218,21 @@ public class EditProfile extends AppCompatActivity {
         String txt_lname = lname.getText().toString();
         String txt_email = email.getText().toString();
         String txt_phone = phone.getText().toString();
-
         if (TextUtils.isEmpty(txt_fname)
                 || TextUtils.isEmpty(txt_lname) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_phone)) {
             Toast.makeText(EditProfile.this, "All field are required", Toast.LENGTH_SHORT).show();
         } else {
-
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Updating ....");
             progressDialog.setCancelable(false);
             progressDialog.show();
-
             if (imageUri != null) {
-
                 StorageReference filepath = sreference.child("Profile img")
                         .child(imageUri.getLastPathSegment());
-
                 filepath.putFile(imageUri).
                         addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                                 Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
                                 result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
@@ -251,7 +245,6 @@ public class EditProfile extends AppCompatActivity {
                                 });
                             }
                         });
-
             } else {
                 updateData(txt_fname, txt_lname, txt_email, txt_phone, progressDialog);
                 progressDialog.dismiss();
@@ -267,43 +260,4 @@ public class EditProfile extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 2);
 
-    }
-
-//    public String getFileExtention(Uri uri){
-//        ContentResolver resolver =getContentResolver();
-//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-//        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
-//    }
-//    public void UploadImage() {
-//        ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage("Updating ....");
-//        progressDialog.setCancelable(false);
-//        progressDialog.show();
-//        if (imageUri != null){
-//            final StorageReference reference = FirebaseStorage.getInstance().getReference().child("img")
-//                    .child(System.currentTimeMillis()+"."+getFileExtention(imageUri));
-//
-//            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        imageUrl = imageUri.toString();
-//                        Toast.makeText(EditProfile.this, "image Uploading...", Toast.LENGTH_SHORT).show();
-//                        progressDialog.dismiss();
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("qqq", e.getLocalizedMessage());
-//                        progressDialog.dismiss();
-//
-//                    }
-//                });
-//                }
-//            });
-//        }
-//    }
-}
+    }}

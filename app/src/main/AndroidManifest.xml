@@ -34,7 +34,8 @@
         </activity>
         <activity android:name=".Actvities.ForgetPassowrd" />
         <activity android:name=".Actvities.SignUp" />
-        <activity android:name=".Actvities.Login" />
+        <activity android:name=".Actvities.Login" >
+        </activity>
         <activity android:name=".Actvities.LastAppBegging" />
         <activity android:name=".Actvities.SecondAppBegging" />
         <activity android:name=".Actvities.AppBegging" />

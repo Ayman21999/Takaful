@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,19 +38,21 @@ public class RigsterStepTwoFragment extends DialogFragment {
 
     EditText title, whoarebenefit, target, deadline;
     Button perv, next;
-    long start_date, end_date;
     FirebaseFirestore firebaseFirestore;
-    String id;
-
+    String homeid;
+    String adsid;
+    String userid;
     ProgressDialog progressDialog;
+    CollectionReference userRef;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
         Bundle bundle = this.getArguments();
-        id = bundle.getString("id");
-        Toast.makeText(getContext(), "ID : " + id, Toast.LENGTH_SHORT).show();
+        homeid = bundle.getString("id");
+        adsid = bundle.getString("adsid");
+//        Toast.makeText(getContext(), "ID : " + id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -65,6 +68,10 @@ public class RigsterStepTwoFragment extends DialogFragment {
         next = view.findViewById(R.id.next);
         progressDialog = new ProgressDialog(getContext());
         firebaseFirestore =FirebaseFirestore.getInstance();
+        userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        userRef = FirebaseFirestore.getInstance().collection("Users").document(userid).collection("UserAds");
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +90,13 @@ public class RigsterStepTwoFragment extends DialogFragment {
 
                 } else {
                     UpdateUploadedData(title_txt, whoarebenefit_txt, target_txt , deaddate);
+                    UpdateUploadedDataforuer(title_txt,whoarebenefit_txt, target_txt , deaddate);
                     Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
                     DialogFragment fragment = LastStepFragment.lastStepFragment();
                     fragment.show(getChildFragmentManager(), "aa");
                     Bundle bundle = new Bundle();
-                    bundle.putString("id", id);
+                    bundle.putString("id", homeid);
+                    bundle.putString("adsid", adsid);
                     fragment.setArguments(bundle);
 
                 }
@@ -97,44 +106,12 @@ public class RigsterStepTwoFragment extends DialogFragment {
         return view;
     }
 
-//    private void showPostOptionsBottomSheet() {
-//
-//        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
-//        final View parentView = getLayoutInflater().inflate(R.layout.dead_line_date_of_add_bottomsheet, null);
-//        parentView.setBackgroundColor(Color.TRANSPARENT);
-//
-//        parentView.findViewById(R.id.startdate).setOnClickListener(view -> {
-//            Calendar cldr = Calendar.getInstance();
-//            int day = cldr.get(Calendar.DAY_OF_MONTH);
-//            int month = cldr.get(Calendar.MONTH);
-//            int year = cldr.get(Calendar.YEAR);
-//            DatePickerDialog picker = new DatePickerDialog(getContext(),
-//                    new DatePickerDialog.OnDateSetListener() {
-//                        @Override
-//                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                            start_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-//                        }
-//                    }, year, month, day);
-//            picker.setTitle("Choose Date: ");
-//            picker.show();
-//            bsd.dismiss();
-//
-//
-//        });
-//        parentView.findViewById(R.id.enddate).setOnClickListener(view -> {
-//            bsd.dismiss();
-//
-//        });
-//
-//        bsd.setContentView(parentView);
-//        bsd.show();
-//    }
 
     public void UpdateUploadedData(String title, String forWhoDonate, int  target , int beginDate) {
 
         progressDialog.show();
         progressDialog.setMessage("Updating...");
-        firebaseFirestore.collection("Advertising").document(id)
+        firebaseFirestore.collection("Advertising").document(homeid)
                 .update("title", title,
                         "whoarebenefit",
                         forWhoDonate,
@@ -156,6 +133,37 @@ public class RigsterStepTwoFragment extends DialogFragment {
             }
         });
     }
+
+
+    public void UpdateUploadedDataforuer(String title, String forWhoDonate, int  target , int beginDate) {
+
+        progressDialog.show();
+        progressDialog.setMessage("Updating...");
+        FirebaseFirestore foruser = FirebaseFirestore.getInstance();
+
+        userRef.document(adsid)
+                .update("title", title,
+                        "whoarebenefit",
+                        forWhoDonate,
+                        "target", target ,
+                        "Daynumber",beginDate
+                        , "remaining" ,target)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Tag", e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
 
     public static RigsterStepTwoFragment RTwoFragment() {
         return new RigsterStepTwoFragment();

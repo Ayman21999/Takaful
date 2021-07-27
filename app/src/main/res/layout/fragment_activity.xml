@@ -8,17 +8,15 @@
     tools:context=".Fragments.ActivityFragment">
 
 
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    </FrameLayout>
     <View
         android:id="@+id/view17"
         android:layout_width="151dp"
@@ -47,7 +45,7 @@
         app:layout_constraintTop_toTopOf="@+id/view17" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/mss1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -66,16 +64,16 @@
         app:layout_constraintTop_toBottomOf="@+id/view17" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/mss2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="There is no activity right now, start donate and spread your love with others"
         android:textColor="#adadad"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView17"
+        app:layout_constraintEnd_toEndOf="@+id/mss1"
         app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="@+id/mss1"
+        app:layout_constraintTop_toBottomOf="@+id/mss1"
         android:gravity="center_horizontal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
