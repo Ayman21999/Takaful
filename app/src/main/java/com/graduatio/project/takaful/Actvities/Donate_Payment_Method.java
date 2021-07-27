@@ -40,43 +40,40 @@ public class Donate_Payment_Method extends AppCompatActivity {
     RadioButton visa,google,paypal;
     CollectionReference update;
     ProgressDialog progressDialog ;
-    int intExtra;
+    String intExtra;
     int totalremaining;
-    static String  paymethod = "";
+    String  paymethod = "";
     String userid ;
     String userdonationid;
     Task<DocumentSnapshot> task;
-
+    String id;
+    String payid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donate_payment_method);
         SetUpElement();
-        intent = getIntent();
-        if (intent.hasExtra("total")){
-            intExtra = intent.getIntExtra("total",0);
-            total.setText(intExtra + "");
-        }
-
+        getIntents();
         AdsData();
         UserData();
-        donateAsAnonymous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (donateAsAnonymous.isActivated()){
-                    donateAsAnonymous.setBackground(getResources().getDrawable(R.color.tabcolor));
-                    donateAsAnonymous.setText("You will donate in Anonymous name");
-                    donateAsAnonymous.setTextColor(Color.BLACK);
-                    DonateAsAnonymuos();
-                }
 
-            }
-        });
+//        donateAsAnonymous.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (donateAsAnonymous.isActivated()){
+//                    donateAsAnonymous.setBackground(getResources().getDrawable(R.color.tabcolor));
+//                    donateAsAnonymous.setText("You will donate in Anonymous name");
+//                    donateAsAnonymous.setTextColor(Color.BLACK);
+//                    DonateAsAnonymuos();
+//                }
+//
+//            }
+//        });
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (visa.isChecked()){
-                    paymethod ="Visa";
+                       paymethod ="Visa";
                 }else if (paypal.isChecked()){
                     paymethod ="Paypal";
 
@@ -84,15 +81,15 @@ public class Donate_Payment_Method extends AppCompatActivity {
                     paymethod ="Google Wallet";
 
                 }
+                    if (paymethod.isEmpty()){
+                        Toast.makeText(Donate_Payment_Method.this, "Pleas your Method", Toast.LENGTH_SHORT).show();
+                    }else {
+                        UpdaateDate(paymethod);
+                        Donation();
 
-                if (paymethod.isEmpty()){
-                    Toast.makeText(Donate_Payment_Method.this, "Please Choose pay method", Toast.LENGTH_SHORT).show();
-                }else {
+                    }
 
 
-                    Donation();
-
-                }
             }
         });
     }
@@ -115,8 +112,6 @@ public class Donate_Payment_Method extends AppCompatActivity {
     }
 
     public void AdsData() {
-        if (intent.hasExtra("id")) {
-            String id = intent.getStringExtra("id");
             reference.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -134,12 +129,11 @@ public class Donate_Payment_Method extends AppCompatActivity {
                     Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+
     }
 
     public void UserData() {
-        if (intent.hasExtra("userid")) {
-             userid = intent.getStringExtra("userid");
+
             task = FirebaseFirestore.getInstance().collection("Users")
                     .document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
@@ -155,7 +149,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
 
                         }
                     });
-        }
+
     }
 
 
@@ -174,27 +168,36 @@ public class Donate_Payment_Method extends AppCompatActivity {
         bsd.setContentView(parentView);
         bsd.show();
     }
-    public void DonateAsAnonymuos() {
-        HashMap hashMap = new HashMap();
-        hashMap.put("User name","Anonymous");
-        String id=  intent.getStringExtra("payid");
-                update.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        progressDialog.dismiss();
-                        showPostOptionsBottomSheet();
-                    }
-                });
-            }
+//    public void DonateAsAnonymuos() {
+//        HashMap hashMap = new HashMap();
+//        hashMap.put("User name","Anonymous");
+//        String id=  intent.getStringExtra("payid");
+//                update.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        progressDialog.dismiss();
+//                        showPostOptionsBottomSheet();
+//                    }
+//                });
+//            }
 
+    public void UpdaateDate(String paymethod){
+
+        update.document(payid).update("paymethod",paymethod).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                showPostOptionsBottomSheet();
+
+            }
+        });
+    }
         public void Donation(){
-            String id = intent.getStringExtra("id");
-            int remaining = totalremaining - intExtra;
+            int total = Integer.parseInt(intExtra);
+            int remaining = totalremaining - total;
 
             reference.document(id).update("remaining",remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -204,6 +207,14 @@ public class Donate_Payment_Method extends AppCompatActivity {
                 }
             });
 
+        }
+
+        public void getIntents(){
+        Intent intent = getIntent();
+         id = intent.getStringExtra("id");
+        userid = intent.getStringExtra("userid");
+        intExtra = intent.getStringExtra("total");
+        payid = intent.getStringExtra("payid");
         }
 }
 

@@ -1,6 +1,7 @@
 package com.graduatio.project.takaful.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.graduatio.project.takaful.Actvities.DonationDetails;
+import com.graduatio.project.takaful.Fragments.DonationInforamtiomFragment;
+import com.graduatio.project.takaful.Fragments.MyAdsDetailsFragment;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
@@ -40,6 +46,14 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.MyAdsHolder>
         holder.traget.setText(advertising.getTarget()+"");
         holder.rimining.setText(advertising.getRemaining()+"");
         Picasso.get().load(advertising.getImage()).into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyAdsDetailsFragment donationFragment = new MyAdsDetailsFragment();
+                FragmentManager manager =  ((FragmentActivity) v.getContext()).getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.container,donationFragment).commit();
+            }
+        });
     }
 
     @Override

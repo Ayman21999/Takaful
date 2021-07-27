@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takaful"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Actvities.AddGoogleWActivity2"></activity>
+        <activity android:name=".Actvities.AddGoogleWActivity2" />
         <activity android:name=".Actvities.AdminNotificationActivity" />
         <activity android:name=".Actvities.PayInfoVisa" />
         <activity android:name=".Actvities.EditPaymentMethod" />
@@ -26,7 +26,6 @@
         <activity android:name=".Actvities.EditPayMethod" />
         <activity android:name=".Actvities.EditProfile" />
         <activity android:name=".Actvities.HomeActivity">
-
         </activity>
         <activity android:name=".Actvities.ForgetPassowrd" />
         <activity android:name=".Actvities.SignUp" />

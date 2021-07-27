@@ -49,6 +49,8 @@ public class DonationDetails extends AppCompatActivity {
     String total;
     String userid;
     CollectionReference userRef;
+    CollectionReference donationRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class DonationDetails extends AppCompatActivity {
         SetUpElement();
         getAdData();
         Donate();
-
+        CreateRefForAds();
     }
 
     public void SetUpElement() {
@@ -74,6 +76,8 @@ public class DonationDetails extends AppCompatActivity {
         donate = findViewById(R.id.donate_bttn);
         title = findViewById(R.id.titleadd);
          userRef = FirebaseFirestore.getInstance().collection("Users");
+         donationRef = FirebaseFirestore.getInstance().collection("Advertising").
+                 document(advertising.getAdd_ID()).collection("Donations");
     }
 
 
@@ -170,7 +174,23 @@ public class DonationDetails extends AppCompatActivity {
             }
         });
     }
+    public void CreateRefForAds(){
+        HashMap hashMap = new HashMap();
+        hashMap.put("total",total);
+        hashMap.put("donerid",advertising.getUserId());
 
+        donationRef.document(advertising.getAdd_ID()).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
     private void AddDonationNumber() {
         final BottomSheetDialog bsd = new BottomSheetDialog(DonationDetails.this, R.style.SheetDialog);
         final View parentView = getLayoutInflater().inflate(R.layout.bottom_sheet_number, null);

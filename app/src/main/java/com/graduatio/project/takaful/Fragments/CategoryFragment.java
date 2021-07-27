@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CategoryFragment extends  DialogFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class CategoryFragment extends DialogFragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     RecyclerView recyclerView;
@@ -69,7 +69,7 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
         Toast.makeText(getContext(), "Size of Array" + advertisings, Toast.LENGTH_SHORT).show();
         firebaseFirestore = FirebaseFirestore.getInstance();
         query = firebaseFirestore.collection("Advertising")
-                .whereEqualTo("isRejected",false)
+                .whereEqualTo("isRejected", false)
                 .limit(Adverstitong_LIMIT);
 
 
@@ -86,7 +86,7 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
         addAadapter = new AddAadapter(getContext(), advertisings);
         recyclerView.setAdapter(addAadapter);
         usernameTv = view.findViewById(R.id.username);
-        ImageView newpost= view.findViewById(R.id.newads);
+        ImageView newpost = view.findViewById(R.id.newads);
         View view1 = view.findViewById(R.id.ads_back);
         reference = FirebaseFirestore.getInstance().collection("Advertising");
         User[] users = new User[1];
@@ -94,17 +94,17 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                users[0] =documentSnapshot.toObject(User.class);
+                users[0] = documentSnapshot.toObject(User.class);
             }
         }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 usernameTv.setText("Hello " + users[0].getFirstName());
                 String role = task.getResult().getString("role");
-                if (role.equals("Admin")){
+                if (role.equals("Admin")) {
                     newpost.setVisibility(View.VISIBLE);
                     view1.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     newpost.setVisibility(View.INVISIBLE);
                     view1.setVisibility(View.INVISIBLE);
                 }
@@ -118,7 +118,7 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
         newpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext() , AdminNotificationActivity.class);
+                Intent intent = new Intent(getContext(), AdminNotificationActivity.class);
                 getContext().startActivity(intent);
             }
         });
@@ -157,10 +157,10 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
                         queryDocumentSnapshots.size() - 1
                 );
 
-                if(isInitial){
+                if (isInitial) {
                     advertisings.addAll(queryDocumentSnapshots.toObjects(Advertising.class));
-                }else{
-                    advertisings.addAll(advertisings.size(),queryDocumentSnapshots.toObjects(Advertising.class));
+                } else {
+                    advertisings.addAll(advertisings.size(), queryDocumentSnapshots.toObjects(Advertising.class));
                 }
             }
         }).addOnCompleteListener(task -> {
@@ -175,11 +175,11 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                if(value!=null){
-                                    for(DocumentChange dc:value.getDocumentChanges()){
-                                        if(dc.getType() == DocumentChange.Type.REMOVED){
-                                            for(Advertising suggestion:advertisings){
-                                                if(suggestion.getAdd_ID().equals(dc.getDocument().getId())){
+                                if (value != null) {
+                                    for (DocumentChange dc : value.getDocumentChanges()) {
+                                        if (dc.getType() == DocumentChange.Type.REMOVED) {
+                                            for (Advertising suggestion : advertisings) {
+                                                if (suggestion.getAdd_ID().equals(dc.getDocument().getId())) {
                                                     final int index = advertisings.indexOf(suggestion);
                                                     advertisings.remove(index);
                                                     addAadapter.notifyItemRemoved(index);
@@ -196,7 +196,7 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
 
                 final int resultSize = task.getResult().size();
 
-                addAadapter.notifyItemRangeInserted(advertisings.size() - resultSize,resultSize);
+                addAadapter.notifyItemRangeInserted(advertisings.size() - resultSize, resultSize);
                 if (resultSize < Adverstitong_LIMIT && scrollListener != null) {
                     recyclerView.removeOnScrollListener(scrollListener);
                 }
@@ -228,7 +228,7 @@ public class CategoryFragment extends  DialogFragment implements SwipeRefreshLay
         }
     }
 
-    public static CategoryFragment cFragment(){
+    public static CategoryFragment cFragment() {
         return new CategoryFragment();
     }
 }
