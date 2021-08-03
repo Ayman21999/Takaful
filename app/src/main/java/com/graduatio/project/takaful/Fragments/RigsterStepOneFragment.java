@@ -34,7 +34,6 @@ public class RigsterStepOneFragment extends DialogFragment {
     Button next;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    String homeid;
     CollectionReference userRef;
 
     ProgressDialog progressDialog;
@@ -49,7 +48,6 @@ public class RigsterStepOneFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
         Bundle bundle = this.getArguments();
-        homeid = bundle.getString("id");
         Adsid = bundle.getString("adsid");
         userid = firebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -92,7 +90,6 @@ public class RigsterStepOneFragment extends DialogFragment {
                     UpdateUploadedDataforuser(job_txt,name_of_Inv_txt,media_txt,address_txt);
                     DialogFragment dialogFragment = RigsterStepTwoFragment.RTwoFragment();
                     Bundle bundle =new Bundle();
-                    bundle.putString("id",homeid);
                     bundle.putString("adsid",Adsid);
                     dialogFragment.setArguments(bundle);
                     dialogFragment.show(getChildFragmentManager(), "dd");
@@ -107,7 +104,7 @@ public class RigsterStepOneFragment extends DialogFragment {
     public void UpdateUploadedData(String job ,String nameOfCharity,String mediaAccount,String address) {
             progressDialog.show();
             progressDialog.setMessage("Updating...");
-            firebaseFirestore.collection("Advertising").document(homeid)
+            firebaseFirestore.collection("Advertising").document(Adsid)
                     .update("job",job, "name_of_Charity", nameOfCharity ,
                             "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

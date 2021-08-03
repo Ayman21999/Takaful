@@ -34,12 +34,11 @@ import com.graduatio.project.takaful.R;
 
 import java.util.Calendar;
 
-public class RigsterStepTwoFragment extends DialogFragment {
+    public class RigsterStepTwoFragment extends DialogFragment {
 
     EditText title, whoarebenefit, target, deadline;
     Button perv, next;
     FirebaseFirestore firebaseFirestore;
-    String homeid;
     String adsid;
     String userid;
     ProgressDialog progressDialog;
@@ -50,7 +49,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
         Bundle bundle = this.getArguments();
-        homeid = bundle.getString("id");
+
         adsid = bundle.getString("adsid");
 //        Toast.makeText(getContext(), "ID : " + id, Toast.LENGTH_SHORT).show();
     }
@@ -95,7 +94,6 @@ public class RigsterStepTwoFragment extends DialogFragment {
                     DialogFragment fragment = LastStepFragment.lastStepFragment();
                     fragment.show(getChildFragmentManager(), "aa");
                     Bundle bundle = new Bundle();
-                    bundle.putString("id", homeid);
                     bundle.putString("adsid", adsid);
                     fragment.setArguments(bundle);
 
@@ -111,7 +109,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
 
         progressDialog.show();
         progressDialog.setMessage("Updating...");
-        firebaseFirestore.collection("Advertising").document(homeid)
+        firebaseFirestore.collection("Advertising").document(adsid)
                 .update("title", title,
                         "whoarebenefit",
                         forWhoDonate,

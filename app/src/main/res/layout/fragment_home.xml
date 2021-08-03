@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/username"
@@ -47,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/notify"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_notification"
@@ -86,6 +87,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/edit_text_background"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toStartOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/view5" />
@@ -95,10 +97,21 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_addpost"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/ads_back"
         app:layout_constraintEnd_toEndOf="@+id/ads_back"
         app:layout_constraintStart_toStartOf="@+id/ads_back"
         app:layout_constraintTop_toTopOf="@+id/ads_back" />
+
+    <ImageView
+        android:id="@+id/request"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_request_donor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/ads_back"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

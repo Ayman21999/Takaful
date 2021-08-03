@@ -2,7 +2,7 @@ package com.graduatio.project.takaful.Model;
 
 import com.google.firebase.firestore.PropertyName;
 
-public class Donations {
+public class    Donations {
 
     @PropertyName("userID")
     String userID ;
@@ -10,6 +10,8 @@ public class Donations {
     String donateforAds;
     @PropertyName("total")
     String total;
+    @PropertyName("donerid")
+    String donerid ;
     @PropertyName("paymethod")
     String paymethod;
     @PropertyName("Adsid")
@@ -52,5 +54,13 @@ public class Donations {
 
     public void setAdsid(String adsid) {
         Adsid = adsid;
+    }
+
+    public String getDonerid() {
+        return donerid;
+    }
+
+    public void setDonerid(String donerid) {
+        this.donerid = donerid;
     }
 }

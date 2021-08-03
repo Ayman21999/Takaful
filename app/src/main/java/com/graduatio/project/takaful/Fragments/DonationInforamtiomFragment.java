@@ -28,7 +28,7 @@ public class DonationInforamtiomFragment extends Fragment {
         TabLayout tabLayout =view.findViewById(R.id.tabs);
         ViewPager viewPager = view.findViewById(R.id.viewpager);
         List<Fragment> fragments = Arrays.asList(new ActivityFragment() , new DonationFragment());
-        List<String> fragmentTitles = Arrays.asList("Activity","Donation");
+        List<String> fragmentTitles = Arrays.asList("My Donations","Ads Donation");
         AdapterPager tabAdapter = new AdapterPager
                 (getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
                         ,getContext(),fragments,fragmentTitles);

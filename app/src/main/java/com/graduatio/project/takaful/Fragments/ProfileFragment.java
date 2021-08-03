@@ -1,5 +1,6 @@
 package com.graduatio.project.takaful.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -23,15 +24,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Actvities.EditProfile;
 import com.graduatio.project.takaful.Actvities.Login;
 import com.graduatio.project.takaful.Actvities.EditPaymentMethod;
+import com.graduatio.project.takaful.Actvities.Users_HasCharities;
 import com.graduatio.project.takaful.Model.User;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
-public class ProfileFragment extends Fragment {
+public class  ProfileFragment extends Fragment {
 
     ImageView userimage, editprofilr, addPayMethod, edit_paymothed;
     TextView name, phonenumber, email, paymethod;
-    Button loguot;
+    Button loguot,adminBtn;
+    ProgressDialog progressDialog ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,8 +48,12 @@ public class ProfileFragment extends Fragment {
         paymethod = view.findViewById(R.id.pay_method);
         loguot = view.findViewById(R.id.logout);
         edit_paymothed = view.findViewById(R.id.editpay_method);
-
+        adminBtn = view.findViewById(R.id.adminbtn);
+        progressDialog = new ProgressDialog(getContext());
         User[] user = new User[1];
+
+        progressDialog.setMessage("Loading ...");
+        progressDialog.show();
         FirebaseFirestore.getInstance().collection("Users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -63,10 +70,19 @@ public class ProfileFragment extends Fragment {
                     email.setText(user[0].getEmail());
                     phonenumber.setText(user[0].getPhone());
                     paymethod.setText(user[0].getPayMethod());
+
                     if (user[0].getUserImage().isEmpty()) {
                         Toast.makeText(getContext(), "Empty Image", Toast.LENGTH_SHORT).show();
                     } else {
                         Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
+
+                    }
+                    if (user[0].getRole().equals("Admin")){
+                        adminBtn.setVisibility(View.VISIBLE);
+                        progressDialog.dismiss();
+                    }else {
+                        adminBtn.setVisibility(View.INVISIBLE);
+                        progressDialog.dismiss();
 
                     }
                 }
@@ -95,8 +111,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        adminBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Users_HasCharities.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
+
 
     private void logOut() {
         FirebaseAuth.getInstance().signOut();

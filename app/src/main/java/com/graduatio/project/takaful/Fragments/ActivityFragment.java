@@ -92,7 +92,6 @@ CollectionReference donateRef;
         return view;
     }
     public void ReadDonatoins(boolean isInitial){
-
         isLoading = true;
         Query updatedQuery = query;
         if (lastDocSnap != null) {
@@ -122,9 +121,6 @@ CollectionReference donateRef;
                     recyclerView.removeOnScrollListener(scrollListener);
                 }
             }
-
-
-
             isLoading = false;
         });
     }

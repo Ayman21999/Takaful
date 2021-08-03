@@ -26,7 +26,14 @@ public class User {
     String firstName;
     @PropertyName("lastName")
     String lastName;
-
+    @PropertyName("isBlocked")
+    boolean isBlocked;
+    @PropertyName("isSuspend")
+    boolean isSuspend;
+    @PropertyName("adsID")
+    String adsID;
+    @PropertyName("donateRequestTotal")
+    int donateRequestTotal;
     public boolean isHasActivity() {
         return isHasActivity;
     }
@@ -113,5 +120,37 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    public boolean isSuspend() {
+        return isSuspend;
+    }
+
+    public void setSuspend(boolean suspend) {
+        isSuspend = suspend;
+    }
+
+    public String getAdsID() {
+        return adsID;
+    }
+
+    public void setAdsID(String adsID) {
+        this.adsID = adsID;
+    }
+
+    public int getDonateRequestTotal() {
+        return donateRequestTotal;
+    }
+
+    public void setDonateRequestTotal(int donateRequestTotal) {
+        this.donateRequestTotal = donateRequestTotal;
     }
 }

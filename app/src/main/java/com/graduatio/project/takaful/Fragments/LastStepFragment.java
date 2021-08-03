@@ -53,7 +53,7 @@ public class LastStepFragment extends DialogFragment {
     Button publish;
     EditText phonenumber ,desc;
     FirebaseFirestore firebaseFirestore;
-    String image_url,id,cameraImageFilePath;
+    String image_url,cameraImageFilePath;
     FirebaseStorage storage;
     boolean isUploading;
     private Uri filePath;
@@ -68,7 +68,6 @@ public class LastStepFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,R.style.FullScreenDialogTheme);
         Bundle bundle = this.getArguments() ;
-       id =  bundle.getString("id");
        adsid =  bundle.getString("adsid");
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -159,7 +158,7 @@ public class LastStepFragment extends DialogFragment {
         mProgressDialog.show();
         mProgressDialog.setMessage("Updating...");
         firebaseFirestore.collection("Advertising")
-                .document(id).update("description",desc ,"image",img , "userphone",phone)
+                .document(adsid).update("description",desc ,"image",img , "userphone",phone)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

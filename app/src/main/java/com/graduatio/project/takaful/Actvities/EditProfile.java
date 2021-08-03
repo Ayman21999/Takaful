@@ -19,6 +19,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +37,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.graduatio.project.takaful.Fragments.ProfileFragment;
 import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
@@ -43,7 +46,12 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class EditProfile extends AppCompatActivity {
 
@@ -59,18 +67,40 @@ public class EditProfile extends AppCompatActivity {
     String userid;
     private Uri filePath;
     private Uri imageUri;
+    PhoneNumberUtil phoneNumberUtil;
 
     String imageUrl;
     String cameraImageFilePath;
     private final static int CAMERA_REQUEST_CODE = 1;
     boolean uploading = false;
-
+    List<String> spinnerArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         SetUpElement();
 
+        new Thread(() -> {
+
+            phoneNumberUtil = PhoneNumberUtil.getInstance();
+
+            List<String> supportedCountryCodes =
+                    new ArrayList<>(phoneNumberUtil.getSupportedRegions());
+
+            spinnerArray = new ArrayList<>(supportedCountryCodes.size());
+            spinnerArray = new ArrayList<>(supportedCountryCodes.size());
+
+            Collections.sort(spinnerArray, new Comparator<String>() {
+                @Override
+                public int compare(String s, String t1) {
+                    return extractCode(s) - extractCode(t1);
+                }
+
+                int extractCode(String s) {
+                    return Integer.parseInt(s.split("\\+")[1]);
+                }
+            });
+        }).start();
         final String[] fname_txt = new String[1];
         final String[] lname_txt = new String[1];
         final String[] email_txt = new String[1];
@@ -211,6 +241,14 @@ public class EditProfile extends AppCompatActivity {
                 Log.d("qqq", e.getLocalizedMessage());
             }
         });
+    }
+    boolean checkPhoneNumber(String number, String code) {
+
+        final Phonenumber.PhoneNumber newNum = new Phonenumber.PhoneNumber();
+
+        newNum.setCountryCode(Integer.parseInt(code)).setNationalNumber(Long.parseLong(number));
+
+        return phoneNumberUtil.isValidNumber(newNum);
     }
 
     public void SaveUpdatedDate() {

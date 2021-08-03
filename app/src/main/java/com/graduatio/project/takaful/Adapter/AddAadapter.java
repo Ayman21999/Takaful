@@ -2,17 +2,20 @@ package com.graduatio.project.takaful.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.graduatio.project.takaful.Actvities.DonationDetails;
 import com.graduatio.project.takaful.Fragments.DonationInforamtiomFragment;
 import com.graduatio.project.takaful.Model.Advertising;
@@ -25,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
-
     Context context;
     List<Advertising> advertisings;
+    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public List<Integer> loadingItems = new ArrayList<>();
     public AddAadapter(Context context, List<Advertising> advertisings) {
         this.context = context;
@@ -53,7 +56,10 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(context, advertising.getAdd_ID(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context , DonationDetails.class);
+                    intent.putExtra("donerid", id);
                 intent.putExtra("id", advertising.getAdd_ID());
                 context.startActivity(intent);
             }

@@ -39,15 +39,15 @@ public class MyAdsDonation extends RecyclerView.Adapter<MyAdsDonation.MyAdsDonat
     public void onBindViewHolder(@NonNull MyAdsDonationHolder holder, int position) {
         Donations donation = donations.get(position);
         holder.totla.setText("$"+donation.getTotal());
-        reference.document(donation.getUserID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+        reference.document(donation.getDonerid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
             String name = documentSnapshot.getString("firstName");
-            holder.title.setText(name);
-
+                holder.title.setText(name);
             }
         });
-
+        holder.text.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -56,11 +56,12 @@ public class MyAdsDonation extends RecyclerView.Adapter<MyAdsDonation.MyAdsDonat
     }
 
     public class MyAdsDonationHolder extends RecyclerView.ViewHolder {
-        TextView totla ,title;
+        TextView totla ,title ,text;
         public MyAdsDonationHolder(@NonNull View itemView) {
             super(itemView);
             totla = itemView.findViewById(R.id.donation_money);
-            title = itemView.findViewById(R.id.ad_title);
+            title = itemView.findViewById(R.id.ad_name);
+            text = itemView.findViewById(R.id.ad_title);
         }
     }
 }

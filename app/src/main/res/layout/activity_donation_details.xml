@@ -163,6 +163,7 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_active_"
         android:text="Donate"
+        android:visibility="invisible"
         android:textAllCaps="false"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -179,5 +180,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/add_image" />
+
+    <android.widget.Button
+        android:id="@+id/request"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_active_"
+        android:text="Make Request"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/donate_bttn"
+        app:layout_constraintEnd_toEndOf="@+id/donate_bttn"
+        app:layout_constraintStart_toStartOf="@+id/donate_bttn"
+        app:layout_constraintTop_toTopOf="@+id/donate_bttn" />
+
+    <android.widget.Button
+        android:id="@+id/adimn_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Show the Benefit users"
+        android:background="@drawable/button_active_"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/donate_bttn"
+        app:layout_constraintEnd_toEndOf="@+id/donate_bttn"
+        app:layout_constraintStart_toStartOf="@+id/donate_bttn"
+        app:layout_constraintTop_toTopOf="@+id/donate_bttn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,14 +23,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.graduatio.project.takaful.DataBase.SessionManager;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.graduatio.project.takaful.R;
+import com.graduatio.project.takaful.Service.MyFirebaseMessaging;
 
 public class Login extends AppCompatActivity {
 
     EditText email;
     EditText pass;
-    TextView forgetpass;
+    TextView forgetpass, createAccount;
     Button login;
     FirebaseAuth auth;
     FirebaseFirestore firebaseFirestore;
@@ -63,8 +64,10 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Password is Required", Toast.LENGTH_SHORT).show();
                     } else {
                         LogIn(emailtxt, passtxt);
-                        SessionManager manager = new SessionManager(Login.this);
-                        manager.CreateSession(emailtxt, passtxt);
+//                        SessionManager manager = new SessionManager(Login.this);
+                        startService(new Intent(Login.this, MyFirebaseMessaging.class));
+
+//                        manager.CreateSession(emailtxt, passtxt);
                     }
                 }
             }
@@ -79,6 +82,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this , SignUp.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -91,7 +101,7 @@ public class Login extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         reference = firebaseFirestore.collection("Users");
         progressDialog = new ProgressDialog(this);
-
+        createAccount = findViewById(R.id.sgin_in_text);
     }
 
     public void LogIn(String email, String pass) {
@@ -105,6 +115,20 @@ public class Login extends AppCompatActivity {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 finish();
+                String id =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        FirebaseFirestore.getInstance().collection("Users").document(id)
+                                .update("cloudMessagingToken",s).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        });
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

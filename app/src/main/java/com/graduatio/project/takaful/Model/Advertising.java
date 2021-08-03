@@ -3,7 +3,7 @@ package com.graduatio.project.takaful.Model;
 import com.google.firebase.firestore.PropertyName;
 
 public class Advertising {
-    @PropertyName("add_ID")
+        @PropertyName("add_ID")
     String add_ID;
     @PropertyName("address")
     String address;
@@ -35,7 +35,10 @@ public class Advertising {
     String userphone;
     @PropertyName("isRejected")
     boolean isRejected;
-
+    @PropertyName("donerid")
+    String donerid;
+    @PropertyName("total")
+    String total;
     public String getName_of_Charity() {
         return name_of_Charity;
     }
@@ -165,6 +168,19 @@ public class Advertising {
         isRejected = rejected;
     }
 
+    public String getDonerid() {
+        return donerid;
+    }
 
+    public void setDonerid(String donerid) {
+        this.donerid = donerid;
+    }
 
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 }

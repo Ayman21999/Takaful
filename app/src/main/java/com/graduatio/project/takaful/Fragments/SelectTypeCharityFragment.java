@@ -34,10 +34,11 @@ public class SelectTypeCharityFragment extends DialogFragment {
     String typeOfAdd = "";
     String TAG = "ttt";
     ProgressDialog progressDialog;
-    TextView home_txt,food_txt,small_txt,edue_txt,health_txt;
-    String id;
+    View home_view,food_view,small_view,edue_view,health_view;
     String userAdsid;
     String adsid;
+
+    CollectionReference updateuser;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +57,16 @@ public class SelectTypeCharityFragment extends DialogFragment {
         education = view.findViewById(R.id.edu);
         health = view.findViewById(R.id.med);
         next = view.findViewById(R.id.next);
-        edue_txt = view.findViewById(R.id.education);
-        food_txt = view.findViewById(R.id.txtfood);
-        health_txt = view.findViewById(R.id.health);
-        home_txt =view.findViewById(R.id.home);
-        small_txt = view.findViewById(R.id.small);
+        adsid = UUID.randomUUID().toString();
+        updateuser = FirebaseFirestore.getInstance().collection("Users");
+        edue_view = view.findViewById(R.id.view21);
+        food_view = view.findViewById(R.id.view19);
+        health_view = view.findViewById(R.id.textView22);
+        home_view =view.findViewById(R.id.view20);
+        small_view = view.findViewById(R.id.view23);
         userAdsid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            userRef = FirebaseFirestore.getInstance().collection("Users").document(userAdsid).collection("UserAds");
+            userRef = FirebaseFirestore.getInstance().collection("Users")
+                    .document(userAdsid).collection("UserAds");
         progressDialog = new ProgressDialog(getContext());
 //        userRef = FirebaseFirestore.getInstance().collection("UserAds");
 
@@ -70,24 +74,22 @@ public class SelectTypeCharityFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 typeOfAdd = "Food";
-                food_txt.setTextColor(getResources().getColor(R.color.background));
-                home_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                edue_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                health_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                small_txt.setTextColor(getResources().getColor(R.color.txt_color));
-
-
+                food_view.setBackground(getResources().getDrawable(R.drawable.backgrounfselection));
+                home_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                edue_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                health_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                small_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
             }
         });
         education.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 typeOfAdd = "Education";
-                food_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                home_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                edue_txt.setTextColor(getResources().getColor(R.color.background));
-                health_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                small_txt.setTextColor(getResources().getColor(R.color.txt_color));
+                food_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                home_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                edue_view.setBackground(getResources().getDrawable(R.drawable.backgrounfselection));
+                health_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                small_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
 
             }
         });
@@ -95,33 +97,33 @@ public class SelectTypeCharityFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 typeOfAdd = "Home";
-                food_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                home_txt.setTextColor(getResources().getColor(R.color.background));
-                edue_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                health_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                small_txt.setTextColor(getResources().getColor(R.color.txt_color));
+                food_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                home_view.setBackground(getResources().getDrawable(R.drawable.backgrounfselection));
+                edue_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                health_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                small_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
             }
         });
         smallproject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 typeOfAdd = "Small Projects";
-                food_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                home_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                edue_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                health_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                small_txt.setTextColor(getResources().getColor(R.color.background));
+                food_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                home_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                edue_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                health_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                small_view.setBackground(getResources().getDrawable(R.drawable.backgrounfselection));
             }
         });
         health.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 typeOfAdd = "Health";
-                food_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                home_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                edue_txt.setTextColor(getResources().getColor(R.color.txt_color));
-                health_txt.setTextColor(getResources().getColor(R.color.background));
-                small_txt.setTextColor(getResources().getColor(R.color.txt_color));
+                food_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                home_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                edue_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
+                health_view.setBackground(getResources().getDrawable(R.drawable.backgrounfselection));
+                small_view.setBackground(getResources().getDrawable(R.drawable.selectshape));
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +138,6 @@ public class SelectTypeCharityFragment extends DialogFragment {
                     DialogFragment fragment = RigsterStepOneFragment.Rfragment();
                     fragment.show(getChildFragmentManager(), "aa");
                     Bundle bundle = new Bundle();
-                    bundle.putString("id", id);
                     bundle.putString("adsid",adsid);
                     fragment.setArguments(bundle);
 
@@ -147,11 +148,11 @@ public class SelectTypeCharityFragment extends DialogFragment {
     }
 
     public void CreateAdd(String typeOfAdd) {
-        id = UUID.randomUUID().toString();
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("Type", typeOfAdd);
         hashMap.put("title", "");
-        hashMap.put("add_ID", id);
+        hashMap.put("add_ID", adsid);
         hashMap.put("description", "");
         hashMap.put("image", "");
         hashMap.put("remaining", 0);
@@ -162,7 +163,7 @@ public class SelectTypeCharityFragment extends DialogFragment {
         hashMap.put("isRejected", true);
         progressDialog.setMessage("Loading ...");
         progressDialog.show();
-        reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        reference.document(adsid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
@@ -177,11 +178,17 @@ public class SelectTypeCharityFragment extends DialogFragment {
 
             }
         });
+        updateuser.document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .update("adsID",adsid).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
 
+            }
+        });
     }
 
     public void CreateUserAds(String typeOfAdd) {
-        adsid = UUID.randomUUID().toString();
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("Type", typeOfAdd);
         hashMap.put("title", "");

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Model.PayMethod;
@@ -45,9 +46,10 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
 
     public void SetUpElement(){
         methods = new ArrayList<>();
-        payMethod = new PayMethod();
+//        payMethod = new PayMethod();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        reference = firebaseFirestore.collection("Pay");
+        reference = firebaseFirestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        .collection("PayMethods");
         visa_btn = findViewById(R.id.visa);
         google_btn = findViewById(R.id.googlew);
         paypal_btn = findViewById(R.id.paypal);
@@ -84,14 +86,17 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
             public void onClick(View v) {
                 typeMethod = "visa";
                 Intent intent =new Intent(AddPaymantMethodActivity.this , PayInfoVisa.class);
+                intent.putExtra("type",typeMethod);
                 startActivity(intent);
             }
         });
         google_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                typeMethod = "googleW";
+                        typeMethod = "googleW";
                 Intent intent =new Intent(AddPaymantMethodActivity.this , AddGoogleWActivity2.class);
+                intent.putExtra("type",typeMethod);
+
                 startActivity(intent);
             }
         });
@@ -99,7 +104,9 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 typeMethod = "pal";
-                Intent intent =new Intent(AddPaymantMethodActivity.this , PayInfoVisa.class);
+                Intent intent =new Intent(AddPaymantMethodActivity.this , AddPAyPalActivity.class);
+                intent.putExtra("type",typeMethod);
+
                 startActivity(intent);
             }
         });

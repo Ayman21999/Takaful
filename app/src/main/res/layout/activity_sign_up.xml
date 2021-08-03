@@ -64,9 +64,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Create New "
-
                 android:textColor="@color/background"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,7 +76,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Account"
                 android:textColor="@color/background"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
@@ -86,7 +85,7 @@
             <EditText
                 android:id="@+id/email"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="12dp"
@@ -108,7 +107,7 @@
             <EditText
                 android:id="@+id/password"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
@@ -118,23 +117,24 @@
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
                 android:textColor="@color/background"
-                android:textColorHint="#DEDEDE"                app:layout_constraintEnd_toEndOf="@+id/phone"
+                android:textColorHint="#DEDEDE"
+                app:layout_constraintEnd_toEndOf="@+id/phone"
                 app:layout_constraintStart_toStartOf="@+id/phone"
                 app:layout_constraintTop_toBottomOf="@+id/phone" />
 
             <EditText
                 android:id="@+id/confirm"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:textColor="@color/background"
-
                 android:hint="Confirm Password "
+
                 android:inputType="textPassword"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/background"
                 android:textColorHint="#DEDEDE"
                 app:layout_constraintEnd_toEndOf="@+id/password"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -144,31 +144,32 @@
             <android.widget.Button
                 android:id="@+id/signe_button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="70dp
+"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/button_shape"
-                android:text="Create Account"
 
+                android:text="Create Account"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/confirm"
-                app:layout_constraintStart_toStartOf="@+id/confirm"
-                app:layout_constraintTop_toBottomOf="@+id/confirm" />
+                app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/radioGroup2" />
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Username"
-                android:textColor="@color/background"
-
                 android:inputType="textPersonName"
+
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/background"
                 android:textColorHint="#DEDEDE"
 
                 app:layout_constraintEnd_toEndOf="@+id/email"
@@ -178,21 +179,54 @@
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Phone"
-                android:textColor="@color/background"
+                android:inputType="phone"
 
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/background"
                 android:textColorHint="#DEDEDE"
-                android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="@+id/username"
-                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/username"
                 app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/background"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/signe_button"
+                app:layout_constraintEnd_toEndOf="@+id/confirm"
+                app:layout_constraintStart_toStartOf="@+id/confirm"
+                app:layout_constraintTop_toBottomOf="@+id/confirm">
+
+                <RadioButton
+                    android:id="@+id/beneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="beneficiary"
+                    android:textColor="@color/background"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/Donors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Donors"
+
+                    android:textColor="@color/background"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,8 +255,8 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="Dont have account? "
@@ -231,7 +265,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/sgin_in_text"
@@ -257,7 +291,7 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.87" />
+        app:layout_constraintGuide_percent="0.93" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -266,6 +300,6 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.91" />
+        app:layout_constraintGuide_percent="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

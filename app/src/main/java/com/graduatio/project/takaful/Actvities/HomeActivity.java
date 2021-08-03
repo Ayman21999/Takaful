@@ -11,9 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import com.graduatio.project.takaful.DataBase.SessionManager;
-import com.graduatio.project.takaful.Fragments.DonationFragment;
+
 import com.graduatio.project.takaful.Fragments.DonationInforamtiomFragment;
 import com.graduatio.project.takaful.Fragments.CategoryFragment;
 import com.graduatio.project.takaful.Fragments.ProfileFragment;

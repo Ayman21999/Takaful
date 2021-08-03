@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
      android:background="@color/background"
     tools:context=".Actvities.EditPaymentMethod">
-     <View
+
+    <View
         android:id="@+id/view41"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,33 +42,7 @@
         app:layout_constraintTop_toTopOf="@+id/back_btn"
         app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/paylist"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
-        tools:listitem="@layout/pay_method_item"
-        app:layout_constraintBottom_toTopOf="@+id/add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/view41"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
-    <!--    <android.widget.Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginTop="56dp"-->
-<!--        android:text="Add new  method"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="#DEDEDE"-->
-<!--        android:background="@drawable/view_shape"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView22" />-->
     <android.widget.Button
         android:id="@+id/add"
         android:layout_width="match_parent"
@@ -86,4 +61,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/vias"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/ic_visa"
+        android:drawableLeft="@drawable/ic_visa"
+        android:text="Visa"
+        android:textAllCaps="false"
+        android:textColor="@color/background"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <android.widget.Button
+        android:id="@+id/paypal"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="36dp"
+        android:text="PayPal"
+        android:textSize="20sp"
+        android:textColor="@color/background"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_paypal"
+        android:background="@drawable/edit_text_background"
+
+        app:layout_constraintEnd_toEndOf="@+id/vias"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/vias"
+        app:layout_constraintTop_toBottomOf="@+id/vias"
+        android:drawableLeft="@drawable/ic_paypal" />
+
+    <android.widget.Button
+        android:id="@+id/google"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="56dp"
+        android:text="Google Wallet"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="@color/background"
+
+        android:drawableStart="@drawable/ic_googlewallet"
+        android:background="@drawable/edit_text_background"
+        app:layout_constraintEnd_toEndOf="@+id/paypal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/paypal"
+        app:layout_constraintTop_toBottomOf="@+id/paypal"
+        android:drawableLeft="@drawable/ic_paypal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

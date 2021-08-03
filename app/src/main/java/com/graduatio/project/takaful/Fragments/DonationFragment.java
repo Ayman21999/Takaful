@@ -1,5 +1,7 @@
 package com.graduatio.project.takaful.Fragments;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,12 +22,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.graduatio.project.takaful.Actvities.HomeActivity;
 import com.graduatio.project.takaful.Adapter.MyAdsAdapter;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.Model.Donations;
@@ -106,8 +110,23 @@ public class DonationFragment extends DialogFragment {
         add_charity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogFragment  = SelectTypeCharityFragment.sFragment();
-                dialogFragment.show(getChildFragmentManager(),"dd");
+                Task<DocumentSnapshot> reference = FirebaseFirestore.getInstance().
+                        collection("Users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        boolean isBlocked = documentSnapshot.getBoolean("isBlocked");
+                        if (isBlocked == true){
+
+                            showPostOptionsBottomSheet();
+
+                        }else {
+                            DialogFragment dialogFragment  = SelectTypeCharityFragment.sFragment();
+                            dialogFragment.show(getChildFragmentManager(),"dd");
+                        }
+                    }
+                });
+
+
             }
         });
         return view;
@@ -167,4 +186,20 @@ public class DonationFragment extends DialogFragment {
             }
         }
     }
+    private void showPostOptionsBottomSheet() {
+
+        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.bottom_suspend_user, null);
+        parentView.setBackgroundColor(Color.TRANSPARENT);
+
+            parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
+            Intent intent  = new Intent(getContext() , HomeActivity.class);
+            getActivity().startActivity(intent);
+            bsd.dismiss();
+
+        });
+        bsd.setContentView(parentView);
+        bsd.show();
+    }
+
 }

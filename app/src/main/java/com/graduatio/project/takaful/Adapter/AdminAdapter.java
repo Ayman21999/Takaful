@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Actvities.DonationDetails;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.R;
+import com.graduatio.project.takaful.Service.CloudMessagingNotificationsSender;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,7 +31,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
     Context context;
     List<Advertising> advertisings;
     CollectionReference firebaseFirestore = FirebaseFirestore.getInstance().collection("Advertising");
-   CollectionReference userRef = FirebaseFirestore.getInstance().collection("Users");
+    CollectionReference userRef = FirebaseFirestore.getInstance().collection("Users");
+
     public AdminAdapter(Context context, List<Advertising> advertisings) {
         this.context = context;
         this.advertisings = advertisings;
@@ -47,33 +49,35 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
     @Override
     public void onBindViewHolder(@NonNull AdminAdapter.AdminHolder holder, int position) {
         Advertising advertising = advertisings.get(position);
-        holder.name_publisher.setText("By :"+advertising.getUserId());
-        holder.target.setText("Target : $"+advertising.getTarget());
+        holder.name_publisher.setText("By :" + advertising.getUserId());
+        holder.target.setText("Target : $" + advertising.getTarget());
         holder.title.setText(advertising.getTitle());
-//      Picasso.get().load(advertising.getImage()).into(holder.ads_img);
-        holder.ads_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context , DonationDetails.class);
-                context.startActivity(i);
-            }
-        });
+      Picasso.get().load(advertising.getImage()).into(holder.ads_img);
+//        holder.ads_img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(context, DonationDetails.class);
+//                i.putExtra("id",advertising.getAdd_ID());
+//                context.startActivity(i);
+//            }
+//        });.
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseFirestore.document(advertising.getAdd_ID()).update("isRejected",false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                firebaseFirestore.document(advertising.getAdd_ID()).update("isRejected", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "The Ads Had been published", Toast.LENGTH_SHORT).show();
-                        userRef.document(advertising.getUserId()).update("isHasCharity",true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        userRef.document(advertising.getUserId()).update("isHasCharity", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Log.d("sss","Success");
+
+                                Log.d("sss", "Success");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.d("sss","Error :  " + e.getLocalizedMessage());
+                                Log.d("sss", "Error :  " + e.getLocalizedMessage());
 
                             }
                         });
@@ -85,14 +89,14 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            firebaseFirestore.document(advertising.getAdd_ID()).delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(context, "The Ads Had been Deleted", Toast.LENGTH_SHORT).show();
+                firebaseFirestore.document(advertising.getAdd_ID()).delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(context, "The Ads Had been Deleted", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                            }
+                        });
             }
         });
 
@@ -113,7 +117,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
 
         public AdminHolder(@NonNull View itemView) {
             super(itemView);
-            ads_img  = itemView.findViewById(R.id.ads_image);
+            ads_img = itemView.findViewById(R.id.ads_image);
             target = itemView.findViewById(R.id.target_ads);
             name_publisher = itemView.findViewById(R.id.ads_publisher);
             title = itemView.findViewById(R.id.title_ads);

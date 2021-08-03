@@ -62,6 +62,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_background"
+
         android:ems="10"
         android:hint="Card Number"
         android:inputType="number"
@@ -119,7 +120,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-
+        android:textColor="@color/background"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="@+id/date"
         app:layout_constraintStart_toEndOf="@+id/textView43"
@@ -135,6 +136,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="numberSigned"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="@+id/end"
         app:layout_constraintStart_toStartOf="@+id/date"
         app:layout_constraintTop_toTopOf="@+id/date"

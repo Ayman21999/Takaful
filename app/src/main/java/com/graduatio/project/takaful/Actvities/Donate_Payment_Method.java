@@ -29,6 +29,7 @@ import com.graduatio.project.takaful.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Donate_Payment_Method extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
     Button donate, donateAsAnonymous;
     CollectionReference reference;
     Intent intent;
+    CollectionReference userRef;
     RadioButton visa,google,paypal;
     CollectionReference update;
     ProgressDialog progressDialog ;
@@ -44,10 +46,13 @@ public class Donate_Payment_Method extends AppCompatActivity {
     int totalremaining;
     String  paymethod = "";
     String userid ;
+    String uid ;
     String userdonationid;
     Task<DocumentSnapshot> task;
-    String id;
+    static String id;
     String payid;
+    int totalr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +61,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
         getIntents();
         AdsData();
         UserData();
-
+        AdsUserDonations();
 //        donateAsAnonymous.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -103,12 +108,15 @@ public class Donate_Payment_Method extends AppCompatActivity {
         visa = findViewById(R.id.visaradio);
         google = findViewById(R.id.googlewallet);
         paypal = findViewById(R.id.paypal);
+
+
         donateAsAnonymous = findViewById(R.id.anonymous_btn);
         reference = FirebaseFirestore.getInstance().collection("Advertising");
         userdonationid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         update = FirebaseFirestore.getInstance().collection("Users").
                 document(userdonationid).collection("Donation");
         progressDialog = new ProgressDialog(this);
+
     }
 
     public void AdsData() {
@@ -121,7 +129,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
                      totalremaining = documentSnapshot.getLong("remaining").intValue();
                     ads_title.setText(title);
                     Picasso.get().load(image).into(ads_image);
-
+                    total.setText(intExtra);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -192,8 +200,8 @@ public class Donate_Payment_Method extends AppCompatActivity {
         });
     }
         public void Donation(){
-            int total = Integer.parseInt(intExtra);
-            int remaining = totalremaining - total;
+            totalr = Integer.parseInt(intExtra);
+            int remaining = totalremaining - totalr;
 
             reference.document(id).update("remaining",remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -209,12 +217,33 @@ public class Donate_Payment_Method extends AppCompatActivity {
 
         }
 
+    public void AdsUserDonations(){
+        totalr = Integer.parseInt(intExtra);
+         int remaining = totalremaining - totalr;
+        userRef = FirebaseFirestore.getInstance().collection("Users")
+                .document(uid).collection("UserAds");
+        userRef.document(id).update("remaining",remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
         public void getIntents(){
         Intent intent = getIntent();
          id = intent.getStringExtra("id");
         userid = intent.getStringExtra("userid");
         intExtra = intent.getStringExtra("total");
         payid = intent.getStringExtra("payid");
+        uid = intent.getStringExtra("userAds");
         }
+
+
 }
 

@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.R;
+import com.graduatio.project.takaful.Service.MyFirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -37,6 +40,8 @@ public class SignUp extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView logText;
 
+  RadioButton Donors ;
+  RadioButton beneficiary ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +74,8 @@ public class SignUp extends AppCompatActivity {
                 } else {
                     Register(nametext, emailtext, passwordtext, phone_txt);
                     Toast.makeText(SignUp.this, "SingeUP Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUp.this, Login.class);
+                    Intent intent = new Intent(SignUp.this, HomeActivity.class);
+//                    startService(new Intent(SignUp.this, MyFirebaseMessaging.class));
                     startActivity(intent);
                 }
 
@@ -80,6 +86,8 @@ public class SignUp extends AppCompatActivity {
 
     public void setUpElement() {
         auth = FirebaseAuth.getInstance();
+        Donors = findViewById(R.id.Donors);
+        beneficiary = findViewById(R.id.beneficiary);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -98,20 +106,24 @@ public class SignUp extends AppCompatActivity {
         task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                if (authResult == null || authResult.getUser() == null) {
-                    return;
-                }
+
                 HashMap<String, Object> map = new HashMap<>();
-                map.put("name", name);
                 map.put("userId", FirebaseAuth.getInstance().getUid());
                 map.put("email", email);
-                map.put("firstName", "");
+                map.put("firstName", name);
                 map.put("lastName", "");
                 map.put("phone", phone);
                 map.put("password", password);
                 map.put("isHasCharity", false);
                 map.put("userImage", "");
-                map.put("role", "user");
+                map.put("isSuspend", false);
+                map.put("adsID","");
+                if (beneficiary.isChecked()){
+                    map.put("role", "beneficiary");
+
+                }else {
+                    map.put("role", "Donors");
+                }
                 map.put("payMethod", "");
                 map.put("isHasActivity", false);
                 reference.document(FirebaseAuth.getInstance().getUid()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
