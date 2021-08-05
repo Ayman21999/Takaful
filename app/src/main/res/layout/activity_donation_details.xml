@@ -58,32 +58,23 @@
         app:layout_constraintStart_toStartOf="@+id/titleadd"
         app:layout_constraintTop_toBottomOf="@+id/titleadd" />
 
-    <View
-        android:id="@+id/view11"
-        android:layout_width="0dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/edit_text_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/user_published"
-        app:layout_constraintTop_toBottomOf="@+id/user_published" />
 
-    <View
-        android:id="@+id/view12"
+    <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="0dp"
-        android:layout_height="10dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/button_shape"
-        app:layout_constraintBottom_toBottomOf="@+id/view11"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_background"
+        android:paddingTop="5dp"
+        android:progress="10"
+        android:progressBackgroundTintMode="screen"
+        android:progressTint="@color/background"
+        android:progressTintMode="src_atop"
+        android:thumb="@drawable/seekbar_designe"
+        app:layout_constraintEnd_toEndOf="@+id/titleadd"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/view11"
-        app:layout_constraintTop_toTopOf="@+id/view11"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/titleadd"
+        app:layout_constraintTop_toBottomOf="@+id/user_published" />
 
     <TextView
         android:id="@+id/textView34"
@@ -93,8 +84,8 @@
         android:text="Target : $"
         android:textColor="#A8A8A8"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/view11"
-        app:layout_constraintTop_toBottomOf="@+id/view12" />
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <TextView
                 android:id="@+id/target_number"
@@ -118,8 +109,7 @@
         android:textColor="#A8A8A8"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/target_number"
-        app:layout_constraintStart_toEndOf="@+id/target_number"
-        app:layout_constraintTop_toTopOf="@+id/target_number" />
+        app:layout_constraintStart_toEndOf="@+id/target_number" />
 
 
     <TextView
@@ -128,27 +118,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
         android:text="554"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/textView36"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toTopOf="@+id/textView36"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintStart_toEndOf="@+id/textView36" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Make learning possible for students of all ages, from pre-school to graduate school. They also provide other educational services and opportunities that help make schools more effective and more accessible to students of all backgrounds. "
         android:textColor="#A8A8A8"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/view14"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
         app:layout_constraintStart_toStartOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
 

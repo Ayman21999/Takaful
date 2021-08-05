@@ -50,6 +50,26 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
         Advertising advertising = advertisings.get(position);
         holder.title.setText(advertising.getTitle());
         Picasso.get().load(advertising.getImage()).into(holder.imageView);
+        int remeining  = advertising.getTarget()-advertising.getRemaining();
+        int percnt  = (remeining/1000)*10;
+//       holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//           @Override
+//           public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//
+//           }
+//
+//           @Override
+//           public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//           }
+//
+//           @Override
+//           public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//           }
+//       });
+        holder.seekBar.setProgress(percnt);
+        holder.percent.setText("(%"+percnt+")");
 //        holder.percent.setText(advertising.getRemaining() + "");
         holder.target.setText("$ "+advertising.getTarget());
 

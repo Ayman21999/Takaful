@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takaful"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Actvities.ShowBenefitsUsers"></activity>
         <activity android:name=".Actvities.RequestAds" />
         <activity android:name=".Actvities.Users_HasCharities" />
         <activity android:name=".Actvities.AddPAyPalActivity" />
@@ -37,8 +38,7 @@
         </activity>
         <activity android:name=".Actvities.ForgetPassowrd" />
         <activity android:name=".Actvities.SignUp" />
-        <activity android:name=".Actvities.Login" >
-
+        <activity android:name=".Actvities.Login">
 
         </activity>
         <activity android:name=".Actvities.LastAppBegging" />

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -31,12 +32,12 @@ public class AdminNotificationActivity extends AppCompatActivity {
     RecyclerView list;
     List<Advertising> advertisingList;
     AdminAdapter adminAdapter;
-    Advertising advertising;
     FirebaseFirestore firebaseFirestore;
     CollectionReference reference;
     int LIMIT_REQUEST = 10;
     boolean isLoading;
     Query query;
+
     ScrollListener scrollListener;
     DocumentSnapshot lastDocSnap;
 
@@ -50,6 +51,12 @@ public class AdminNotificationActivity extends AppCompatActivity {
         adminAdapter = new AdminAdapter(AdminNotificationActivity.this, advertisingList);
         list.setAdapter(adminAdapter);
         ReadAds(true);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void SetUpElement() {

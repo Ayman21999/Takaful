@@ -193,8 +193,7 @@ public class DonationFragment extends DialogFragment {
         parentView.setBackgroundColor(Color.TRANSPARENT);
 
             parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
-            Intent intent  = new Intent(getContext() , HomeActivity.class);
-            getActivity().startActivity(intent);
+
             bsd.dismiss();
 
         });

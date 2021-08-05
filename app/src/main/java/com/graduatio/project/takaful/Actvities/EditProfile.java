@@ -74,6 +74,7 @@ public class EditProfile extends AppCompatActivity {
     private final static int CAMERA_REQUEST_CODE = 1;
     boolean uploading = false;
     List<String> spinnerArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,17 +179,17 @@ public class EditProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-          /// GALLERY
-            if (requestCode == 2   && resultCode == RESULT_OK) {
-                imageUri = data.getData();
-                ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setMessage("Updating ....");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-                Picasso.get().load(imageUri).fit().into(userimage);
-                progressDialog.dismiss();
+        /// GALLERY
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            imageUri = data.getData();
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Updating ....");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            Picasso.get().load(imageUri).fit().into(userimage);
+            progressDialog.dismiss();
 //                UploadImage();
-            }
+        }
 
     }
 
@@ -242,14 +243,14 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
-    boolean checkPhoneNumber(String number, String code) {
-
-        final Phonenumber.PhoneNumber newNum = new Phonenumber.PhoneNumber();
-
-        newNum.setCountryCode(Integer.parseInt(code)).setNationalNumber(Long.parseLong(number));
-
-        return phoneNumberUtil.isValidNumber(newNum);
-    }
+//    boolean checkPhoneNumber(String number, String code) {
+//
+//        final Phonenumber.PhoneNumber newNum = new Phonenumber.PhoneNumber();
+//
+//        newNum.setCountryCode(Integer.parseInt(code)).setNationalNumber(Long.parseLong(number));
+//
+//        return phoneNumberUtil.isValidNumber(newNum);
+//    }
 
     public void SaveUpdatedDate() {
         String txt_fname = fname.getText().toString();
@@ -259,6 +260,8 @@ public class EditProfile extends AppCompatActivity {
         if (TextUtils.isEmpty(txt_fname)
                 || TextUtils.isEmpty(txt_lname) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_phone)) {
             Toast.makeText(EditProfile.this, "All field are required", Toast.LENGTH_SHORT).show();
+        } else if (!isValidMobile(txt_phone) && phone.length() > 6 && phone.length() <= 13) {
+            Toast.makeText(this, "Pleas insert valid phone number ", Toast.LENGTH_SHORT).show();
         } else {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Updating ....");
@@ -292,10 +295,15 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
+    private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
+
     public void OpenImage() {
         Intent intent = new Intent();
         intent.setType("image/");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 2);
 
-    }}
+    }
+}

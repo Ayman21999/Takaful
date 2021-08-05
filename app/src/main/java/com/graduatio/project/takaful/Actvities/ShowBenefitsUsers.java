@@ -1,69 +1,65 @@
-package com.graduatio.project.takaful.Fragments;
-
-import android.os.Bundle;
+package com.graduatio.project.takaful.Actvities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.graduatio.project.takaful.Adapter.DonationAdapter;
-import com.graduatio.project.takaful.Adapter.MyAdsAdapter;
+import com.graduatio.project.takaful.Adapter.AdsBenefitAdapter;
 import com.graduatio.project.takaful.Adapter.MyAdsDonation;
+import com.graduatio.project.takaful.Fragments.DonationFragment;
+import com.graduatio.project.takaful.Fragments.MyAdsDetailsFragment;
+import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.Model.Donations;
 import com.graduatio.project.takaful.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdsDetailsFragment extends DialogFragment {
+public class ShowBenefitsUsers extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    FirebaseFirestore firebaseFirestore;
-    CollectionReference collectionReference;
-    List<Donations> donations;
+    List<Advertising> advertisings;
     boolean isLoading;
     private PostsBottomScrollListener scrollListener;
     Query query;
-    MyAdsDonation adapter;
-    int donatoin_LIMIT = 10;
-    String adsID;
+    AdsBenefitAdapter adapter;
+    RecyclerView recyclerView;
     private DocumentSnapshot lastDocSnap;
+    ImageView back;
+    int donatoin_LIMIT = 10;
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-               Bundle bundle = this.getArguments();
-        adsID = bundle.getString("adsId");
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_ads_details, container, false);
-        recyclerView = view.findViewById(R.id.list);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        setContentView(R.layout.activity_show_benefits_users);
+        recyclerView = findViewById(R.id.list);
+        back = findViewById(R.id.back);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        donations = new ArrayList<>();
-        adapter = new MyAdsDonation(getContext(), donations);
+        advertisings = new ArrayList<>();
+        adapter = new AdsBenefitAdapter(ShowBenefitsUsers.this, advertisings);
+        Intent intent =getIntent();
+        String adsID = intent.getStringExtra("id");
         recyclerView.setAdapter(adapter);
         query = FirebaseFirestore.getInstance().
                 collection("Advertising")
                 .document(adsID)
-                .collection("DonationsAds");
+                .collection("Requests");
         ReadDonatoins(true);
-        return view;
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void ReadDonatoins(boolean isInitial) {
@@ -79,9 +75,9 @@ public class MyAdsDetailsFragment extends DialogFragment {
                         queryDocumentSnapshots.size() - 1
                 );
                 if (isInitial) {
-                    donations.addAll(queryDocumentSnapshots.toObjects(Donations.class));
+                    advertisings.addAll(queryDocumentSnapshots.toObjects(Advertising.class));
                 } else {
-                    donations.addAll(donations.size(), queryDocumentSnapshots.toObjects(Donations.class));
+                    advertisings.addAll(advertisings.size(), queryDocumentSnapshots.toObjects(Advertising.class));
                 }
             }
         }).addOnCompleteListener(task -> {
@@ -92,7 +88,7 @@ public class MyAdsDetailsFragment extends DialogFragment {
                 }
             } else {
                 final int resultSize = task.getResult().size();
-                adapter.notifyItemRangeInserted(donations.size() - resultSize, resultSize);
+                adapter.notifyItemRangeInserted(advertisings.size() - resultSize, resultSize);
                 if (resultSize < donatoin_LIMIT && scrollListener != null) {
                     recyclerView.removeOnScrollListener(scrollListener);
                 }
@@ -117,9 +113,5 @@ public class MyAdsDetailsFragment extends DialogFragment {
 
             }
         }
-    }
-
-    public static MyAdsDetailsFragment myAdsDetailsFragment() {
-        return new MyAdsDetailsFragment();
     }
 }

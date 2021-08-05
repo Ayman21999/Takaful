@@ -34,7 +34,7 @@ import com.graduatio.project.takaful.R;
 
 import java.util.Calendar;
 
-    public class RigsterStepTwoFragment extends DialogFragment {
+public class RigsterStepTwoFragment extends DialogFragment {
 
     EditText title, whoarebenefit, target, deadline;
     Button perv, next;
@@ -66,7 +66,7 @@ import java.util.Calendar;
         perv = view.findViewById(R.id.previous);
         next = view.findViewById(R.id.next);
         progressDialog = new ProgressDialog(getContext());
-        firebaseFirestore =FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         userRef = FirebaseFirestore.getInstance().collection("Users").document(userid).collection("UserAds");
@@ -87,9 +87,11 @@ import java.util.Calendar;
                 } else if (target_txt == 0) {
                     Toast.makeText(getContext(), "Pleas set your target", Toast.LENGTH_SHORT).show();
 
+                } else if (target_txt > 10000) {
+                    Toast.makeText(getContext(), "You Can't insert target larger than 10000", Toast.LENGTH_SHORT).show();
                 } else {
-                    UpdateUploadedData(title_txt, whoarebenefit_txt, target_txt , deaddate);
-                    UpdateUploadedDataforuer(title_txt,whoarebenefit_txt, target_txt , deaddate);
+                    UpdateUploadedData(title_txt, whoarebenefit_txt, target_txt, deaddate);
+                    UpdateUploadedDataforuer(title_txt, whoarebenefit_txt, target_txt, deaddate);
                     Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
                     DialogFragment fragment = LastStepFragment.lastStepFragment();
                     fragment.show(getChildFragmentManager(), "aa");
@@ -98,14 +100,13 @@ import java.util.Calendar;
                     fragment.setArguments(bundle);
 
                 }
-
             }
         });
         return view;
     }
 
 
-    public void UpdateUploadedData(String title, String forWhoDonate, int  target , int beginDate) {
+    public void UpdateUploadedData(String title, String forWhoDonate, int target, int beginDate) {
 
         progressDialog.show();
         progressDialog.setMessage("Updating...");
@@ -113,9 +114,9 @@ import java.util.Calendar;
                 .update("title", title,
                         "whoarebenefit",
                         forWhoDonate,
-                        "target", target ,
-                        "Daynumber",beginDate
-                        , "remaining" ,target)
+                        "target", target,
+                        "Daynumber", beginDate
+                        , "remaining", target)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -133,7 +134,7 @@ import java.util.Calendar;
     }
 
 
-    public void UpdateUploadedDataforuer(String title, String forWhoDonate, int  target , int beginDate) {
+    public void UpdateUploadedDataforuer(String title, String forWhoDonate, int target, int beginDate) {
 
         progressDialog.show();
         progressDialog.setMessage("Updating...");
@@ -143,9 +144,9 @@ import java.util.Calendar;
                 .update("title", title,
                         "whoarebenefit",
                         forWhoDonate,
-                        "target", target ,
-                        "Daynumber",beginDate
-                        , "remaining" ,target)
+                        "target", target,
+                        "Daynumber", beginDate
+                        , "remaining", target)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

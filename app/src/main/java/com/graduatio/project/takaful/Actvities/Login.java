@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity {
         forgetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this ,ForgetPassowrd.class);
+                Intent intent = new Intent(Login.this, ForgetPassowrd.class);
                 startActivity(intent);
             }
         });
@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this , SignUp.class);
+                Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
             }
         });
@@ -115,12 +115,12 @@ public class Login extends AppCompatActivity {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 finish();
-                String id =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         FirebaseFirestore.getInstance().collection("Users").document(id)
-                                .update("cloudMessagingToken",s).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .update("cloudMessagingToken", s).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
 
@@ -141,6 +141,32 @@ public class Login extends AppCompatActivity {
         });
 
     }
+//    public void verify() {
+//
+//        FirebaseUser user = auth.getCurrentUser();
+//
+//        if (user != null && user.isEmailVerified()) {
+//            verifyEmail.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Toast.makeText(Login.this,
+//                                    R.string.Email_Verfiy,
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(Login.this,
+//                                    "Email not sebt ", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                }
+//            });
+//        }
+//    }
 
 
 }

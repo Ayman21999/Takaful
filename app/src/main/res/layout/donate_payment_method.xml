@@ -28,13 +28,13 @@
         android:textSize="20sp"
         android:textColor="#000"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/back"
         android:gravity="center_horizontal" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/back"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
@@ -50,11 +50,10 @@
         android:id="@+id/ads_image"
         android:layout_width="109dp"
         android:layout_height="108dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/ic_user"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
-         />
+        app:layout_constraintStart_toStartOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/back" />
 
     <TextView
         android:id="@+id/ads_title"
@@ -230,5 +229,5 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.71" />
+        app:layout_constraintGuide_percent="0.78" />
 </androidx.constraintlayout.widget.ConstraintLayout>

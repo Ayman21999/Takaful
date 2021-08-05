@@ -83,7 +83,7 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
                 progressDialog.show();
                 userref.document(userid).update("isBlocked", true,
                         "isSuspend", true,
-                        "isHasActivity",false)
+                        "isHasCharity",false)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

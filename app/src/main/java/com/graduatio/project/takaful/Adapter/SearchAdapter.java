@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,7 +54,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
     public void onBindViewHolder(@NonNull SearchHoleder holder, int position) {
         Advertising advertising = filterads.get(position);
         holder.title.setText(advertising.getTitle());
-
+        int remeining  = advertising.getTarget()-advertising.getRemaining();
+        int percnt  = (remeining/1000)*10;
+        holder.seekBar.setProgress(percnt);
+        holder.percent.setText(percnt+"%");
         reference.document(advertising.getUserId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -62,7 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
             }
         });
         holder.remingin.setText(advertising.getRemaining()+"");
-        holder.dayleft.setText(advertising.getDaynumber()+"");
+        holder.dayleft.setText(advertising.getDaynumber()+"Day left");
         Picasso.get().load(advertising.getImage()).into(holder.ad_image);
         holder.ad_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +97,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
 
         ImageView ad_image;
         TextView title,usernamePublished,remingin,dayleft,percent;
-
+        SeekBar seekBar ;
         public SearchHoleder(@NonNull View itemView) {
             super(itemView);
 
@@ -103,6 +107,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
             remingin = itemView.findViewById(R.id.remenig);
             dayleft = itemView.findViewById(R.id.dayleft);
             percent = itemView.findViewById(R.id.percnet);
+            seekBar = itemView.findViewById(R.id.seekBar);
 
 
         }

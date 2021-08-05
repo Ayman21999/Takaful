@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,11 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.MyAdsHolder>
         holder.traget.setText(advertising.getTarget()+"");
         holder.rimining.setText(advertising.getRemaining()+"");
         Picasso.get().load(advertising.getImage()).into(holder.imageView);
+
+        int remeining  = advertising.getTarget()-advertising.getRemaining();
+        int percnt  = (remeining/1000)*10;
+        holder.progressBar.setProgress(percnt);
+        holder.percent.setText(percnt+"%");
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,14 +76,17 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.MyAdsHolder>
     }
 
     public class MyAdsHolder extends RecyclerView.ViewHolder {
-        TextView rimining,traget,title;
+        TextView rimining,traget,title,percent;
         ImageView imageView ;
+        ProgressBar progressBar;
         public MyAdsHolder(@NonNull View itemView) {
             super(itemView);
             rimining = itemView.findViewById(R.id.ads_riming);
             traget = itemView.findViewById(R.id.ads_trage);
             title = itemView.findViewById(R.id.title);
             imageView = itemView.findViewById(R.id.ads_image);
+            percent = itemView.findViewById(R.id.percent);
+            progressBar = itemView.findViewById(R.id.progress);
 
         }
     }

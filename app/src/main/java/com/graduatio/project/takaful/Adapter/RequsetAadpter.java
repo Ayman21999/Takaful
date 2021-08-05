@@ -56,8 +56,11 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
                 String name = documentSnapshot.getString("firstName");
                 String image = documentSnapshot.getString("userImage");
                 holder.name.setText(name);
-                Picasso.get().load(image).into(holder.image);
-
+//                if (image.equals("")){
+//                    Toast.makeText(context, "null iamge", Toast.LENGTH_SHORT).show();
+//                }
+//                Picasso.get().load(image).into(holder.image);
+//
             }
         });
         collectionReference.document(advertising.getAdd_ID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -82,7 +85,10 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
                         Toast.makeText(context, "Successful accepted request", Toast.LENGTH_SHORT).show();
                         CloudMessagingNotificationsSender.Data data =
                                 new CloudMessagingNotificationsSender.Data
-                                        ("ss", "asd", "asd", "ds", "Asd", 55);
+                                        (FirebaseAuth.getInstance().getCurrentUser().getUid()
+                                                , "Message ",
+                                                "Your request is Accepted please contact us to get your money ",
+                                                "", advertising.getUserId(), 55);
 
                         CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(), data);
                     }

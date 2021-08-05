@@ -71,39 +71,30 @@
         app:layout_constraintTop_toTopOf="@+id/dayleft"
         app:layout_constraintVertical_bias="0.0" />
 
-    <View
-        android:id="@+id/complete"
+    <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="0dp"
-        android:layout_height="10dp"
+        android:layout_height="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/edit_text_background"
+        android:backgroundTintMode="add"
+        android:progress="50"
+        android:progressTint="@color/background"
+        android:thumb="@drawable/seekbar_designe"
+        android:thumbTintMode="src_over"
         app:layout_constraintEnd_toStartOf="@+id/percnet"
         app:layout_constraintStart_toStartOf="@+id/dayleft"
-        app:layout_constraintTop_toBottomOf="@+id/remenig" />
-
-    <View
-        android:id="@+id/view44"
-        android:layout_width="0dp"
-        android:layout_height="10dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@drawable/edit_text_background"
-        android:backgroundTint="@color/background"
-        app:layout_constraintBottom_toBottomOf="@+id/complete"
-        app:layout_constraintEnd_toEndOf="@+id/complete"
-        app:layout_constraintStart_toStartOf="@+id/complete"
-        app:layout_constraintTop_toTopOf="@+id/complete" />
+        app:layout_constraintTop_toBottomOf="@+id/dayleft" />
 
     <TextView
         android:id="@+id/percnet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:text="75%"
         android:textColor="#A8A8A8"
-        app:layout_constraintBottom_toBottomOf="@+id/complete"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="@+id/remenig"
-        app:layout_constraintStart_toEndOf="@+id/complete"
-        app:layout_constraintTop_toTopOf="@+id/complete" />
+        app:layout_constraintTop_toTopOf="@+id/seekBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

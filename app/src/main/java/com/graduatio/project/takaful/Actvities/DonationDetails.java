@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.graduatio.project.takaful.Fragments.LastStepFragment;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.Model.Donations;
 import com.graduatio.project.takaful.R;
+import com.graduatio.project.takaful.Service.CloudMessagingNotificationsSender;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -42,7 +44,7 @@ public class DonationDetails extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore,dFirebaseFirestore;
     ImageView ad_image;
     TextView targetnumber, desc, userPublisher, daynum, rimeing, title;
-    Button donate,make_request;
+    Button donate,make_request,showBenefits;
     Advertising advertising;
     CollectionReference dreference,userRef,adsUserDonations,reference;
     static String total;
@@ -52,6 +54,7 @@ public class DonationDetails extends AppCompatActivity {
     ProgressDialog progressDialog;
     String userdasid,userpublisher,role,userid;
     String donationtotal ;
+    SeekBar seekBar ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +84,28 @@ public class DonationDetails extends AppCompatActivity {
                make_request.setVisibility(View.INVISIBLE);
                progressDialog.dismiss();
 
-           }else {
+           }else if (role.equals("Admin")){
                progressDialog.dismiss();
+               showBenefits.setVisibility(View.VISIBLE);
+               make_request.setVisibility(View.INVISIBLE);
+               donate.setVisibility(View.INVISIBLE);
+
+
+           }else {
+               Toast.makeText(DonationDetails.this, "Nulll", Toast.LENGTH_SHORT).show();
            }
             }
         });
         Toast.makeText(this, "Ads ID:: " + donerid, Toast.LENGTH_SHORT).show();
         Log.d("tt", "Doner ID" + donerid);
+        showBenefits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DonationDetails.this , ShowBenefitsUsers.class);
+                intent.putExtra("id",adsId);
+                startActivity(intent);
+            }
+        });
     }
 
     public void SetUpElement() {
@@ -110,7 +128,9 @@ public class DonationDetails extends AppCompatActivity {
         rimeing = findViewById(R.id.remining_number);
         donate = findViewById(R.id.donate_bttn);
         title = findViewById(R.id.titleadd);
+        seekBar = findViewById(R.id.seekBar);
         userRef = FirebaseFirestore.getInstance().collection("Users");
+        showBenefits = findViewById(R.id.adimn_btn);
 
     }
 
@@ -148,6 +168,9 @@ public class DonationDetails extends AppCompatActivity {
                     Picasso.get().load(advertising.getImage()).into(ad_image);
                     rimeing.setText("" + advertising.getRemaining());
                     daynum.setText("Day left" + advertising.getDaynumber());
+                    int remeining  = advertising.getTarget()-advertising.getRemaining();
+                    int percnt  = (remeining/1000)*10;
+                    seekBar.setProgress(percnt);
 
                 }
 
@@ -251,7 +274,6 @@ public class DonationDetails extends AppCompatActivity {
         bsd.show();
     }
 
-
     private void MakeRequestNumber() {
         final BottomSheetDialog bsd = new BottomSheetDialog(DonationDetails.this, R.style.SheetDialog);
         final View parentView = getLayoutInflater().inflate(R.layout.bottom_sheet_number, null);
@@ -266,6 +288,11 @@ public class DonationDetails extends AppCompatActivity {
                 Toast.makeText(this, "Pleas insert number", Toast.LENGTH_SHORT).show();
             } else {
                 MakeRequest(donationtotal);
+                CloudMessagingNotificationsSender.Data data =
+                new CloudMessagingNotificationsSender.Data
+                        (userid,"Request","New Request"
+                                ,"ds",advertising.getUserId(),55);
+        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),data);
                 bsd.dismiss();
             }
 
@@ -277,6 +304,7 @@ public class DonationDetails extends AppCompatActivity {
         bsd.setContentView(parentView);
         bsd.show();
     }
+
     public void DonationRef(String total) {
         String did = UUID.randomUUID().toString();
         if (adsId.equals(null)&& total.isEmpty()){

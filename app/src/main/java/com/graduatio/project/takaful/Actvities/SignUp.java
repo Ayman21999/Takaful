@@ -71,10 +71,13 @@ public class SignUp extends AppCompatActivity {
                 } else if (phone_txt.isEmpty() && phone_txt.equals(" ")) {
                     Toast.makeText(SignUp.this, "Please fill the Your  Phone Number ", Toast.LENGTH_SHORT).show();
 
-                } else {
+                } else if (!isValidMobile(phone_txt)|| phone_txt.length() > 6 && phone_txt.length() <= 13){
+                    Toast.makeText(SignUp.this, "Pleas insert Valid Phone number ", Toast.LENGTH_SHORT).show();
+                }else {
                     Register(nametext, emailtext, passwordtext, phone_txt);
                     Toast.makeText(SignUp.this, "SingeUP Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUp.this, HomeActivity.class);
+                    Intent intent = new Intent(SignUp.this, Login.class);
+//                    verify();
 //                    startService(new Intent(SignUp.this, MyFirebaseMessaging.class));
                     startActivity(intent);
                 }
@@ -117,7 +120,9 @@ public class SignUp extends AppCompatActivity {
                 map.put("isHasCharity", false);
                 map.put("userImage", "");
                 map.put("isSuspend", false);
+                map.put("isBlocked", false);
                 map.put("adsID","");
+                map.put("isVerified",false);
                 if (beneficiary.isChecked()){
                     map.put("role", "beneficiary");
 
@@ -151,4 +156,32 @@ public class SignUp extends AppCompatActivity {
         });
 
     }
+
+        public void verify() {
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null && user.isEmailVerified()) {
+                user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(SignUp.this, "pleas check your email to verify your account ", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("ttt",e.getMessage());
+                    }
+                });
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        auth.signOut();
+    }
+    private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
+
 }

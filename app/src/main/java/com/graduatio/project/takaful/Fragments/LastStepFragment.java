@@ -49,11 +49,11 @@ import static android.app.Activity.RESULT_OK;
 
 public class LastStepFragment extends DialogFragment {
 
-    ImageView add_image,ads_image;
+    ImageView add_image, ads_image;
     Button publish;
-    EditText phonenumber ,desc;
+    EditText phonenumber, desc;
     FirebaseFirestore firebaseFirestore;
-    String image_url,cameraImageFilePath;
+    String image_url, cameraImageFilePath;
     FirebaseStorage storage;
     boolean isUploading;
     private Uri filePath;
@@ -66,9 +66,9 @@ public class LastStepFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.FullScreenDialogTheme);
-        Bundle bundle = this.getArguments() ;
-       adsid =  bundle.getString("adsid");
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogTheme);
+        Bundle bundle = this.getArguments();
+        adsid = bundle.getString("adsid");
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     }
@@ -90,7 +90,7 @@ public class LastStepFragment extends DialogFragment {
         add_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               SelectImage(getContext());
+                SelectImage(getContext());
             }
         });
 
@@ -104,12 +104,14 @@ public class LastStepFragment extends DialogFragment {
                 } else if (phone.isEmpty()) {
                     Toast.makeText(getContext(), "Pleas Add Phone Number", Toast.LENGTH_SHORT).show();
 
+                } else if (!isValidMobile(phone) && phone.length() > 6 && phone.length() <= 13) {
+                    Toast.makeText(getContext(), "Pleas insert valid phone number", Toast.LENGTH_SHORT).show();
                 } else if (desc_txt.isEmpty()) {
                     Toast.makeText(getContext(), "Pleas Add description", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    UpdateUploadedData(image_url ,desc_txt ,  phone);
-                    UpdateUploadedDataforuser(image_url ,desc_txt ,  phone);
+                    UpdateUploadedData(image_url, desc_txt, phone);
+                    UpdateUploadedDataforuser(image_url, desc_txt, phone);
                     showPostOptionsBottomSheet();
 
                 }
@@ -121,7 +123,7 @@ public class LastStepFragment extends DialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2   && resultCode == RESULT_OK) {
+        if (requestCode == 2 && resultCode == RESULT_OK) {
             /// GALLERY
             isUploading = true;
             filePath = data.getData();
@@ -148,17 +150,17 @@ public class LastStepFragment extends DialogFragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("aa","Errrrrrrrrrrrrrrrrrrrrrrror"+ e.getMessage());
+                    Log.d("aa", "Errrrrrrrrrrrrrrrrrrrrrrror" + e.getMessage());
                 }
             });
         }
     }
 
-    public void UpdateUploadedData(String img ,String desc , String phone) {
+    public void UpdateUploadedData(String img, String desc, String phone) {
         mProgressDialog.show();
         mProgressDialog.setMessage("Updating...");
         firebaseFirestore.collection("Advertising")
-                .document(adsid).update("description",desc ,"image",img , "userphone",phone)
+                .document(adsid).update("description", desc, "image", img, "userphone", phone)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -168,16 +170,17 @@ public class LastStepFragment extends DialogFragment {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Tag",e.getLocalizedMessage());
-                Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Tag", e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 mProgressDialog.dismiss();
             }
         });
     }
-    public void UpdateUploadedDataforuser(String img ,String desc , String phone) {
+
+    public void UpdateUploadedDataforuser(String img, String desc, String phone) {
         mProgressDialog.show();
         mProgressDialog.setMessage("Updating...");
-        userRef.document(adsid).update("description",desc ,"image",img , "userphone",phone)
+        userRef.document(adsid).update("description", desc, "image", img, "userphone", phone)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -187,8 +190,8 @@ public class LastStepFragment extends DialogFragment {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Tag",e.getLocalizedMessage());
-                Toast.makeText(getContext(), "Error : "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Tag", e.getLocalizedMessage());
+                Toast.makeText(getContext(), "Error : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 mProgressDialog.dismiss();
             }
         });
@@ -196,13 +199,14 @@ public class LastStepFragment extends DialogFragment {
 
     public void SelectImage(Context context) {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                OpenImage();
+            OpenImage();
         } else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
 
         }
 
     }
+
     public void OpenImage() {
         Intent intent = new Intent();
         intent.setType("image/");
@@ -210,23 +214,28 @@ public class LastStepFragment extends DialogFragment {
         startActivityForResult(intent, 2);
 
     }
-    public static LastStepFragment lastStepFragment(){
+
+    public static LastStepFragment lastStepFragment() {
         return new LastStepFragment();
     }
-        private void showPostOptionsBottomSheet() {
 
-            final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
-            final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet, null);
-            parentView.setBackgroundColor(Color.TRANSPARENT);
+    private void showPostOptionsBottomSheet() {
 
-            parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
-               Intent intent  = new Intent(getContext() , HomeActivity.class);
-               getActivity().startActivity(intent);
-                bsd.dismiss();
+        final BottomSheetDialog bsd = new BottomSheetDialog(getContext(), R.style.SheetDialog);
+        final View parentView = getLayoutInflater().inflate(R.layout.success_bottomsheet, null);
+        parentView.setBackgroundColor(Color.TRANSPARENT);
 
-            });
-            bsd.setContentView(parentView);
-            bsd.show();
-        }
+        parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), HomeActivity.class);
+            getActivity().startActivity(intent);
+            bsd.dismiss();
 
+        });
+        bsd.setContentView(parentView);
+        bsd.show();
+    }
+
+    private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
 }

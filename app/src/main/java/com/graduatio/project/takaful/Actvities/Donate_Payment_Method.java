@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.graduatio.project.takaful.Model.User;
 import com.graduatio.project.takaful.R;
+import com.graduatio.project.takaful.Service.CloudMessagingNotificationsSender;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -33,21 +34,17 @@ import java.util.UUID;
 
 public class Donate_Payment_Method extends AppCompatActivity {
 
-    ImageView ads_image;
+    ImageView ads_image, back;
     TextView ads_title, ads_userpublisher, total;
     Button donate, donateAsAnonymous;
     CollectionReference reference;
-    Intent intent;
     CollectionReference userRef;
-    RadioButton visa,google,paypal;
+    RadioButton visa, google, paypal;
     CollectionReference update;
-    ProgressDialog progressDialog ;
+    ProgressDialog progressDialog;
     String intExtra;
     int totalremaining;
-    String  paymethod = "";
-    String userid ;
-    String uid ;
-    String userdonationid;
+    String paymethod = "", userid, uid, userdonationid;
     Task<DocumentSnapshot> task;
     static String id;
     String payid;
@@ -74,25 +71,31 @@ public class Donate_Payment_Method extends AppCompatActivity {
 //
 //            }
 //        });
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (visa.isChecked()){
-                       paymethod ="Visa";
-                }else if (paypal.isChecked()){
-                    paymethod ="Paypal";
+                if (visa.isChecked()) {
+                    paymethod = "Visa";
+                } else if (paypal.isChecked()) {
+                    paymethod = "Paypal";
 
-                }else if (google.isChecked()){
-                    paymethod ="Google Wallet";
+                } else if (google.isChecked()) {
+                    paymethod = "Google Wallet";
 
                 }
-                    if (paymethod.isEmpty()){
-                        Toast.makeText(Donate_Payment_Method.this, "Pleas your Method", Toast.LENGTH_SHORT).show();
-                    }else {
-                        UpdaateDate(paymethod);
-                        Donation();
-
-                    }
+                if (paymethod.isEmpty()) {
+                    Toast.makeText(Donate_Payment_Method.this, "Pleas your Method", Toast.LENGTH_SHORT).show();
+                } else {
+                    UpdaateDate(paymethod);
+                    Donation();
+                }
 
 
             }
@@ -108,7 +111,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
         visa = findViewById(R.id.visaradio);
         google = findViewById(R.id.googlewallet);
         paypal = findViewById(R.id.paypal);
-
+        back = findViewById(R.id.back);
 
         donateAsAnonymous = findViewById(R.id.anonymous_btn);
         reference = FirebaseFirestore.getInstance().collection("Advertising");
@@ -120,43 +123,43 @@ public class Donate_Payment_Method extends AppCompatActivity {
     }
 
     public void AdsData() {
-            reference.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    String title = documentSnapshot.getString("title");
-                    String image = documentSnapshot.getString("image");
+        reference.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String title = documentSnapshot.getString("title");
+                String image = documentSnapshot.getString("image");
 
-                     totalremaining = documentSnapshot.getLong("remaining").intValue();
-                    ads_title.setText(title);
-                    Picasso.get().load(image).into(ads_image);
-                    total.setText(intExtra);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                totalremaining = documentSnapshot.getLong("remaining").intValue();
+                ads_title.setText(title);
+                Picasso.get().load(image).into(ads_image);
+                total.setText(intExtra);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
     public void UserData() {
 
-            task = FirebaseFirestore.getInstance().collection("Users")
-                    .document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            String usernare = documentSnapshot.getString("firstName");
-                            ads_userpublisher.setText("By :" + usernare);
+        task = FirebaseFirestore.getInstance().collection("Users")
+                .document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String usernare = documentSnapshot.getString("firstName");
+                        ads_userpublisher.setText("By :" + usernare);
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                    }
+                });
 
     }
 
@@ -168,7 +171,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
         parentView.setBackgroundColor(Color.TRANSPARENT);
 
         parentView.findViewById(R.id.home_btn).setOnClickListener(view -> {
-            Intent intent  = new Intent(this , HomeActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             bsd.dismiss();
 
@@ -189,40 +192,27 @@ public class Donate_Payment_Method extends AppCompatActivity {
 //                });
 //            }
 
-    public void UpdaateDate(String paymethod){
+    public void UpdaateDate(String paymethod) {
 
-        update.document(payid).update("paymethod",paymethod).addOnSuccessListener(new OnSuccessListener<Void>() {
+        update.document(payid).update("paymethod", paymethod).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                CloudMessagingNotificationsSender.Data data =
+                        new CloudMessagingNotificationsSender.Data
+                                (userid, "Request", "New Request"
+                                        , "ds", uid, 55);
+                CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(), data);
                 showPostOptionsBottomSheet();
 
             }
         });
     }
-        public void Donation(){
-            totalr = Integer.parseInt(intExtra);
-            int remaining = totalremaining - totalr;
 
-            reference.document(id).update("remaining",remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-        }
-
-    public void AdsUserDonations(){
+    public void Donation() {
         totalr = Integer.parseInt(intExtra);
-         int remaining = totalremaining - totalr;
-        userRef = FirebaseFirestore.getInstance().collection("Users")
-                .document(uid).collection("UserAds");
-        userRef.document(id).update("remaining",remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
+        int remaining = totalremaining - totalr;
+
+        reference.document(id).update("remaining", remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
             }
@@ -235,14 +225,34 @@ public class Donate_Payment_Method extends AppCompatActivity {
         });
 
     }
-        public void getIntents(){
+
+    public void AdsUserDonations() {
+        totalr = Integer.parseInt(intExtra);
+        int remaining = totalremaining - totalr;
+        userRef = FirebaseFirestore.getInstance().collection("Users")
+                .document(uid).collection("UserAds");
+        userRef.document(id).update("remaining", remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public void getIntents() {
         Intent intent = getIntent();
-         id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
         userid = intent.getStringExtra("userid");
         intExtra = intent.getStringExtra("total");
         payid = intent.getStringExtra("payid");
         uid = intent.getStringExtra("userAds");
-        }
+    }
 
 
 }
