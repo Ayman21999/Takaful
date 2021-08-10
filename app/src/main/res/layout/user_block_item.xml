@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/reject_btn"
-        android:text="Block user"
+        android:text="@string/block_user"
 
         android:textAllCaps="false"
         android:textColor="#fff"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/accept_brn"
-        android:text="Active User"
+        android:text="@string/active_user"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:visibility="visible"

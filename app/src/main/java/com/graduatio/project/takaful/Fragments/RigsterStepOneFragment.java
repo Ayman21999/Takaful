@@ -75,15 +75,15 @@ public class RigsterStepOneFragment extends DialogFragment {
              address_txt = address.getText().toString();
              name_of_Inv_txt = job.getText().toString();
                 if (job_txt.isEmpty() && !job_txt.trim().equals(" ")) {
-                    Toast.makeText(getContext(), "Pleas Fill Your Profession", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),getString(R.string.emptProg), Toast.LENGTH_SHORT).show();
                 } else if (name_of_Inv_txt.isEmpty() && !name_of_Inv_txt.trim().equals(" ")) {
-                    Toast.makeText(getContext(), "Pleas Fill Name of Institution", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.fillInstitutiom), Toast.LENGTH_SHORT).show();
 
                 } else if (media_txt.isEmpty() && !media_txt.trim().equals(" ")) {
-                    Toast.makeText(getContext(), "Pleas Fill Social Media Account", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.socialAccount), Toast.LENGTH_SHORT).show();
 
                 } else if (address_txt.isEmpty() && !address_txt.trim().equals(" ")) {
-                    Toast.makeText(getContext(), "Pleas Fill Your Address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.fillAdresss), Toast.LENGTH_SHORT).show();
 
                 } else {
                     UpdateUploadedData(job_txt,name_of_Inv_txt,media_txt,address_txt);
@@ -109,7 +109,7 @@ public class RigsterStepOneFragment extends DialogFragment {
                             "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.success), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -125,13 +125,13 @@ public class RigsterStepOneFragment extends DialogFragment {
     public void UpdateUploadedDataforuser   (String job ,String nameOfCharity,String mediaAccount,String address) {
 
         progressDialog.show();
-        progressDialog.setMessage("Updating...");
+        progressDialog.setMessage(getString(R.string.update));
         userRef.document(Adsid)
                 .update("job",job, "name_of_Charity", nameOfCharity ,
                         "media_account",mediaAccount , "address",address).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.success), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {

@@ -130,7 +130,7 @@ public class SelectTypeCharityFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (typeOfAdd.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas select your add type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.addtype), Toast.LENGTH_SHORT).show();
                 } else {
 
                     CreateAdd(typeOfAdd);
@@ -161,12 +161,12 @@ public class SelectTypeCharityFragment extends DialogFragment {
         hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
         hashMap.put("Daynumber", 0);
         hashMap.put("isRejected", true);
-        progressDialog.setMessage("Loading ...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         reference.document(adsid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getString(R.string.next), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -201,12 +201,12 @@ public class SelectTypeCharityFragment extends DialogFragment {
         hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
         hashMap.put("Daynumber", 0);
         hashMap.put("isRejected", true);
-        progressDialog.setMessage("Loading ...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         userRef.document(adsid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.next), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {

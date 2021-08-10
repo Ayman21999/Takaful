@@ -91,7 +91,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
 
                 }
                 if (paymethod.isEmpty()) {
-                    Toast.makeText(Donate_Payment_Method.this, "Pleas your Method", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Donate_Payment_Method.this, getString(R.string.addMethod), Toast.LENGTH_SHORT).show();
                 } else {
                     UpdaateDate(paymethod);
                     Donation();

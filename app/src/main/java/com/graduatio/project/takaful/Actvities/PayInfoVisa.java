@@ -47,19 +47,19 @@ public class PayInfoVisa extends AppCompatActivity {
                 String end_txt = start.getText()+"";
 
                 if (card_txt.length() < 12) {
-                    Toast.makeText(PayInfoVisa.this, "Please the card number  must be 12 number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this,getString( R.string.validcard), Toast.LENGTH_SHORT).show();
 
                 } else if (card_txt.isEmpty()) {
-                    Toast.makeText(PayInfoVisa.this, "Please write your card number ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, getString(R.string.emptycardnumber), Toast.LENGTH_SHORT).show();
 
                 } else if (cvvCode_txt.length() < 4) {
-                    Toast.makeText(PayInfoVisa.this, "Please the CVV Code must be 4 number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, getString(R.string.validCvv), Toast.LENGTH_SHORT).show();
 
                 } else if (cvvCode_txt.isEmpty()) {
-                    Toast.makeText(PayInfoVisa.this, "Please write your CVV Code ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, getString(R.string.emtpyCvvv), Toast.LENGTH_SHORT).show();
 
                 } else if (date_txt.isEmpty()) {
-                    Toast.makeText(PayInfoVisa.this, "Please set end date for your card ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayInfoVisa.this, getString(R.string.carddate), Toast.LENGTH_SHORT).show();
 
                 } else {
                     AddMethod(card_txt, cvvCode_txt, date_txt,end_txt);
@@ -99,7 +99,7 @@ public class PayInfoVisa extends AppCompatActivity {
         collectionReference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(PayInfoVisa.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PayInfoVisa.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(PayInfoVisa.this ,EditPaymentMethod.class);
                 progressDialog.dismiss();
                 startActivity(intent);

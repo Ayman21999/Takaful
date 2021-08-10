@@ -64,13 +64,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="Donation" />
+                android:text="@string/donation" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/charity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Charity" />
+                android:text="@string/my_charity" />
 
         </com.google.android.material.tabs.TabLayout>
 

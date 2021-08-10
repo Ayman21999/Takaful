@@ -52,7 +52,7 @@ public class  ProfileFragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         User[] user = new User[1];
 
-        progressDialog.setMessage("Loading ...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         FirebaseFirestore.getInstance().collection("Users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
@@ -72,7 +72,7 @@ public class  ProfileFragment extends Fragment {
                     paymethod.setText(user[0].getPayMethod());
 
                     if (user[0].getUserImage().isEmpty()) {
-                        Toast.makeText(getContext(), "Empty Image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.EmptyImage), Toast.LENGTH_SHORT).show();
                     } else {
                         Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
 

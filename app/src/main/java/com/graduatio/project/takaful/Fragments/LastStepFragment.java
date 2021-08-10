@@ -1,4 +1,4 @@
-package com.graduatio.project.takaful.Fragments;
+ package com.graduatio.project.takaful.Fragments;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -100,14 +100,14 @@ public class LastStepFragment extends DialogFragment {
                 String phone = phonenumber.getText().toString();
                 String desc_txt = desc.getText().toString();
                 if (image_url.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas Add Image for your Advertising", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.pickImage), Toast.LENGTH_SHORT).show();
                 } else if (phone.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas Add Phone Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.phoneEmpty), Toast.LENGTH_SHORT).show();
 
                 } else if (!isValidMobile(phone) && phone.length() > 6 && phone.length() <= 13) {
-                    Toast.makeText(getContext(), "Pleas insert valid phone number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.validphone), Toast.LENGTH_SHORT).show();
                 } else if (desc_txt.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas Add description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.addDecs), Toast.LENGTH_SHORT).show();
 
                 } else {
                     UpdateUploadedData(image_url, desc_txt, phone);
@@ -127,7 +127,7 @@ public class LastStepFragment extends DialogFragment {
             /// GALLERY
             isUploading = true;
             filePath = data.getData();
-            mProgressDialog.setMessage("Uploading ....");
+            mProgressDialog.setMessage(getString(R.string.Uploading));
             mProgressDialog.show();
             sreference = FirebaseStorage.getInstance().getReference().child("Ads_img/" + UUID.randomUUID().toString());
             sreference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -144,7 +144,7 @@ public class LastStepFragment extends DialogFragment {
                             Toast.makeText(getContext(), image_url, Toast.LENGTH_SHORT).show();
                         }
                     });
-                    Toast.makeText(getContext(), "Upload Finish", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.UploadFinish), Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -164,7 +164,7 @@ public class LastStepFragment extends DialogFragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.success), Toast.LENGTH_SHORT).show();
                         mProgressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -179,12 +179,12 @@ public class LastStepFragment extends DialogFragment {
 
     public void UpdateUploadedDataforuser(String img, String desc, String phone) {
         mProgressDialog.show();
-        mProgressDialog.setMessage("Updating...");
+        mProgressDialog.setMessage(getString(R.string.update));
         userRef.document(adsid).update("description", desc, "image", img, "userphone", phone)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.success), Toast.LENGTH_SHORT).show();
                         mProgressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

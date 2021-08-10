@@ -1,10 +1,13 @@
 package com.graduatio.project.takaful.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,15 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.graduatio.project.takaful.Actvities.DonationDetails;
+import com.graduatio.project.takaful.Actvities.UserInformation;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.R;
 import com.graduatio.project.takaful.Service.CloudMessagingNotificationsSender;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestVH> {
@@ -31,6 +38,9 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
     Context context;
     CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Advertising");
     CollectionReference userRef = FirebaseFirestore.getInstance().collection("Users");
+    String donationtotal;
+    String userid;
+    String ads_id;
 
     public RequsetAadpter(Context context, List<Advertising> advertisings) {
         this.context = context;
@@ -40,7 +50,8 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
     @NonNull
     @Override
     public RequestVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.request_item_donatios, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.request_item_donatios,
+                parent, false);
 
         return new RequsetAadpter.RequestVH(view);
 
@@ -50,20 +61,23 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
     public void onBindViewHolder(@NonNull RequestVH holder, int position) {
         Advertising advertising = advertisings.get(position);
 //        String id =FirebaseAuth.getInstance().getCurrentUser().getUid();
-        userRef.document(advertising.getUserId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        userid = advertising.getUserId();
+        ads_id = advertising.getAdd_ID();
+        userRef.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String name = documentSnapshot.getString("firstName");
                 String image = documentSnapshot.getString("userImage");
                 holder.name.setText(name);
-//                if (image.equals("")){
-//                    Toast.makeText(context, "null iamge", Toast.LENGTH_SHORT).show();
+//                if (image.equals("")) {
+//                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
 //                }
 //                Picasso.get().load(image).into(holder.image);
-//
+
             }
         });
-        collectionReference.document(advertising.getAdd_ID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        collectionReference.document(ads_id).
+                get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String title = documentSnapshot.getString("title");
@@ -73,31 +87,20 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
         });
         holder.total.setText("$" + advertising.getTotal());
 
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(context, UserInformation.class);
+                intent.putExtra("id",userid);
+                context.startActivity(intent);
+            }
+        });
 
         holder.donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                collectionReference.document(advertising.getAdd_ID())
-                        .collection("Requests").document(advertising.getUserId())
-                        .update("donated", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Successful accepted request", Toast.LENGTH_SHORT).show();
-                        CloudMessagingNotificationsSender.Data data =
-                                new CloudMessagingNotificationsSender.Data
-                                        (FirebaseAuth.getInstance().getCurrentUser().getUid()
-                                                , "Message ",
-                                                "Your request is Accepted please contact us to get your money ",
-                                                "", advertising.getUserId(), 55);
+                MakeRequestNumber();
 
-                        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(), data);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
             }
         });
 
@@ -109,7 +112,7 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
                         .update("isdeleted", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Deleted request", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.deleteReq), Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -120,6 +123,8 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
 
             }
         });
+
+
     }
 
     @Override
@@ -144,4 +149,66 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
 
         }
     }
+
+    public void MakeRequestNumber() {
+        final BottomSheetDialog bsd = new BottomSheetDialog(context, R.style.SheetDialog);
+        final View parentView = LayoutInflater.from(context).
+                inflate(R.layout.bottom_sheet_number, null, false);
+        parentView.setBackgroundColor(Color.TRANSPARENT);
+        EditText number = parentView.findViewById(R.id.number);
+
+        parentView.findViewById(R.id.donate_btn).setOnClickListener(view -> {
+            donationtotal = number.getText() + "";
+            if (donationtotal.isEmpty() && donationtotal.equals("")) {
+
+                Toast.makeText(context, context.getString(R.string.emptynumber), Toast.LENGTH_SHORT).show();
+            } else {
+                MakeRequest(donationtotal);
+                bsd.dismiss();
+
+            }
+
+
+        });
+        parentView.findViewById(R.id.close).setOnClickListener(view -> {
+            bsd.dismiss();
+        });
+        bsd.setContentView(parentView);
+        bsd.show();
+    }
+
+    public void MakeRequest(String total) {
+        CollectionReference reference = FirebaseFirestore.getInstance()
+                .collection("Advertising").document(ads_id).collection("Requests");
+        reference.document(userid).update("total", donationtotal).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                collectionReference.document(ads_id)
+                        .collection("Requests").document(userid)
+                        .update("donated", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_SHORT).show();
+                        CloudMessagingNotificationsSender.Data data =
+                                new CloudMessagingNotificationsSender.Data
+                                        (FirebaseAuth.getInstance().getCurrentUser().getUid()
+                                                , "Message ",
+                                                "Your request is Accepted please contact us to get your money ",
+                                                "", userid, 55);
+
+
+                        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(), data);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+            }
+        });
+
+
+    }
+
 }

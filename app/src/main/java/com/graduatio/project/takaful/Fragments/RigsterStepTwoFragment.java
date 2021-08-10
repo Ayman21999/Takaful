@@ -79,20 +79,20 @@ public class RigsterStepTwoFragment extends DialogFragment {
                 int target_txt = Integer.parseInt(target.getText().toString());
                 int deaddate = Integer.parseInt((deadline.getText().toString()));
                 if (title_txt.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas Fill Title", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.fillTitle), Toast.LENGTH_SHORT).show();
 
                 } else if (whoarebenefit_txt.isEmpty()) {
-                    Toast.makeText(getContext(), "Pleas Fill who the Benefit ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.benefit), Toast.LENGTH_SHORT).show();
 
                 } else if (target_txt == 0) {
-                    Toast.makeText(getContext(), "Pleas set your target", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.target), Toast.LENGTH_SHORT).show();
 
                 } else if (target_txt > 10000) {
-                    Toast.makeText(getContext(), "You Can't insert target larger than 10000", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.condtion), Toast.LENGTH_SHORT).show();
                 } else {
                     UpdateUploadedData(title_txt, whoarebenefit_txt, target_txt, deaddate);
                     UpdateUploadedDataforuer(title_txt, whoarebenefit_txt, target_txt, deaddate);
-                    Toast.makeText(getContext(), "Next Step", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.next), Toast.LENGTH_SHORT).show();
                     DialogFragment fragment = LastStepFragment.lastStepFragment();
                     fragment.show(getChildFragmentManager(), "aa");
                     Bundle bundle = new Bundle();
@@ -120,7 +120,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.update), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -137,7 +137,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
     public void UpdateUploadedDataforuer(String title, String forWhoDonate, int target, int beginDate) {
 
         progressDialog.show();
-        progressDialog.setMessage("Updating...");
+        progressDialog.setMessage(getString(R.string.update));
         FirebaseFirestore foruser = FirebaseFirestore.getInstance();
 
         userRef.document(adsid)
@@ -150,7 +150,7 @@ public class RigsterStepTwoFragment extends DialogFragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getContext(), "Update Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.update), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

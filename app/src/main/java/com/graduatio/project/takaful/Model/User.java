@@ -34,6 +34,21 @@ public class User {
     String adsID;
     @PropertyName("donateRequestTotal")
     int donateRequestTotal;
+    @PropertyName("age")
+    String age;
+    @PropertyName("familynum")
+    String familynum;
+    @PropertyName("identity")
+    String identity;
+    @PropertyName("social")
+    String social;
+    @PropertyName("havework")
+    String havework;
+
+    @PropertyName("soialmedai")
+    String soialmedai;
+    @PropertyName("salary")
+    String salary;
     public boolean isHasActivity() {
         return isHasActivity;
     }
@@ -152,5 +167,61 @@ public class User {
 
     public void setDonateRequestTotal(int donateRequestTotal) {
         this.donateRequestTotal = donateRequestTotal;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getFamilynum() {
+        return familynum;
+    }
+
+    public void setFamilynum(String familynum) {
+        this.familynum = familynum;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public String getSoialmedai() {
+        return soialmedai;
+    }
+
+    public void setSoialmedai(String soialmedai) {
+        this.soialmedai = soialmedai;
+    }
+
+    public String getSocial() {
+        return social;
+    }
+
+    public void setSocial(String social) {
+        this.social = social;
+    }
+
+    public String getHavework() {
+        return havework;
+    }
+
+    public void setHavework(String havework) {
+        this.havework = havework;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 }

@@ -57,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Successful!"
+        android:text="@string/successful"
         android:textAlignment="center"
         android:textColor="#0E4944"
         android:textSize="24sp"
@@ -78,8 +78,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
-android:text="Your charity program has been successfully created.
-Now you have to wait admin to accept your program"        android:textAlignment="center"
+android:text="@string/your_charity_program_has_been_successfully_created_now_you_have_to_wait_admin_to_accept_your_program"        android:textAlignment="center"
         android:textColor="#0C0A0A"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/home_btn"

@@ -21,12 +21,15 @@
     <View
         android:id="@+id/view4"
         android:layout_width="60dp"
-        android:background="@drawable/white_background_creatnewaccount"
         android:layout_height="60dp"
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
-
         android:layout_marginTop="12dp"
+
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/white_background_creatnewaccount"
+        app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -86,7 +89,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Sign in "
+                android:text="@string/sign_in_nto_continue"
+
                 android:textColor="@color/background"
 
                 android:textColorHint="#DEDEDE"
@@ -94,18 +98,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="to continue"
-                android:textColor="@color/background"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/email"
@@ -113,21 +105,21 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="E-mail"
+                android:hint="@string/Eamil"
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
                 android:textColor="@color/background"
-                android:textColorHint="#DEDEDE"
 
+                android:textColorHint="#DEDEDE"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/password"
@@ -138,7 +130,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Password "
+                android:hint="@string/password"
                 android:inputType="textPassword"
 
                 android:paddingStart="10dp"
@@ -154,12 +146,13 @@
                 android:id="@+id/forgetpassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginRight="24dp"
-                android:text="Forgot password?"
+                android:text="@string/forgot_password"
                 android:textColor="#9BD35A"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <android.widget.Button
@@ -169,14 +162,14 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/button_shape"
-                android:text="Login"
+                android:text="@string/login"
                 android:textAllCaps="false"
 
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password" />
+                app:layout_constraintTop_toBottomOf="@+id/forgetpassword" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -188,7 +181,7 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.76" />
+        app:layout_constraintGuide_percent="0.71" />
 
     <View
         android:id="@+id/view2"
@@ -217,7 +210,7 @@
             android:layout_marginTop="8dp"
             android:textColor="#A8A8A8"
             android:layout_marginBottom="8dp"
-            android:text="Dont have account? "
+            android:text="@string/dont_have_account"
             app:layout_constraintBottom_toBottomOf="@+id/view2"
             app:layout_constraintStart_toStartOf="@+id/view2"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -227,21 +220,23 @@
         android:id="@+id/sgin_in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text=" Create new account"
+        android:text="@string/create_new_account"
         android:textColor="#9BD35A"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Or Login With"
+        android:layout_marginTop="16dp"
+        android:text="@string/or_login_with"
         android:textColor="#F5F6F8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -278,6 +273,6 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.72" />
+        app:layout_constraintGuide_percent="0.67" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

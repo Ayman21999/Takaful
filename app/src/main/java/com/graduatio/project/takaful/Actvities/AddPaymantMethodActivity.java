@@ -69,7 +69,7 @@ public class AddPaymantMethodActivity extends AppCompatActivity {
         reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(AddPaymantMethodActivity.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddPaymantMethodActivity.this, getText(R.string.success), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

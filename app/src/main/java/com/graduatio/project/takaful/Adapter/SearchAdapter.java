@@ -66,7 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHole
             }
         });
         holder.remingin.setText(advertising.getRemaining()+"");
-        holder.dayleft.setText(advertising.getDaynumber()+"Day left");
+        holder.dayleft.setText(advertising.getDaynumber()+context.getString(R.string.dayleft));
         Picasso.get().load(advertising.getImage()).into(holder.ad_image);
         holder.ad_image.setOnClickListener(new View.OnClickListener() {
             @Override

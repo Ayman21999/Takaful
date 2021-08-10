@@ -35,7 +35,7 @@ public class ForgetPassowrd extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ForgetPassowrd.this, "The Email had been sent", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgetPassowrd.this, getString(R.string.sent), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ForgetPassowrd.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 

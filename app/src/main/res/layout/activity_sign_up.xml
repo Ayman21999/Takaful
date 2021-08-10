@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:layout_marginLeft="140dp"
-        android:text="Tak"
+        android:text="Taka"
         android:textColor="#fff"
         android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,24 +63,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Create New "
+                android:text="@string/create_new_account"
                 android:textColor="@color/background"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Account"
-                android:textColor="@color/background"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/email"
@@ -88,12 +75,12 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="E-mail"
 
+                android:hint="@string/Eamil"
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
@@ -102,7 +89,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/password"
@@ -111,7 +98,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Password "
+                android:hint="@string/password"
                 android:inputType="textPassword"
 
                 android:paddingStart="10dp"
@@ -129,7 +116,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Confirm Password "
+                android:hint="@string/confirm_password"
 
                 android:inputType="textPassword"
                 android:paddingStart="10dp"
@@ -141,22 +128,6 @@
                 app:layout_constraintStart_toStartOf="@+id/password"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
-            <android.widget.Button
-                android:id="@+id/signe_button"
-                android:layout_width="0dp"
-                android:layout_height="70dp
-"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/button_shape"
-
-                android:text="Create Account"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/radioGroup2" />
-
             <EditText
                 android:id="@+id/username"
                 android:layout_width="0dp"
@@ -164,7 +135,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="textPersonName"
 
                 android:paddingStart="10dp"
@@ -183,7 +154,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Phone"
+                android:hint="@string/phone"
                 android:inputType="phone"
 
                 android:paddingStart="10dp"
@@ -195,6 +166,41 @@
                 app:layout_constraintStart_toStartOf="@+id/username"
                 app:layout_constraintTop_toBottomOf="@+id/username" />
 
+            <android.widget.Button
+                android:id="@+id/signe_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_shape"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/radioGroup2"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+            <android.widget.Button
+                android:id="@+id/next"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_shape"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/radioGroup2"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
             <RadioGroup
                 android:id="@+id/radioGroup2"
                 android:layout_width="0dp"
@@ -202,7 +208,6 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/background"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/signe_button"
                 app:layout_constraintEnd_toEndOf="@+id/confirm"
                 app:layout_constraintStart_toStartOf="@+id/confirm"
                 app:layout_constraintTop_toBottomOf="@+id/confirm">
@@ -212,19 +217,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="beneficiary"
+
+                    android:text="@string/beneficiary"
                     android:textColor="@color/background"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/Donors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Donors"
-
+                    android:text="@string/donors"
                     android:textColor="@color/background"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RadioGroup>
 
 
@@ -255,11 +260,11 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Dont have account? "
+        android:text="@string/dont_have_account"
         android:textColor="#DEDEDE"
 
         app:layout_constraintBottom_toBottomOf="@+id/view2"
@@ -276,13 +281,14 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
-        android:text="Sign in"
+        android:text="@string/sign_in"
         android:textColor="#9BD35A"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -291,7 +297,7 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.93" />
+        app:layout_constraintGuide_percent="0.83" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -300,6 +306,6 @@
         android:layout_marginBottom="1462dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.98" />
+        app:layout_constraintGuide_percent="0.89" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

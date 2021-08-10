@@ -59,9 +59,9 @@ public class Login extends AppCompatActivity {
                     String emailtxt = email.getText().toString();
                     String passtxt = pass.getText().toString();
                     if (emailtxt.isEmpty()) {
-                        Toast.makeText(Login.this, "Email is Required", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, getString(R.string.emialempty), Toast.LENGTH_SHORT).show();
                     } else if (passtxt.isEmpty()) {
-                        Toast.makeText(Login.this, "Password is Required", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, getString(R.string.emptypass), Toast.LENGTH_SHORT).show();
                     } else {
                         LogIn(emailtxt, passtxt);
 //                        SessionManager manager = new SessionManager(Login.this);

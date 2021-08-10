@@ -55,15 +55,15 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
         User user = users.get(position);
         String userid = user.getUserId();
         holder.username.setText(user.getFirstName());
-//        Picasso.get().load(user.getUserImage()).into(holder.userimage);
-        progressDialog.setMessage("Loading ...");
-        progressDialog.show();
+        Picasso.get().load(user.getUserImage()).into(holder.userimage);
+
 
         userref.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
+
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 isblocked = documentSnapshot.getBoolean("isBlocked");
                 progressDialog.dismiss();
+
                 if (isblocked == true) {
                     holder.active_btn.setClickable(false);
                     holder.block_btn.setBackground(context.getResources().getDrawable(R.drawable.disable_btn));
@@ -73,6 +73,7 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
                     holder.active_btn.setBackground(context.getResources().getDrawable(R.drawable.disable_btn));
                     holder.block_btn.setBackground(context.getResources().getDrawable(R.drawable.reject_btn));
                 }
+
             }
         });
 

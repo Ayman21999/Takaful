@@ -62,7 +62,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Target : "
+        android:text="@string/target_"
         android:textColor="#000"
 
         android:textSize="16sp"

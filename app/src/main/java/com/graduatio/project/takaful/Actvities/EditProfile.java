@@ -183,7 +183,7 @@ public class EditProfile extends AppCompatActivity {
         if (requestCode == 2 && resultCode == RESULT_OK) {
             imageUri = data.getData();
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Updating ....");
+            progressDialog.setMessage(getString(R.string.update));
             progressDialog.setCancelable(false);
             progressDialog.show();
             Picasso.get().load(imageUri).fit().into(userimage);
@@ -259,12 +259,12 @@ public class EditProfile extends AppCompatActivity {
         String txt_phone = phone.getText().toString();
         if (TextUtils.isEmpty(txt_fname)
                 || TextUtils.isEmpty(txt_lname) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_phone)) {
-            Toast.makeText(EditProfile.this, "All field are required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProfile.this, getString(R.string.fieldsRequred), Toast.LENGTH_SHORT).show();
         } else if (!isValidMobile(txt_phone) && phone.length() > 6 && phone.length() <= 13) {
-            Toast.makeText(this, "Pleas insert valid phone number ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.validphone), Toast.LENGTH_SHORT).show();
         } else {
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Updating ....");
+            progressDialog.setMessage(getString(R.string.update));
             progressDialog.setCancelable(false);
             progressDialog.show();
             if (imageUri != null) {

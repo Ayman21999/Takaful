@@ -96,8 +96,8 @@ public class DonationDetails extends AppCompatActivity {
            }
             }
         });
-        Toast.makeText(this, "Ads ID:: " + donerid, Toast.LENGTH_SHORT).show();
-        Log.d("tt", "Doner ID" + donerid);
+//        Toast.makeText(this, "Ads ID:: " + donerid, Toast.LENGTH_SHORT).show();
+//        Log.d("tt", "Doner ID" + donerid);
         showBenefits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +243,7 @@ public class DonationDetails extends AppCompatActivity {
             total = number.getText() + "";
             if (total.isEmpty() && total.equals("")) {
 
-                Toast.makeText(this, "Pleas insert number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getText(R.string.emptynumber), Toast.LENGTH_SHORT).show();
             } else {
                 donationOP(total);
                 DonationRef(total);
@@ -251,7 +251,7 @@ public class DonationDetails extends AppCompatActivity {
                 userRef.document(userid).update("isHasActivity", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(DonationDetails.this, "Thanks For your donation ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DonationDetails.this, getString(R.string.thanksDonation), Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -285,7 +285,7 @@ public class DonationDetails extends AppCompatActivity {
             donationtotal = number.getText() + "";
             if (donationtotal.isEmpty() && donationtotal.equals("")) {
 
-                Toast.makeText(this, "Pleas insert number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.emptynumber), Toast.LENGTH_SHORT).show();
             } else {
                 MakeRequest(donationtotal);
                 CloudMessagingNotificationsSender.Data data =
@@ -316,10 +316,12 @@ public class DonationDetails extends AppCompatActivity {
             map.put("Adsid", adsId);
             map.put("payid", did);
             adsUserDonations.document(adsId)
-                    .collection("DonationsAds").document(donerid).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    .collection("DonationsAds")
+                    .document(donerid)
+                    .set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(DonationDetails.this, "Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DonationDetails.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -363,7 +365,7 @@ public class DonationDetails extends AppCompatActivity {
                 reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(DonationDetails.this, "Your Request had been sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DonationDetails.this, getString(R.string.requestsent), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

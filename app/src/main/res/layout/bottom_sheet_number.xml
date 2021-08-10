@@ -27,7 +27,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/button_shape"
-        android:text="Donate"
+        android:text="@string/donate"
         android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,7 +72,7 @@
         android:textSize="20sp"
 
         android:background="@drawable/button_close_"
-        android:hint="Enter Your Donation Number "
+        android:hint="@string/enter_your_donation_number"
         android:paddingTop="20dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

@@ -60,6 +60,7 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
     AddAadapter addAadapter;
     ImageView request,notify,newpost;
     ScrollListener scrollListener;
+    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     List<Advertising> advertisings;
     ProgressDialog progressDialog;
@@ -93,15 +94,15 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
         notify = view.findViewById(R.id.notify);
         reference = FirebaseFirestore.getInstance().collection("Advertising");
         User[] users = new User[1];
-        progressDialog.setMessage("Loading ...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
-
         //////////send Notification
 //        CloudMessagingNotificationsSender.Data data =
 //                new CloudMessagingNotificationsSender.Data
 //                        ("ss","asd","asd","ds","Asd",55);
 //        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),data);
-        FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        FirebaseFirestore.getInstance().collection("Users")
+                .document(id)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

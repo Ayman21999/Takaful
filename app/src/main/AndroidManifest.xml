@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takaful"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Actvities.ShowBenefitsUsers"></activity>
+        <activity android:name=".Actvities.UserBeneficiaryInfo"></activity>
+        <activity android:name=".Actvities.UserInformation" />
+        <activity android:name=".Actvities.ShowBenefitsUsers" />
         <activity android:name=".Actvities.RequestAds" />
         <activity android:name=".Actvities.Users_HasCharities" />
         <activity android:name=".Actvities.AddPAyPalActivity" />
@@ -30,16 +32,19 @@
         <activity android:name=".Actvities.EditPayMethod" />
         <activity android:name=".Actvities.EditProfile" />
         <activity android:name=".Actvities.HomeActivity">
+
+
+
+        </activity>
+        <activity android:name=".Actvities.ForgetPassowrd" />
+        <activity android:name=".Actvities.SignUp">
+                 </activity>
+        <activity android:name=".Actvities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Actvities.ForgetPassowrd" />
-        <activity android:name=".Actvities.SignUp" />
-        <activity android:name=".Actvities.Login">
-
         </activity>
         <activity android:name=".Actvities.LastAppBegging" />
         <activity android:name=".Actvities.SecondAppBegging" />

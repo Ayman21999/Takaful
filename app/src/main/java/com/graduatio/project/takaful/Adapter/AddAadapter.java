@@ -30,7 +30,7 @@ import java.util.List;
 public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
     Context context;
     List<Advertising> advertisings;
-    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String id = FirebaseAuth.getInstance().getUid();
     public List<Integer> loadingItems = new ArrayList<>();
     public AddAadapter(Context context, List<Advertising> advertisings) {
         this.context = context;

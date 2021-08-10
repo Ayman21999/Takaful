@@ -42,10 +42,10 @@ public class AddGoogleWActivity2 extends AppCompatActivity {
                String pass_txt = pass.getText()+"";
           
                 if (email_txt.isEmpty()) {
-                    Toast.makeText(AddGoogleWActivity2.this, "Please write your Email ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddGoogleWActivity2.this, getString(R.string.emialempty), Toast.LENGTH_SHORT).show();
 
                 } else if (pass_txt.isEmpty()) {
-                    Toast.makeText(AddGoogleWActivity2.this, "Please write your password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddGoogleWActivity2.this, getString(R.string.failpass), Toast.LENGTH_SHORT).show();
 
                 }else{
                     AddMethod(email_txt, pass_txt);
@@ -80,7 +80,7 @@ public class AddGoogleWActivity2 extends AppCompatActivity {
         collectionReference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(AddGoogleWActivity2.this, "Add Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddGoogleWActivity2.this, getText(R.string.success), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddGoogleWActivity2.this ,EditPaymentMethod.class);
                 startActivity(intent);
             }
