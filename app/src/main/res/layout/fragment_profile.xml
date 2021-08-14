@@ -24,7 +24,7 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:text="@string/paymentmethod"
         android:textColor="#A8a8a8"
         android:textSize="20sp"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:text="@string/email_address"
         android:textColor="#A8a8a8"
         android:textSize="20sp"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="@string/profile"
         android:textColor="#000"
         android:textSize="20sp"
@@ -63,11 +63,11 @@
         android:id="@+id/userimage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+
         android:src="@drawable/ic_user"
         app:layout_constraintStart_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-     />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/username"
@@ -165,6 +165,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_shape"
         android:drawableLeft="@drawable/ic_logout"
         android:paddingStart="15dp"
@@ -172,10 +173,12 @@
         android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
         app:layout_constraintEnd_toEndOf="@+id/view9"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/pay_method"
-        app:layout_constraintTop_toBottomOf="@+id/textView74" />
+        app:layout_constraintTop_toBottomOf="@+id/adminbtn"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/pay_method"
@@ -240,16 +243,15 @@
         android:id="@+id/adminbtn"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button_shape"
         android:text="@string/active_block_users"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/view11"
-        app:layout_constraintEnd_toEndOf="@+id/logout"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="@+id/logout"
-        app:layout_constraintTop_toBottomOf="@+id/logout" />
+        app:layout_constraintEnd_toEndOf="@+id/view40"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView74"
+        app:layout_constraintTop_toBottomOf="@+id/textView74" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

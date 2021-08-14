@@ -72,7 +72,7 @@ public class AddAadapter extends RecyclerView.Adapter<AddAadapter.AddHolder> {
         holder.percent.setText("(%"+percnt+")");
 //        holder.percent.setText(advertising.getRemaining() + "");
         holder.target.setText("$ "+advertising.getTarget());
-
+        holder.seekBar.setEnabled(false);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

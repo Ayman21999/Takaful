@@ -121,6 +121,8 @@
         android:text="554"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/textView36"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView36" />
 
     <TextView

@@ -157,4 +157,6 @@
     <string name="active_user">Active User</string>
     <string name="sign_in_nto_continue">Sign in to continue</string>
     <string name="total">Total</string>
+    <string name="makereauset">Make Requset</string>
+    <string name="emptfile">Please upload file</string>
 </resources>

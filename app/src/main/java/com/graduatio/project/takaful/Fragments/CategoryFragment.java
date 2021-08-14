@@ -60,8 +60,7 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
     AddAadapter addAadapter;
     ImageView request,notify,newpost;
     ScrollListener scrollListener;
-    String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+    String id ;
     List<Advertising> advertisings;
     ProgressDialog progressDialog;
     @Override
@@ -74,6 +73,7 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
                 .whereEqualTo("isRejected", false)
                 .limit(Adverstitong_LIMIT);
 
+         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     }
 
@@ -101,36 +101,42 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
 //                new CloudMessagingNotificationsSender.Data
 //                        ("ss","asd","asd","ds","Asd",55);
 //        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),data);
-        FirebaseFirestore.getInstance().collection("Users")
-                .document(id)
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                users[0] = documentSnapshot.toObject(User.class);
-            }
-        }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                usernameTv.setText("Hello " + users[0].getFirstName());
-                String role = task.getResult().getString("role");
-                if (role.equals("Admin")) {
-                    newpost.setVisibility(View.VISIBLE);
-                    view1.setVisibility(View.VISIBLE);
-                    request.setVisibility(View.INVISIBLE);
-                    progressDialog.dismiss();
 
-                } else if (role.equals("Donors")){
-                    newpost.setVisibility(View.INVISIBLE);
-                    view1.setVisibility(View.INVISIBLE);
-                    request.setVisibility(View.VISIBLE);
+      if (FirebaseAuth.getInstance().getCurrentUser() != null){
+          FirebaseFirestore.getInstance().collection("Users")
+                  .document(id)
+                  .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+              @Override
+              public void onSuccess(DocumentSnapshot documentSnapshot) {
+                  users[0] = documentSnapshot.toObject(User.class);
+              }
+          }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+              @Override
+              public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                  usernameTv.setText("Hello " + users[0].getFirstName());
+                  String role = task.getResult().getString("role");
+                  if (role.equals("Admin")) {
+                      newpost.setVisibility(View.VISIBLE);
+                      view1.setVisibility(View.VISIBLE);
+                      request.setVisibility(View.INVISIBLE);
+                      progressDialog.dismiss();
 
-                    progressDialog.dismiss();
-                }else {
-                    progressDialog.dismiss();
+                  } else if (role.equals("Donors")){
+                      newpost.setVisibility(View.INVISIBLE);
+                      view1.setVisibility(View.INVISIBLE);
+                      request.setVisibility(View.VISIBLE);
 
-                }
-            }
-        });
+                      progressDialog.dismiss();
+                  }else {
+                      progressDialog.dismiss();
+
+                  }
+              }
+          });
+      }else {
+          Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+      }
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

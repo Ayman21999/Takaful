@@ -1,11 +1,19 @@
 package com.graduatio.project.takaful.Actvities;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +35,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.graduatio.project.takaful.Fragments.LastStepFragment;
 import com.graduatio.project.takaful.Model.Advertising;
 import com.graduatio.project.takaful.Model.Donations;
@@ -41,20 +53,30 @@ import java.util.UUID;
 
 public class DonationDetails extends AppCompatActivity {
 
-    FirebaseFirestore firebaseFirestore,dFirebaseFirestore;
+    FirebaseFirestore firebaseFirestore, dFirebaseFirestore;
     ImageView ad_image;
     TextView targetnumber, desc, userPublisher, daynum, rimeing, title;
-    Button donate,make_request,showBenefits;
+    Button donate, make_request, showBenefits;
     Advertising advertising;
-    CollectionReference dreference,userRef,adsUserDonations,reference;
-    static String total;
+    CollectionReference dreference, userRef, adsUserDonations, reference;
+    String total;
     Intent i;
+    private static String POST_DOCUMENT_REF = "Post-documents/";
+    private static final String[] supportedMimeTypes = {"application/pdf", "application/msword",
+            "text/*", "application/vnd.ms-excel", "application/zip"};
+    private final static String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
     static String adsId;
     static String donerid;
     ProgressDialog progressDialog;
-    String userdasid,userpublisher,role,userid;
-    String donationtotal ;
-    SeekBar seekBar ;
+    String userdasid, userpublisher, role, userid;
+    Uri attchmentURI;
+    String donationtotal;
+    SeekBar seekBar;
+    FirebaseStorage storage;
+    ActivityResultLauncher<String> launcher;
+    String attachmentUrld;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,37 +85,70 @@ public class DonationDetails extends AppCompatActivity {
         getIntents();
         getAdData();
         Donate();
-      make_request.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              MakeRequestNumber();
-          }
-      });
-        progressDialog.setMessage("Loading...!");
+
+
+        launcher = registerForActivityResult
+                (new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri result) {
+                        if (result != null) {
+                            Log.d("ddd", "has resulr");
+                            attchmentURI = result;
+                            final StorageReference reference = FirebaseStorage.getInstance().getReference()
+                                    .child(POST_DOCUMENT_REF).child(UUID.randomUUID().toString() + "-" +
+                                            System.currentTimeMillis());
+                            final UploadTask uploadTask = reference.putFile(attchmentURI);
+                            final StorageTask<UploadTask.TaskSnapshot> onSuccessListener =
+                                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                                        reference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                            attachmentUrld = uri.toString();
+
+//                                            MakeRequestNumber(attachmentUrld);
+
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(Exception e) {
+                                                Log.d("aaa", e.getLocalizedMessage());
+                                            }
+                                        });
+                                    });
+
+                        }
+                    }
+                });
+        make_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MakeRequestNumber();
+
+            }
+        });
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         userRef.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-           role = documentSnapshot.getString("role");
-           if (role.equals("beneficiary")){
-            make_request.setVisibility(View.VISIBLE);
-            donate.setVisibility(View.INVISIBLE);
-            progressDialog.dismiss();
-           }else if (role.equals("Donors")){
-               donate.setVisibility(View.VISIBLE);
-               make_request.setVisibility(View.INVISIBLE);
-               progressDialog.dismiss();
+                role = documentSnapshot.getString("role");
+                if (role.equals("beneficiary")) {
+                    make_request.setVisibility(View.VISIBLE);
+                    donate.setVisibility(View.INVISIBLE);
+                    progressDialog.dismiss();
+                } else if (role.equals("Donors")) {
+                    donate.setVisibility(View.VISIBLE);
+                    make_request.setVisibility(View.INVISIBLE);
+                    progressDialog.dismiss();
 
-           }else if (role.equals("Admin")){
-               progressDialog.dismiss();
-               showBenefits.setVisibility(View.VISIBLE);
-               make_request.setVisibility(View.INVISIBLE);
-               donate.setVisibility(View.INVISIBLE);
+                } else if (role.equals("Admin")) {
+                    progressDialog.dismiss();
+                    showBenefits.setVisibility(View.VISIBLE);
+                    make_request.setVisibility(View.INVISIBLE);
+                    donate.setVisibility(View.INVISIBLE);
 
 
-           }else {
-               Toast.makeText(DonationDetails.this, "Nulll", Toast.LENGTH_SHORT).show();
-           }
+                } else {
+                    Toast.makeText(DonationDetails.this, "Nulll", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 //        Toast.makeText(this, "Ads ID:: " + donerid, Toast.LENGTH_SHORT).show();
@@ -101,8 +156,8 @@ public class DonationDetails extends AppCompatActivity {
         showBenefits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DonationDetails.this , ShowBenefitsUsers.class);
-                intent.putExtra("id",adsId);
+                Intent intent = new Intent(DonationDetails.this, ShowBenefitsUsers.class);
+                intent.putExtra("id", adsId);
                 startActivity(intent);
             }
         });
@@ -113,8 +168,9 @@ public class DonationDetails extends AppCompatActivity {
         reference = firebaseFirestore.collection("Advertising");
         dFirebaseFirestore = FirebaseFirestore.getInstance();
         i = getIntent();
+        storage = FirebaseStorage.getInstance();
         progressDialog = new ProgressDialog(this);
-        adsUserDonations =FirebaseFirestore.getInstance().collection("Advertising") ;
+        adsUserDonations = FirebaseFirestore.getInstance().collection("Advertising");
         make_request = findViewById(R.id.request);
         userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dreference = dFirebaseFirestore.collection("Users")
@@ -168,8 +224,8 @@ public class DonationDetails extends AppCompatActivity {
                     Picasso.get().load(advertising.getImage()).into(ad_image);
                     rimeing.setText("" + advertising.getRemaining());
                     daynum.setText("Day left" + advertising.getDaynumber());
-                    int remeining  = advertising.getTarget()-advertising.getRemaining();
-                    int percnt  = (remeining/1000)*10;
+                    int remeining = advertising.getTarget() - advertising.getRemaining();
+                    int percnt = (remeining / 1000) * 10;
                     seekBar.setProgress(percnt);
 
                 }
@@ -207,7 +263,6 @@ public class DonationDetails extends AppCompatActivity {
         hashMap.put("total", total);
         hashMap.put("payid", payid);
         hashMap.put("Adsid", adsId);
-
         hashMap.put("donateforAds", advertising.getName_of_Charity());
         dreference.document(payid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -276,27 +331,40 @@ public class DonationDetails extends AppCompatActivity {
 
     private void MakeRequestNumber() {
         final BottomSheetDialog bsd = new BottomSheetDialog(DonationDetails.this, R.style.SheetDialog);
-        final View parentView = getLayoutInflater().inflate(R.layout.bottom_sheet_number, null);
+        final View parentView = getLayoutInflater().inflate(R.layout.make_request_bottm_sheet, null);
         parentView.setBackgroundColor(Color.TRANSPARENT);
         EditText number = parentView.findViewById(R.id.number);
-
-
         parentView.findViewById(R.id.donate_btn).setOnClickListener(view -> {
             donationtotal = number.getText() + "";
             if (donationtotal.isEmpty() && donationtotal.equals("")) {
 
                 Toast.makeText(this, getString(R.string.emptynumber), Toast.LENGTH_SHORT).show();
+            } else if (attchmentURI == null) {
+                Toast.makeText(this, getString(R.string.emptfile), Toast.LENGTH_SHORT).show();
             } else {
-                MakeRequest(donationtotal);
+
+                MakeRequest(donationtotal,attachmentUrld);
                 CloudMessagingNotificationsSender.Data data =
-                new CloudMessagingNotificationsSender.Data
-                        (userid,"Request","New Request"
-                                ,"ds",advertising.getUserId(),55);
-        CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),data);
+                        new CloudMessagingNotificationsSender.Data
+                                (userid, "Request", "New Request"
+                                        , "ds", advertising.getUserId(), 55);
+                CloudMessagingNotificationsSender.sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(), data);
                 bsd.dismiss();
             }
 
 
+        });
+        parentView.findViewById(R.id.attachment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkStoragePermissions(3)) {
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.setType("*/*");
+                    intent.putExtra(Intent.EXTRA_MIME_TYPES, supportedMimeTypes);
+                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                    launcher.launch("*/*");
+                }
+            }
         });
         parentView.findViewById(R.id.close).setOnClickListener(view -> {
             bsd.dismiss();
@@ -307,9 +375,9 @@ public class DonationDetails extends AppCompatActivity {
 
     public void DonationRef(String total) {
         String did = UUID.randomUUID().toString();
-        if (adsId.equals(null)&& total.isEmpty()){
+        if (adsId.equals(null) && total.isEmpty()) {
             Toast.makeText(this, "NUlllllllllllll", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             HashMap map = new HashMap();
             map.put("donerid", donerid);
             map.put("total", total);
@@ -326,7 +394,7 @@ public class DonationDetails extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("qqq",e.getMessage());
+                    Log.d("qqq", e.getMessage());
                 }
             });
         }
@@ -339,14 +407,15 @@ public class DonationDetails extends AppCompatActivity {
 
     }
 
-    public static DonationDetails lastStepFragment(){
+    public static DonationDetails lastStepFragment() {
         return new DonationDetails();
     }
-    public void MakeRequest(String  total){
+
+    public void MakeRequest(String total, String attachmentUrl) {
         CollectionReference reference = FirebaseFirestore.getInstance()
                 .collection("Advertising").document(adsId).collection("Requests");
         CollectionReference user = FirebaseFirestore.getInstance().collection("Users");
-        String id =    FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         user.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -355,13 +424,14 @@ public class DonationDetails extends AppCompatActivity {
                 progressDialog.show();
                 progressDialog.setMessage("Loading...");
                 HashMap hashMap = new HashMap();
-                hashMap.put("userId" , id);
-                hashMap.put("add_ID",adsId);
-                hashMap.put("firstName",username);
-                hashMap.put("userImage",userimage);
-                hashMap.put("isdeleted",false);
-                hashMap.put("donated",false);
-                hashMap.put("total",total);
+                hashMap.put("userId", id);
+                hashMap.put("add_ID", adsId);
+                hashMap.put("firstName", username);
+                hashMap.put("userImage", userimage);
+                hashMap.put("isdeleted", false);
+                hashMap.put("donated", false);
+                hashMap.put("attachment", attachmentUrl);
+                hashMap.put("total", total);
                 reference.document(id).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -376,9 +446,45 @@ public class DonationDetails extends AppCompatActivity {
                         Toast.makeText(DonationDetails.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                Task<Void> reference1 = FirebaseFirestore.getInstance()
+                        .collection("Users")
+                        .document(id).update("attachment",attachmentUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
 
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure( Exception e) {
+                            Log.d("ttt",e.getLocalizedMessage());
+                            }
+                        });
             }
         });
 
+    }
+
+    private boolean checkStoragePermissions(int requestCode) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (checkSelfPermission(permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    //doesn't need to request write persmission
+                    requestPermissions(new String[]{permissions[0]}, requestCode);
+                } else {
+                    //needs to request write persmission
+                    requestPermissions(permissions, requestCode);
+
+                }
+
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+        return true;
     }
 }

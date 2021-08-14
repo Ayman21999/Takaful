@@ -24,7 +24,7 @@ public class AppBegging extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AppBegging.this , CategoryFragment.class);
+                Intent intent = new Intent(AppBegging.this , HomeActivity.class);
                 startActivity(intent);
 
             }

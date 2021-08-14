@@ -60,7 +60,6 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
     @Override
     public void onBindViewHolder(@NonNull RequestVH holder, int position) {
         Advertising advertising = advertisings.get(position);
-//        String id =FirebaseAuth.getInstance().getCurrentUser().getUid();
         userid = advertising.getUserId();
         ads_id = advertising.getAdd_ID();
         userRef.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -69,10 +68,14 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
                 String name = documentSnapshot.getString("firstName");
                 String image = documentSnapshot.getString("userImage");
                 holder.name.setText(name);
-//                if (image.equals("")) {
+                if (image != null && !image.isEmpty()) {
+                    Picasso.get().load(image).into(holder.image);
+
+
+                } else {
 //                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
-//                }
-//                Picasso.get().load(image).into(holder.image);
+                    return;
+                }
 
             }
         });
@@ -90,8 +93,8 @@ public class RequsetAadpter extends RecyclerView.Adapter<RequsetAadpter.RequestV
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent(context, UserInformation.class);
-                intent.putExtra("id",userid);
+                Intent intent = new Intent(context, UserInformation.class);
+                intent.putExtra("id", userid);
                 context.startActivity(intent);
             }
         });

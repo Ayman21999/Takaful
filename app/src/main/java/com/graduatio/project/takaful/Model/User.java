@@ -49,6 +49,9 @@ public class User {
     String soialmedai;
     @PropertyName("salary")
     String salary;
+
+    @PropertyName("attachment")
+    String attachment;
     public boolean isHasActivity() {
         return isHasActivity;
     }
@@ -223,5 +226,13 @@ public class User {
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
     }
 }

@@ -74,7 +74,7 @@ public class  ProfileFragment extends Fragment {
                     if (user[0].getUserImage().isEmpty()) {
                         Toast.makeText(getContext(), getString(R.string.EmptyImage), Toast.LENGTH_SHORT).show();
                     } else {
-                        Picasso.get().load(user[0].getUserImage()).fit().into(userimage);
+                        Picasso.get().load(user[0].getUserImage()).centerCrop().fit().into(userimage);
 
                     }
                     if (user[0].getRole().equals("Admin")){

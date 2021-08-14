@@ -55,9 +55,14 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
         User user = users.get(position);
         String userid = user.getUserId();
         holder.username.setText(user.getFirstName());
-        Picasso.get().load(user.getUserImage()).into(holder.userimage);
 
+        if (user.getUserImage() != null && !user.getUserImage().isEmpty()) {
+            Picasso.get().load(user.getUserImage()).into(holder.userimage);
 
+        } else {
+//                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
+            return;
+        }
         userref.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
             public void onSuccess(DocumentSnapshot documentSnapshot) {

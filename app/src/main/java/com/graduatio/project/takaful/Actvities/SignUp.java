@@ -215,6 +215,13 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(SignUp.this, "", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         auth.signOut();
+//                        FirebaseUser user = authResult.getUser();
+//                        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//                                Toast.makeText(SignUp.this, "Email Verification was sent", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

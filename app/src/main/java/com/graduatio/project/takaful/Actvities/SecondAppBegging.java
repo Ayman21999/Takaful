@@ -23,7 +23,7 @@ public class SecondAppBegging extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SecondAppBegging.this , CategoryFragment.class);
+                Intent intent = new Intent(SecondAppBegging.this , HomeActivity.class);
                 startActivity(intent);
 
             }

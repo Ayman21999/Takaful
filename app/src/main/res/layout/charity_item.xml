@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Fundraising to recover Eu La Museum"
@@ -89,34 +89,36 @@
 
             <TextView
                 android:id="@+id/ads_riming"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="102dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="12dp"
                 android:text="$105.69"
                 android:textColor="@color/background"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view35" />
+                app:layout_constraintTop_toTopOf="@+id/progress" />
 
             <TextView
                 android:id="@+id/textView68"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="97dp"
+                android:layout_height="31dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/rimining"
                 android:textColor="#B6C8C7"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/progress"
                 app:layout_constraintStart_toStartOf="@+id/ads_riming"
-                app:layout_constraintTop_toBottomOf="@+id/ads_riming" />
+                app:layout_constraintTop_toBottomOf="@+id/ads_riming"
+                app:layout_constraintVertical_bias="0.111" />
 
             <TextView
                 android:id="@+id/ads_trage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="52dp"
-                android:layout_marginRight="52dp"
+                android:layout_width="125dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:text="$250.00"
                 android:textColor="@color/background"
                 android:textSize="20sp"
@@ -131,32 +133,31 @@
                 android:text="@string/target_"
                 android:textColor="#B6C8C7"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/progress"
                 app:layout_constraintEnd_toEndOf="@+id/ads_trage"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/ads_trage"
-                app:layout_constraintTop_toBottomOf="@+id/ads_trage" />
+                app:layout_constraintTop_toBottomOf="@+id/ads_trage"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ProgressBar
                 android:id="@+id/progress"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
                 android:indeterminateOnly="false"
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ads_trage"
                 app:layout_constraintHorizontal_bias="0.468"
                 app:layout_constraintStart_toEndOf="@+id/ads_riming"
-                app:layout_constraintTop_toBottomOf="@+id/view35"
-                app:layout_constraintVertical_bias="0.867" />
+                app:layout_constraintTop_toBottomOf="@+id/view35" />
 
             <TextView
                 android:id="@+id/percent"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="103dp"
+                android:layout_height="101dp"
                 android:gravity="center_horizontal"
                 android:paddingTop="30dp"
                 android:text="70"

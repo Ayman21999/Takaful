@@ -33,23 +33,27 @@
         <activity android:name=".Actvities.EditProfile" />
         <activity android:name=".Actvities.HomeActivity">
 
-
-
-        </activity>
-        <activity android:name=".Actvities.ForgetPassowrd" />
-        <activity android:name=".Actvities.SignUp">
-                 </activity>
-        <activity android:name=".Actvities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Actvities.ForgetPassowrd" />
+        <activity android:name=".Actvities.SignUp">
+
+        </activity>
+        <activity android:name=".Actvities.Login">
+
+        </activity>
         <activity android:name=".Actvities.LastAppBegging" />
         <activity android:name=".Actvities.SecondAppBegging" />
-        <activity android:name=".Actvities.AppBegging" />
-        <activity android:name=".Actvities.MainActivity" />
+        <activity android:name=".Actvities.AppBegging" >
+
+        </activity>
+        <activity android:name=".Actvities.MainActivity">
+
+        </activity>
 
         <service
             android:name=".Service.MyFirebaseMessaging"

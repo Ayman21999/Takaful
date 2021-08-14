@@ -52,15 +52,23 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
         holder.name_publisher.setText("By :" + advertising.getUserId());
         holder.target.setText("Target : $" + advertising.getTarget());
         holder.title.setText(advertising.getTitle());
-      Picasso.get().load(advertising.getImage()).into(holder.ads_img);
-//        holder.ads_img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(context, DonationDetails.class);
-//                i.putExtra("id",advertising.getAdd_ID());
-//                context.startActivity(i);
-//            }
-//        });.
+
+        if (advertising.getImage() != null && !advertising.getImage().isEmpty()) {
+            Picasso.get().load(advertising.getImage()).into(holder.ads_img);
+
+        } else {
+//                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        holder.ads_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DonationDetails.class);
+                i.putExtra("id",advertising.getAdd_ID());
+                context.startActivity(i);
+            }
+        });
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

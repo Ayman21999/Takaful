@@ -115,11 +115,11 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="@+id/anonymous_btn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView35"
         app:layout_constraintTop_toBottomOf="@+id/textView35">
 
@@ -130,15 +130,15 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
-            android:elevation="4dp"
             android:drawableEnd="@drawable/ic_visa"
+            android:drawableRight="@drawable/ic_visa"
+            android:elevation="4dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
-            android:text="Credit Card"
-            android:textColor="#D8d8d8"
             android:paddingEnd="10dp"
+            android:text="Credit Card"
 
-            android:drawableRight="@drawable/ic_visa" />
+            android:textColor="#D8d8d8" />
 
         <RadioButton
             android:id="@+id/googlewallet"
@@ -147,15 +147,15 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
-            android:elevation="4dp"
             android:drawableEnd="@drawable/ic_googlewallet"
+            android:drawableRight="@drawable/ic_googlewallet"
+            android:elevation="4dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
-            android:text="Google Wallet "
-            android:textColor="#D8d8d8"
             android:paddingEnd="10dp"
+            android:text="Google Wallet "
 
-            android:drawableRight="@drawable/ic_googlewallet" />
+            android:textColor="#D8d8d8" />
 
         <RadioButton
             android:id="@+id/paypal"
@@ -164,14 +164,14 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/radio_selector"
             android:button="@android:color/transparent"
-            android:elevation="4dp"
             android:drawableEnd="@drawable/ic_paypal"
+            android:drawableRight="@drawable/ic_paypal"
+            android:elevation="4dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
-            android:text="PayPal "
-            android:textColor="#D8d8d8"
             android:paddingEnd="10dp"
-            android:drawableRight="@drawable/ic_paypal" />
+            android:text="PayPal "
+            android:textColor="#D8d8d8" />
     </RadioGroup>
 
     <TextView
@@ -180,27 +180,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
         android:text="@string/total"
         android:textColor="#000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
         android:id="@+id/totalnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="$710.00"
         android:textColor="#000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <android.widget.Button
         android:id="@+id/donate_btn"
@@ -221,12 +217,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view10" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1462dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.73" />
 </androidx.constraintlayout.widget.ConstraintLayout>
