@@ -215,12 +215,29 @@ public class Donate_Payment_Method extends AppCompatActivity {
         reference.document(id).update("remaining", remaining).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(Donate_Payment_Method.this, "Error " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        reference.document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                int reimeingint = documentSnapshot.getLong("remaining").intValue();
+                if (reimeingint == 0 ){
+                    reference.document(id).update("isFinished", true ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                        }
+                    });
+                }
             }
         });
 
