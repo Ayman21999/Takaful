@@ -18,28 +18,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         SharedPreferences preferences  = getSharedPreferences("Takafull",MODE_PRIVATE);
-        if (preferences.contains("is not first time")&& preferences.getBoolean("is not first time",false)) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null){
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+
+
+        if (user != null){
+//            Intent intent = new Intent(this, HomeActivity.class);
+//            startActivity(intent);
+//            finish();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent mainIntent = new Intent(MainActivity.this, HomeActivity.class);
+                    MainActivity.this.startActivity(mainIntent);
+                    MainActivity.this.finish();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+
+        }else {
+            if (preferences.contains("is not first time")&& preferences.getBoolean("is not first time",false)) {
+
             }else {
                 preferences.edit().putBoolean("is not first time",true).apply();
-                Intent intent = new Intent(this, AppBegging.class);
-                startActivity(intent);
-                finish();
+//                    Intent intent = new Intent(this, AppBegging.class);
+//                startActivity(intent);
+//                finish();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent mainIntent = new Intent(MainActivity.this, AppBegging.class);
+                        MainActivity.this.startActivity(mainIntent);
+                        MainActivity.this.finish();
+                    }
+                }, SPLASH_DISPLAY_LENGTH);
 
             }
         }
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent mainIntent = new Intent(MainActivity.this, AppBegging.class);
-//                MainActivity.this.startActivity(mainIntent);
-//                MainActivity.this.finish();
-//            }
-//        }, SPLASH_DISPLAY_LENGTH);
+//
+
+
+
     }
 }

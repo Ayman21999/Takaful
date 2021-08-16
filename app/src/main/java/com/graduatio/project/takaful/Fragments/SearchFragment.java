@@ -44,10 +44,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SearchFragment extends Fragment  {
+public class SearchFragment extends Fragment {
 
     CollectionReference reference;
-    ArrayList<Advertising> advertisings =  new ArrayList<>();
+    ArrayList<Advertising> advertisings = new ArrayList<>();
     SearchAdapter adapter;
     RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -69,20 +69,23 @@ public class SearchFragment extends Fragment  {
         progressBar = view.findViewById(R.id.progressBar);
         noResultsTv = view.findViewById(R.id.noResultsTv);
         recyclerView = view.findViewById(R.id.list);
-        reference = FirebaseFirestore.getInstance().collection("Advertising");
+        reference = FirebaseFirestore.getInstance()
+                .collection("Advertising");
         searchIV = view.findViewById(R.id.search_btn);
 
         adapter = new SearchAdapter(getContext(), advertisings);
         recyclerView.setAdapter(adapter);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager manager
+                = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(manager);
 
-        reference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        reference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 ArrayList<Advertising> arrayList = new ArrayList<>();
-                for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()){
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
 
                     arrayList.add(documentSnapshot.toObject(Advertising.class));
                 }
@@ -100,7 +103,7 @@ public class SearchFragment extends Fragment  {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                        adapter.getFilter().filter(s);
+                adapter.getFilter().filter(s);
 
 
             }
@@ -112,7 +115,6 @@ public class SearchFragment extends Fragment  {
         });
         return view;
     }
-
 
 
 }

@@ -89,9 +89,9 @@ public class UserBeneficiaryInfo extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(UserBeneficiaryInfo.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UserBeneficiaryInfo.this, Login.class);
+                        Intent i = new Intent(UserBeneficiaryInfo.this, HomeActivity.class);
                         startActivity(i);
-                        FirebaseAuth.getInstance().signOut();
+//                        FirebaseAuth.getInstance().signOut();
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

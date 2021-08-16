@@ -33,11 +33,6 @@
         <activity android:name=".Actvities.EditProfile" />
         <activity android:name=".Actvities.HomeActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Actvities.ForgetPassowrd" />
         <activity android:name=".Actvities.SignUp">
@@ -53,6 +48,11 @@
         </activity>
         <activity android:name=".Actvities.MainActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
