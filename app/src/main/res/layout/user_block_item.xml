@@ -41,24 +41,25 @@
         android:id="@+id/blockbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/reject_btn"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/block_user"
-
         android:textAllCaps="false"
-        android:textColor="#fff"
-        app:layout_constraintStart_toStartOf="@+id/username"
+        android:background="@drawable/reject_btn"
+        app:layout_constraintStart_toEndOf="@+id/imageuser"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <android.widget.Button
         android:id="@+id/active_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/accept_brn"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
         android:text="@string/active_user"
         android:textAllCaps="false"
-        android:textColor="#fff"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/username"
+        android:background="@drawable/accept_brn"
+        app:layout_constraintStart_toEndOf="@+id/blockbtn"
         app:layout_constraintTop_toTopOf="@+id/blockbtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

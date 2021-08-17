@@ -51,24 +51,20 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
     @Override
     public void onBindViewHolder(@NonNull UserHasCharityVH holder, int position) {
         ProgressDialog progressDialog = new ProgressDialog(context);
-
         User user = users.get(position);
         String userid = user.getUserId();
         holder.username.setText(user.getFirstName());
-
         if (user.getUserImage() != null && !user.getUserImage().isEmpty()) {
             Picasso.get().load(user.getUserImage()).into(holder.userimage);
-
         } else {
-//                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
-            return;
+//                   Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
+
         }
         userref.document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 isblocked = documentSnapshot.getBoolean("isBlocked");
                 progressDialog.dismiss();
-
                 if (isblocked == true) {
                     holder.active_btn.setClickable(false);
                     holder.block_btn.setBackground(context.getResources().getDrawable(R.drawable.disable_btn));
@@ -89,7 +85,7 @@ public class UsersHasCharity extends RecyclerView.Adapter<UsersHasCharity.UserHa
                 progressDialog.show();
                 userref.document(userid).update("isBlocked", true,
                         "isSuspend", true,
-                        "isHasCharity",false)
+                        "isHasCharity", false)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

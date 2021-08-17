@@ -69,6 +69,7 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
         advertisings = new ArrayList<>();
         addAadapter = new AddAadapter(getContext(), advertisings);
         firebaseFirestore = FirebaseFirestore.getInstance();
+
         query = firebaseFirestore.collection("Advertising")
                 .whereEqualTo("isRejected", false)
                 .whereEqualTo("isFinished",false)
