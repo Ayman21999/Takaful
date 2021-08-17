@@ -55,6 +55,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
             }
         });
     }

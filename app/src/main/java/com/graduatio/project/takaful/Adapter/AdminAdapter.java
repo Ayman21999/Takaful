@@ -72,7 +72,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminHolder>
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseFirestore.document(advertising.getAdd_ID()).update("isRejected", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                firebaseFirestore.document(advertising.getAdd_ID()).update("isRejected", false , "isFinished",false).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "The Ads Had been published", Toast.LENGTH_SHORT).show();

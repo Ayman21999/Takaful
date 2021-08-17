@@ -161,6 +161,7 @@ public class SelectTypeCharityFragment extends DialogFragment {
         hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
         hashMap.put("Daynumber", 0);
         hashMap.put("isRejected", true);
+        hashMap.put("isFinished", false);
         progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         reference.document(adsid).set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {

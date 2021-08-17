@@ -66,9 +66,9 @@ public class RequestAds extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         intent =getIntent();
         if (intent.hasExtra("id")){
-            adsid = intent.getStringExtra("id");
-            reference = firebaseFirestore.collection("Advertising")
-                    .document(adsid)
+                adsid = intent.getStringExtra("id");
+                reference = firebaseFirestore.collection("Advertising")
+                        .document(adsid)
                     .collection("Requests");
             query  = reference.whereEqualTo("isdeleted", false);
             
@@ -157,14 +157,4 @@ public class RequestAds extends AppCompatActivity {
             isLoading = false;
         });
     }
-
-//    public void ReadUserData() {
-//        userref.document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                adsid = documentSnapshot.getString("adsID");
-//
-//             }
-//        });
-//    }
 }

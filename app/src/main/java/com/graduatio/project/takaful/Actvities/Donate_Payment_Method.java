@@ -127,7 +127,7 @@ public class Donate_Payment_Method extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String title = documentSnapshot.getString("title");
-                String image = documentSnapshot.getString("image");
+                    String image = documentSnapshot.getString("image");
 
                 totalremaining = documentSnapshot.getLong("remaining").intValue();
                 ads_title.setText(title);
