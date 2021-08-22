@@ -18,18 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="83dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back"
-        tools:ignore="VectorDrawableCompat" />
-
     <android.widget.Button
         android:id="@+id/button4"
         android:layout_width="0dp"
@@ -48,15 +36,12 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Payment Method"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="@+id/imageView11" />
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="36dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

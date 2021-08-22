@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Set;
 
 public class AdminNotificationActivity extends AppCompatActivity {
-    ImageView back;
     RecyclerView list;
     List<Advertising> advertisingList;
     AdminAdapter adminAdapter;
@@ -51,17 +50,9 @@ public class AdminNotificationActivity extends AppCompatActivity {
         adminAdapter = new AdminAdapter(AdminNotificationActivity.this, advertisingList);
         list.setAdapter(adminAdapter);
         ReadAds(true);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
     }
 
     public void SetUpElement() {
-        back = findViewById(R.id.back_btn);
         list = findViewById(R.id.list);
         advertisingList = new ArrayList<>();
         firebaseFirestore = FirebaseFirestore.getInstance();

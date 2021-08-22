@@ -99,6 +99,7 @@ public class CategoryFragment extends DialogFragment implements SwipeRefreshLayo
         progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
         //////////send Notification
+
 //        CloudMessagingNotificationsSender.Data data =
 //                new CloudMessagingNotificationsSender.Data
 //                        ("ss","asd","asd","ds","Asd",55);

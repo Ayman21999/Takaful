@@ -34,7 +34,7 @@ import java.util.UUID;
 
 public class Donate_Payment_Method extends AppCompatActivity {
 
-    ImageView ads_image, back;
+    ImageView ads_image;
     TextView ads_title, ads_userpublisher, total;
     Button donate, donateAsAnonymous;
     CollectionReference reference;
@@ -71,12 +71,6 @@ public class Donate_Payment_Method extends AppCompatActivity {
 //
 //            }
 //        });
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
 
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +105,6 @@ public class Donate_Payment_Method extends AppCompatActivity {
         visa = findViewById(R.id.visaradio);
         google = findViewById(R.id.googlewallet);
         paypal = findViewById(R.id.paypal);
-        back = findViewById(R.id.back);
 
         donateAsAnonymous = findViewById(R.id.anonymous_btn);
         reference = FirebaseFirestore.getInstance().collection("Advertising");

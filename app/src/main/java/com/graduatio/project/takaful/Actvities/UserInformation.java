@@ -32,7 +32,7 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class UserInformation extends AppCompatActivity {
     TextView name, age, identiy, familynumber, phone, salay, soail, work;
-    ImageView iamge, back, pdf;
+    ImageView iamge, pdf;
     String attachment;
     StorageReference storage, ref;
     private static String POST_DOCUMENT_REF = "Post-documents/";
@@ -57,12 +57,7 @@ public class UserInformation extends AppCompatActivity {
                 Toast.makeText(UserInformation.this, "Downloading .....", Toast.LENGTH_SHORT).show();
             }
         });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
     }
 
     public void setUpElement() {
@@ -75,7 +70,6 @@ public class UserInformation extends AppCompatActivity {
         iamge = findViewById(R.id.useriamge);
         work = findViewById(R.id.work);
         salay = findViewById(R.id.salary);
-        back = findViewById(R.id.back);
         pdf = findViewById(R.id.dpdf);
         storage = FirebaseStorage.getInstance().getReference().child(POST_DOCUMENT_REF);
 
@@ -116,7 +110,6 @@ public class UserInformation extends AppCompatActivity {
 
                         } else {
 //                    Toast.makeText(context, "null image", Toast.LENGTH_SHORT).show();
-                            return;
                         }
 
                         if (attachment != null && !attachment.isEmpty()) {

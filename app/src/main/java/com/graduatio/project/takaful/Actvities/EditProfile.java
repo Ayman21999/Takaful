@@ -56,7 +56,7 @@ import java.util.Locale;
 public class EditProfile extends AppCompatActivity {
 
     EditText fname, lname, email, phone;
-    ImageView userimage, edit_image_iv, back;
+    ImageView userimage, edit_image_iv;
     Button save;
     FirebaseFirestore firebaseFirestore;
     CollectionReference reference;
@@ -135,13 +135,7 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
 
-            }
-        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +167,6 @@ public class EditProfile extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         fAuth = FirebaseAuth.getInstance();
         userid = fAuth.getCurrentUser().getUid();
-        back = findViewById(R.id.back_btn);
     }
 
     @Override

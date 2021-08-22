@@ -21,10 +21,6 @@
         android:id="@+id/donate_btn"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/button_shape"
         android:text="@string/donate"
@@ -32,28 +28,29 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view33" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/view33"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:background="@drawable/button_close_"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/donate_btn" />
+        app:layout_constraintBottom_toBottomOf="@+id/number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/number" />
 
     <ImageView
         android:id="@+id/close"
-        android:layout_width="62dp"
-        android:layout_height="64dp"
+        android:layout_width="63dp"
+        android:layout_height="65dp"
         app:layout_constraintBottom_toBottomOf="@+id/view33"
         app:layout_constraintEnd_toEndOf="@+id/view33"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/view33"
         app:layout_constraintTop_toTopOf="@+id/view33"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_close_"
         tools:ignore="VectorDrawableCompat" />
 
@@ -63,22 +60,21 @@
         android:layout_height="70dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:ems="10"
-        android:textColor="@color/background"
-        android:inputType="number"
-        android:textSize="20sp"
-
         android:background="@drawable/button_close_"
+        android:ems="10"
+
+        android:gravity="center_horizontal"
         android:hint="@string/enter_your_donation_number"
+        android:inputType="number"
         android:paddingTop="20dp"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
+        android:textColor="@color/background"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/view33"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view32"
-        android:gravity="center_horizontal" />
+        app:layout_constraintTop_toTopOf="@+id/view32" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

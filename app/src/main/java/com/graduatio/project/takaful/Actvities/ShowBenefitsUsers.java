@@ -34,14 +34,12 @@ public class ShowBenefitsUsers extends AppCompatActivity {
     AdsBenefitAdapter adapter;
     RecyclerView recyclerView;
     private DocumentSnapshot lastDocSnap;
-    ImageView back;
     int donatoin_LIMIT = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_benefits_users);
         recyclerView = findViewById(R.id.list);
-        back = findViewById(R.id.back);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         advertisings = new ArrayList<>();
@@ -54,12 +52,7 @@ public class ShowBenefitsUsers extends AppCompatActivity {
                 .document(adsID)
                 .collection("Requests");
         ReadDonatoins(true);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+
     }
 
     public void ReadDonatoins(boolean isInitial) {

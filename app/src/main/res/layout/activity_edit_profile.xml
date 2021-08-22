@@ -8,6 +8,7 @@
     tools:context=".Actvities.EditProfile">
 
     <View
+        android:id="@+id/view12"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/card_background"
@@ -16,30 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="44dp"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
+        android:layout_marginTop="28dp"
         android:text="@string/edit"
         android:textColor="#000"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/back_btn"
-        app:layout_constraintStart_toEndOf="@+id/back_btn"
-        app:layout_constraintTop_toTopOf="@+id/back_btn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/useriamge"
@@ -72,8 +60,8 @@
         android:text="@string/fisrt"
         android:textColor="#3B3B3B"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/back_btn"
-        app:layout_constraintTop_toBottomOf="@+id/useriamge" />
+        app:layout_constraintTop_toBottomOf="@+id/useriamge"
+        tools:layout_editor_absoluteX="36dp" />
 
     <EditText
         android:id="@+id/firstname"
